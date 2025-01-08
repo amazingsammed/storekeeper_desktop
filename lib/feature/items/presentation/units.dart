@@ -1,10 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/datalisting.dart';
 
-class QuotePage extends StatelessWidget {
-  const QuotePage({super.key});
+class UnitsPage extends StatelessWidget {
+  const UnitsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +22,14 @@ class QuotePage extends StatelessWidget {
       ontap: (element) {
         print(element['id'].runtimeType);
       },
-      title: "Quote",
+      title: "Units",
       heads: [
-        TableHead(title: 'Date', id: 'date'),
-        TableHead(title: 'Quote', id: 'narration'),
-        TableHead(title: 'Customer', id: 'account_name'),
-        TableHead(title: "Sales Person", id: 'createdby'),
-        TableHead(title: 'Status', id: 'amount'),
-        TableHead(title: 'Amount', id: 'amount'),
+        TableHead(title: 'Name', id: 'name'),
+        TableHead(title: 'Status', id: 'status'),
+
       ],
       items: [],
     );
+
   }
 }

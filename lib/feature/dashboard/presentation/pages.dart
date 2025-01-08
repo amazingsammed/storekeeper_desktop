@@ -1,5 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:storekepper_desktop/feature/items/presentation/category.dart';
+import 'package:storekepper_desktop/feature/items/presentation/group.dart';
+import 'package:storekepper_desktop/feature/items/presentation/itemlist.dart';
+import 'package:storekepper_desktop/feature/items/presentation/units.dart';
 import 'package:storekepper_desktop/feature/purchases/presentation/payment.dart';
 import 'package:storekepper_desktop/feature/purchases/presentation/purchaselisting.dart';
 import 'package:storekepper_desktop/feature/purchases/presentation/purchaseorder.dart';
@@ -13,13 +17,13 @@ import '../../sales/presentation/saleslisting.dart';
 
 final List<NavigationPaneItem> items = [
   PaneItem(
-    icon: const Icon(FluentIcons.dashboard_add),
+    icon: const Icon(Icons.dashboard),
     title: const Text('Dashboard'),
     body: Container(child: Text("sammed"),),
   ),
   PaneItemSeparator(),
   PaneItemExpander(
-    icon: const Icon(FluentIcons.sell),
+    icon: const Icon(Icons.point_of_sale_sharp),
     title: const Text('Sales'),
     body: Saleslisting(),
     items: [
@@ -91,22 +95,22 @@ final List<NavigationPaneItem> items = [
       PaneItem(
         icon: const Icon(Icons.inventory_2_outlined),
         title: const Text('Items'),
-        body: Container(),
+        body: ItemListing(),
       ),
       PaneItem(
         icon: const Icon(Icons.category),
         title: const Text('Category'),
-        body: Container(),
+        body: CategoryPage(),
       ),
       PaneItem(
         icon: const Icon(Icons.group_work),
         title: const Text('Group'),
-        body: Container(),
+        body: GroupPage(),
       ),
       PaneItem(
         icon: const Icon(Icons.scatter_plot),
         title: const Text('units'),
-        body: Container(),
+        body: UnitsPage(),
       ),
     ],
   ),

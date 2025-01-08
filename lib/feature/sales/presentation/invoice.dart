@@ -26,10 +26,12 @@ class InvoicePage extends StatelessWidget {
       title: "Invoice",
       heads: [
         TableHead(title: 'Date', id: 'date'),
-        TableHead(title: 'Narration', id: 'narration'),
-        TableHead(title: 'Account Name', id: 'account_name'),
+        TableHead(title: 'Accountpayable', id: 'narration'),
+        TableHead(title: 'Reference', id: 'account_name'),
+        TableHead(title: 'Customer', id: 'amount'),
+        TableHead(title: "Sales Person", id: 'createdby'),
         TableHead(title: 'Amount', id: 'amount'),
-        TableHead(title: "Sales Person", id: 'createdby')
+        TableHead(title: 'Status', id: 'amount'),
       ],
       items: [],
     );
