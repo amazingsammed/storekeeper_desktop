@@ -1,6 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:storekepper_desktop/feature/purchases/presentation/payment.dart';
+import 'package:storekepper_desktop/feature/purchases/presentation/purchaselisting.dart';
+import 'package:storekepper_desktop/feature/purchases/presentation/purchaseorder.dart';
+import 'package:storekepper_desktop/feature/sales/presentation/customer.dart';
+import 'package:storekepper_desktop/feature/sales/presentation/invoice.dart';
+import 'package:storekepper_desktop/feature/sales/presentation/qoute.dart';
+import 'package:storekepper_desktop/feature/sales/presentation/salesorder.dart';
 
+import '../../purchases/presentation/accountspayable.dart';
 import '../../sales/presentation/saleslisting.dart';
 
 final List<NavigationPaneItem> items = [
@@ -23,22 +31,22 @@ final List<NavigationPaneItem> items = [
       PaneItem(
         icon: const Icon(FluentIcons.quotes),
         title: const Text('Quote'),
-        body: Container(),
+        body: QuotePage(),
       ),
       PaneItem(
         icon: const Icon(FluentIcons.invoice),
         title: const Text('Invoice'),
-        body: Container(),
+        body: InvoicePage(),
       ),
       PaneItem(
         icon: const Icon(FluentIcons.order_lock),
         title: const Text('Sales Orders'),
-        body: Container(),
+        body: SalesOrder(),
       ),
       PaneItem(
         icon: const Icon(FluentIcons.user_followed),
         title: const Text('Customer'),
-        body: Container(),
+        body: CustomerPage(),
       ),
       PaneItem(
         icon: const Icon(FluentIcons.mail),
@@ -56,22 +64,22 @@ final List<NavigationPaneItem> items = [
       PaneItem(
         icon: const Icon(FluentIcons.mail),
         title: const Text('Purchase List'),
-        body: Container(),
+        body: PurchaseListing(),
       ),
       PaneItem(
         icon: const Icon(FluentIcons.calendar),
         title: const Text('Purchase Order'),
-        body: Container(),
+        body: PurchaseOrder(),
       ),
       PaneItem(
         icon: const Icon(FluentIcons.calendar),
         title: const Text('Account Payable'),
-        body: Container(),
+        body: AccountsPayable(),
       ),
       PaneItem(
         icon: const Icon(FluentIcons.calendar),
         title: const Text('Payment'),
-        body: Container(),
+        body: PaymentPage(),
       ),
     ],
   ),
