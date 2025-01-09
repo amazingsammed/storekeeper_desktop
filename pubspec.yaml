@@ -40,6 +40,10 @@ dependencies:
   dartz: ^0.10.1
   path: ^1.9.0
   path_provider: ^2.1.5
+  flutter_form_builder: ^9.3.0
+  form_builder_validators: ^11.0.0
+  form_builder_image_picker: ^4.1.0
+  form_builder_file_picker: ^4.2.0
 
 dev_dependencies:
   flutter_test:

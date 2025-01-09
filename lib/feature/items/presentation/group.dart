@@ -1,4 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/items/presentation/forms/addgroup.dart';
+import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../shared/widgets/datalisting.dart';
 
@@ -10,9 +13,11 @@ class GroupPage extends StatelessWidget {
     return  DataTableV2(
       titleWidget: Row(
         children: [
-          Button(
-            onPressed: () {},
-            child: Text("Create New"),
+          PrimaryButton(
+            onTap: () {
+              Get.dialog(AddGroup());
+            },
+            title: "Create New",
           ),
         ],
       ),

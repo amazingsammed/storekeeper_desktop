@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
         return GetMaterialApp(
           title: 'Flutter App',
-          initialRoute: '/dashboard',
+          initialRoute: '/sign_in',
           getPages: [
             GetPage(name: '/sign_in', page: () => FluentApp(home: SignInScreen())),
             GetPage(name: '/sign_up', page: () => FluentApp(home: SignUpScreen())),
