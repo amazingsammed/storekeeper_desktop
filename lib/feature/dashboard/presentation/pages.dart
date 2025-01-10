@@ -13,7 +13,9 @@ import 'package:storekepper_desktop/feature/sales/presentation/qoute.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/salesorder.dart';
 
 import '../../purchases/presentation/accountspayable.dart';
+import '../../sales/presentation/forms/sales_form.dart';
 import '../../sales/presentation/saleslisting.dart';
+import '../../sales/presentation/salestab.dart';
 
 final List<NavigationPaneItem> items = [
   PaneItem(
@@ -25,7 +27,7 @@ final List<NavigationPaneItem> items = [
   PaneItemExpander(
     icon: const Icon(Icons.point_of_sale_sharp),
     title: const Text('Sales'),
-    body: Saleslisting(),
+    body: SalesTab(),
     items: [
       PaneItem(
         icon: const Icon(FluentIcons.list),
@@ -55,6 +57,32 @@ final List<NavigationPaneItem> items = [
       PaneItem(
         icon: const Icon(FluentIcons.mail),
         title: const Text('Sales Refund'),
+        body: Container(),
+      ),
+      PaneItemHeader(header: Text("Forms")),
+      PaneItem(
+        icon: const Icon(FluentIcons.mail),
+        title: const Text('Create Sales'),
+        body: SalesForm(),
+      ),
+      PaneItem(
+        icon: const Icon(FluentIcons.mail),
+        title: const Text('Create Quote'),
+        body: Container(),
+      ),
+      PaneItem(
+        icon: const Icon(FluentIcons.mail),
+        title: const Text('Create Invoice'),
+        body: Container(),
+      ),
+      PaneItem(
+        icon: const Icon(FluentIcons.mail),
+        title: const Text('Create Sales Order'),
+        body: Container(),
+      ),
+      PaneItem(
+        icon: const Icon(FluentIcons.mail),
+        title: const Text('Create Sales Refund'),
         body: Container(),
       ),
 

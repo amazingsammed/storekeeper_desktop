@@ -18,18 +18,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+        return FluentApp(
+          home: GetMaterialApp(
+            title: 'Flutter App',
+            initialRoute: '/dashboard',
+            getPages: [
+              GetPage(name: '/sign_in', page: () => FluentApp(home: SignInScreen())),
+              GetPage(name: '/sign_up', page: () => FluentApp(home: SignUpScreen())),
 
-        return GetMaterialApp(
-          title: 'Flutter App',
-          initialRoute: '/sign_in',
-          getPages: [
-            GetPage(name: '/sign_in', page: () => FluentApp(home: SignInScreen())),
-            GetPage(name: '/sign_up', page: () => FluentApp(home: SignUpScreen())),
+              GetPage(name: '/store_selection', page: () => FluentApp(home: StoreSelectionScreen())),
 
-            GetPage(name: '/store_selection', page: () => FluentApp(home: StoreSelectionScreen())),
-
-            GetPage(name: '/dashboard', page: () => FluentApp(home: DashboardScreen())),
-          ],
+              GetPage(name: '/dashboard', page: () => FluentApp(home: DashboardScreen())),
+            ],
+          ),
         );
 
   }

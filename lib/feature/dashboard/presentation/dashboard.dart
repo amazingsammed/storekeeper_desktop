@@ -8,7 +8,7 @@ class DashboardScreen extends StatelessWidget {
   DashboardController controller = Get.put(DashboardController());
 
 
-  PaneDisplayMode displayMode = PaneDisplayMode.open;
+  PaneDisplayMode displayMode = PaneDisplayMode.compact;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,7 @@ class DashboardScreen extends StatelessWidget {
           title: Text('My Store App'),
         ),
         pane: NavigationPane(
+          displayMode: displayMode,
           selected: controller.selectedPage.value,
           onItemPressed: (index) {
             print(index);
@@ -36,6 +37,5 @@ class DashboardScreen extends StatelessWidget {
         ),
       );
     });
-    ;
   }
 }
