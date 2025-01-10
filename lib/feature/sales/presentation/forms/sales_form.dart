@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:storekepper_desktop/shared/constant/colors.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
 
@@ -41,6 +42,7 @@ class SalesForm extends StatelessWidget {
             ],
           ),
         ),
+        kSizedbox20,
         Expanded(
           child: Column(
             children: [
