@@ -13,10 +13,9 @@ class Saleslisting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      children: [
-        SalesToolBar(),
-        Expanded(
+    return
+        MainPageWithToolBar(
+          toolBar: SalesToolBar(),
           child: DataTableV2(
 
               titleWidget: Row(
@@ -46,9 +45,7 @@ class Saleslisting extends StatelessWidget {
               ],
               items: [],
             ),
-        ),
-      ],
-    );
+        );
 
   }
 }

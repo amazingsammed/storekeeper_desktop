@@ -2,13 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
+import '../../data/local/itemcontroller.dart';
 
 class AddGroup extends StatelessWidget {
-  const AddGroup({super.key});
+  final ItemDB controller = Get.put(ItemDB());
+   AddGroup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +35,7 @@ class AddGroup extends StatelessWidget {
                   kSizedbox10,
                   KDropDown(title: 'Category',
                     id: 'category',
-                    children: [
-                      "phone",
-                      "others",
-                      "cosmetics"
-                    ],),
+                    children: controller.allCategory.value.map((element)=>element['name'].toString()).toList(),),
 
                 ],
               ),

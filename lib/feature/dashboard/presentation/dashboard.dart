@@ -15,7 +15,9 @@ class DashboardScreen extends StatelessWidget {
       return Scaffold(
 
         body: NavigationView(
-          onOpenSearch: (){},
+          transitionBuilder: (c,a){
+            return c;
+          },
           appBar:  NavigationAppBar(
             automaticallyImplyLeading: false,
             title: Text("Store"),

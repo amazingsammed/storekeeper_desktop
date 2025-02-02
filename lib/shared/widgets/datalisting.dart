@@ -151,7 +151,7 @@ class _DataTableV2State extends State<DataTableV2> {
           maxWidth: 1377,
         ),
         child: Card(
-          margin: EdgeInsets.all(40),
+          margin: EdgeInsets.all(40).copyWith(top: 10),
           child: Container(
             padding: EdgeInsets.all(20),
             child: Column(
