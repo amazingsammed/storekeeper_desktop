@@ -21,7 +21,6 @@ class KTextField extends StatelessWidget {
           name: id,
           decoration: InputDecoration(
             hintText: title,
-
             border: OutlineInputBorder(),
           ),
         ),

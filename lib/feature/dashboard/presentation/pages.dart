@@ -11,11 +11,10 @@ import 'package:storekepper_desktop/feature/sales/presentation/customer.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/invoice.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/qoute.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/salesorder.dart';
-
+import '../../items/presentation/forms/addcategory.dart';
 import '../../purchases/presentation/accountspayable.dart';
-import '../../sales/presentation/forms/sales_form.dart';
 import '../../sales/presentation/saleslisting.dart';
-import '../../sales/presentation/salestab.dart';
+
 
 final List<NavigationPaneItem> items = [
   PaneItem(
@@ -27,13 +26,13 @@ final List<NavigationPaneItem> items = [
   PaneItemExpander(
     icon: const Icon(Icons.point_of_sale_sharp),
     title: const Text('Sales'),
-    body: SalesTab(),
+    body: Saleslisting(),
     items: [
-      PaneItem(
-        icon: const Icon(FluentIcons.list),
-        title: const Text('Sales List'),
-        body: Saleslisting(),
-      ),
+      // PaneItem(
+      //   icon: const Icon(FluentIcons.list),
+      //   title: const Text('Sales List'),
+      //   body: Saleslisting(),
+      // ),
       PaneItem(
         icon: const Icon(FluentIcons.quotes),
         title: const Text('Quote'),
@@ -56,48 +55,48 @@ final List<NavigationPaneItem> items = [
       ),
       PaneItem(
         icon: const Icon(FluentIcons.mail),
-        title: const Text('Sales Refund'),
+        title: const Text('Refund'),
         body: Container(),
       ),
-      PaneItemHeader(header: Text("Forms")),
-      PaneItem(
-        icon: const Icon(FluentIcons.mail),
-        title: const Text('Create Sales'),
-        body: SalesForm(),
-      ),
-      PaneItem(
-        icon: const Icon(FluentIcons.mail),
-        title: const Text('Create Quote'),
-        body: Container(),
-      ),
-      PaneItem(
-        icon: const Icon(FluentIcons.mail),
-        title: const Text('Create Invoice'),
-        body: Container(),
-      ),
-      PaneItem(
-        icon: const Icon(FluentIcons.mail),
-        title: const Text('Create Sales Order'),
-        body: Container(),
-      ),
-      PaneItem(
-        icon: const Icon(FluentIcons.mail),
-        title: const Text('Create Sales Refund'),
-        body: Container(),
-      ),
+      // PaneItemHeader(header: Text("Forms")),
+      // PaneItem(
+      //   icon: const Icon(FluentIcons.mail),
+      //   title: const Text('Create Sales'),
+      //   body: SalesForm(),
+      // ),
+      // PaneItem(
+      //   icon: const Icon(FluentIcons.mail),
+      //   title: const Text('Create Quote'),
+      //   body: Container(),
+      // ),
+      // PaneItem(
+      //   icon: const Icon(FluentIcons.mail),
+      //   title: const Text('Create Invoice'),
+      //   body: Container(),
+      // ),
+      // PaneItem(
+      //   icon: const Icon(FluentIcons.mail),
+      //   title: const Text('Create Sales Order'),
+      //   body: Container(),
+      // ),
+      // PaneItem(
+      //   icon: const Icon(FluentIcons.mail),
+      //   title: const Text('Create Sales Refund'),
+      //   body: Container(),
+      // ),
 
     ],
   ),
   PaneItemExpander(
     icon: const Icon(FluentIcons.inbox),
     title: const Text('Purchases'),
-    body: Container(),
+    body: PurchaseListing(),
     items: [
-      PaneItem(
-        icon: const Icon(FluentIcons.mail),
-        title: const Text('Purchase List'),
-        body: PurchaseListing(),
-      ),
+      // PaneItem(
+      //   icon: const Icon(FluentIcons.mail),
+      //   title: const Text('Purchase List'),
+      //   body: PurchaseListing(),
+      // ),
       PaneItem(
         icon: const Icon(FluentIcons.calendar),
         title: const Text('Purchase Order'),
@@ -116,15 +115,10 @@ final List<NavigationPaneItem> items = [
     ],
   ),
   PaneItemExpander(
-    icon: const Icon(Icons.inventory),
+    icon: const Icon(Icons.inventory_2_outlined),
     title: const Text('Items'),
-    body: Container(),
+    body: ItemListing(),
     items: [
-      PaneItem(
-        icon: const Icon(Icons.inventory_2_outlined),
-        title: const Text('Items'),
-        body: ItemListing(),
-      ),
       PaneItem(
         icon: const Icon(Icons.category),
         title: const Text('Category'),
@@ -136,8 +130,8 @@ final List<NavigationPaneItem> items = [
         body: GroupPage(),
       ),
       PaneItem(
-        icon: const Icon(Icons.scatter_plot),
-        title: const Text('units'),
+        icon: const Icon(Icons.scale),
+        title: const Text('Unit'),
         body: UnitsPage(),
       ),
     ],
@@ -145,7 +139,7 @@ final List<NavigationPaneItem> items = [
   PaneItemExpander(
     icon: const Icon(Icons.report),
     title: const Text('Report'),
-    body: Container(),
+    body: CustomResizableTable(),
     items: [
       PaneItem(
         icon: const Icon(FluentIcons.mail),

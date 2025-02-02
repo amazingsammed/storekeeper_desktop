@@ -4,9 +4,11 @@ import 'package:storekepper_desktop/feature/items/presentation/forms/addunit.dar
 
 import '../../../shared/widgets/button_c.dart';
 import '../../../shared/widgets/datalisting.dart';
+import '../data/local/itemcontroller.dart';
 
 class UnitsPage extends StatelessWidget {
-  const UnitsPage({super.key});
+  final ItemDB controller = Get.put(ItemDB());
+  UnitsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class UnitsPage extends StatelessWidget {
         TableHead(title: 'Status', id: 'status'),
 
       ],
-      items: [],
+      items: controller.allUnit.value,
     );
 
   }
