@@ -6,9 +6,11 @@ import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
 import '../../controller/itemcontroller.dart';
+import '../../data/local/itemcontroller.dart';
 
 class AddProduct extends StatelessWidget {
-  final ItemController controller = Get.put(ItemController());
+  final _formKey = GlobalKey<FormBuilderState>();
+  final ItemDB controller = Get.put(ItemDB());
 
   AddProduct({super.key});
 
@@ -19,87 +21,100 @@ class AddProduct extends StatelessWidget {
         title: Text("Create New Product"),
         subtitle: Text("Use this form to create a new item"),
       ),
-      content: Obx(() {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          height: 450,
-          width: 600,
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    KTextField(
-                      title: "Product Name",
-                      id: 'name',
-                    ),
-                    kSizedbox10,
-                    Row(
-                      children: [
-                        Expanded(
-                          child: KTextField(
-                            title: "Selling price",
-                            id: 'sprice',
-                          ),
-                        ),
-                        kSizedbox10,
-                        Expanded(
-                          child: KTextField(
-                            title: "Purchase price",
-                            id: 'pprice',
-                          ),
-                        ),
-                      ],
-                    ),
-                    kSizedbox10,
-                    Row(
-                      children: [
-                        Expanded(
-                            child: KDropDown(
-                          title: 'Group',
-                          id: 'group',
-                          children: ["phone", "others", "cosmetics"],
-                        )),
-                        kSizedbox10,
-                        Expanded(
-                            child: KDropDown(
-                          title: 'Units',
-                          id: 'unit',
-                          children: ["box", "pack", "kilo"],
-                        )),
-                      ],
-                    ),
-                    CheckboxListTile(
-                      value: controller.hasOpeningBal.value,
-                      onChanged: (v) {
-                        controller.hasOpeningBal.value = v!;
-                        controller.update();
-                      },
-                      title: Text("Has Opening Balanced"),
-                    ),
-                    if (controller.hasOpeningBal.value)
+      content: FormBuilder(
+        key: _formKey,
+        child: Obx(() {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            height: 450,
+            width: 600,
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
                       KTextField(
-                        title: "Initial Quantity",
-                        id: 'qty',
+                        title: "Product Name",
+                        id: 'name',
                       ),
-                  ],
+                      kSizedbox10,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: KTextField(
+                              title: "Selling price",
+                              id: 'salesprice',
+                            ),
+                          ),
+                          kSizedbox10,
+                          Expanded(
+                            child: KTextField(
+                              title: "Purchase price",
+                              id: 'purchaseprice',
+                            ),
+                          ),
+                        ],
+                      ),
+                      kSizedbox10,
+                      Row(
+                        children: [
+                          Expanded(
+                              child: KDropDown2(
+                            title: 'Group',
+                            id: 'group',
+                            children: controller.allGroup.value
+                                .map((element) => {
+                              'name': element['name'].toString(),
+                              'id': element['id']
+                            })
+                                .toList(),
+                          )),
+                          kSizedbox10,
+                          Expanded(
+                              child: KDropDown2(
+                            title: 'Units',
+                            id: 'unit',
+                            children: controller.allUnit.value
+                                .map((element) => {
+                              'name': element['name'].toString(),
+                              'id': element['id']
+                            })
+                                .toList(),
+                          )),
+                        ],
+                      ),
+                      CheckboxListTile(
+                        value: controller.hasOpeningBal.value,
+                        onChanged: (v) {
+                          controller.hasOpeningBal.value = v!;
+                          controller.update();
+                        },
+                        title: Text("Has Opening Balanced"),
+                      ),
+                      if (controller.hasOpeningBal.value)
+                        KTextField(
+                          title: "Initial Quantity",
+                          id: 'qty',
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  PrimaryButton(
-                    onTap: () {
-
-                    },
-                    title: "Save",
-                  )
-                ],
-              )
-            ],
-          ),
-        );
-      }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    PrimaryButton(
+                      onTap: () {
+        print(_formKey.currentState?.fields);
+                      },
+                      title: "Save",
+                    )
+                  ],
+                )
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }

@@ -18,10 +18,37 @@ class DashboardScreen extends StatelessWidget {
           transitionBuilder: (c,a){
             return c;
           },
-          appBar:  NavigationAppBar(
-            automaticallyImplyLeading: false,
-            title: Text("Store"),
-          ),
+          // appBar:  NavigationAppBar(
+          //  // automaticallyImplyLeading: false,
+          //   title: MenuFlyout(
+          //
+          //       items: [
+          //         MenuFlyoutSubItem(
+          //           text: const Text('New'),
+          //           items: (context) {
+          //             return [
+          //               MenuFlyoutItem(
+          //                 text: const Text('Plain Text Documents'),
+          //                 onPressed: () {},
+          //               ),
+          //               MenuFlyoutItem(
+          //                 text: const Text('Rich Text Documents'),
+          //                 onPressed: () {},
+          //               ),
+          //               MenuFlyoutItem(
+          //                 text: const Text('Other Formats'),
+          //                 onPressed: () {},
+          //               ),
+          //             ];
+          //           },
+          //         ),
+          //         MenuFlyoutItem(text: const Text('Open'), onPressed: () {}),
+          //         MenuFlyoutItem(text: const Text('Save'), onPressed: () {}),
+          //         const MenuFlyoutSeparator(),
+          //         MenuFlyoutItem(text: const Text('Exit'), onPressed: () {}),
+          //       ]
+          //   ),
+          // ),
           pane: NavigationPane(
             displayMode: displayMode,
             selected: controller.selectedPage.value,

@@ -41,7 +41,44 @@ class ToolBarItem extends StatelessWidget {
 }
 
 
+class DashBoardToolBar extends StatelessWidget {
+  const DashBoardToolBar({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+      height: 100,
+      padding: EdgeInsets.symmetric(horizontal: 40 ,vertical: 10).copyWith(bottom: 0),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+
+          ToolBarItem(
+              title:"Sales",
+              icon: Icons.book,
+              index: 1
+          ),
+          ToolBarItem(
+              title:"Purchases",
+              icon: Icons.quora,
+              index: 2
+          ),
+          ToolBarItem(
+              title:"Item List",
+              icon: Icons.inventory_outlined,
+              index: 3
+          ),
+          ToolBarItem(
+              title:"Accounts",
+              icon: Icons.offline_pin_rounded,
+              index: 4
+          ),
+        ],
+      ),
+    );
+  }
+}
 class SalesToolBar extends StatelessWidget {
   const SalesToolBar({super.key});
 
@@ -54,6 +91,11 @@ class SalesToolBar extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
+          ToolBarItem(
+              title:"Dashboard",
+              icon: Icons.dashboard,
+              index: 0
+          ),
           ToolBarItem(
               title:"Sales",
               icon: Icons.book,
@@ -102,6 +144,11 @@ class ItemToolBar extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: [
           ToolBarItem(
+              title:"Dashboard",
+              icon: Icons.dashboard,
+              index: 0
+          ),
+          ToolBarItem(
               title:"Items",
               icon: Icons.inventory_2_outlined,
               index: 11
@@ -137,6 +184,11 @@ class PurchasesToolBar extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 40 ,vertical: 10).copyWith(bottom: 0),
       child: Row(
         children: [
+          ToolBarItem(
+              title:"Dashboard",
+              icon: Icons.dashboard,
+              index: 0
+          ),
           ToolBarItem(
               title:"Purchase",
               icon: Icons.book,

@@ -38,7 +38,7 @@ class GroupPage extends StatelessWidget {
           heads: [
             TableHead(title: 'Date', id: 'date'),
             TableHead(title: 'Name', id: 'name'),
-            TableHead(title: 'Category', id: 'cat'),
+            TableHead(title: 'Category', id: 'category'),
             TableHead(title: 'status', id: 'status'),
           ],
           items: controller.allGroup.value,

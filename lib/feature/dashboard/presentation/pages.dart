@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:storekepper_desktop/feature/dashboard/presentation/mydashboard.dart';
 import 'package:storekepper_desktop/feature/items/presentation/category.dart';
 import 'package:storekepper_desktop/feature/items/presentation/group.dart';
 import 'package:storekepper_desktop/feature/items/presentation/itemlist.dart';
@@ -20,7 +21,7 @@ final List<NavigationPaneItem> items = [
   PaneItem(
     icon: const Icon(Icons.dashboard),
     title: const Text('Dashboard'),
-    body: Container(child: Text("sammed"),),
+    body: MyDashBoard(),
   ),
   PaneItemSeparator(),
   PaneItemExpander(

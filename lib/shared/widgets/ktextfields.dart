@@ -57,3 +57,31 @@ class KDropDown extends StatelessWidget {
     );
   }
 }
+
+class KDropDown2 extends StatelessWidget {
+  final List<Map> children;
+  final String title;
+  final String id;
+  const KDropDown2({super.key, required this.children, required this.title, required this.id});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title),
+        SizedBox(height: 5,),
+        FormBuilderDropdown(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: title
+            ),
+            name: id, items: children.map((element){
+          return DropdownMenuItem(
+              value: element['id'], child: Text(element['name'])
+          );
+        }).toList()),
+      ],
+    );
+  }
+}
