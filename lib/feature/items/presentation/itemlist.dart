@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import '../../../shared/widgets/datalisting.dart';
-import '../data/local/itemcontroller.dart';
+import '../controller/itemcontroller.dart';
+import '../data/local/item_localdb.dart';
 import 'forms/additem.dart';
 
 
 class ItemListing extends StatelessWidget {
-  ItemDB controller = Get.put(ItemDB());
+  final ItemController controller = Get.put(ItemController());
 
   ItemListing({super.key});
 

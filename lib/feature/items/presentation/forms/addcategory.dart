@@ -6,11 +6,11 @@ import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
-import '../../data/local/itemcontroller.dart';
+import '../../data/local/item_localdb.dart';
 
 class AddCategory extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
-  final ItemDB controller = Get.put(ItemDB());
+  final ItemLocalDatabase controller = Get.put(ItemLocalDatabase());
 
   AddCategory({super.key});
 

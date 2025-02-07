@@ -5,10 +5,11 @@ import 'package:storekepper_desktop/feature/items/presentation/forms/addunit.dar
 
 import '../../../shared/widgets/button_c.dart';
 import '../../../shared/widgets/datalisting.dart';
-import '../data/local/itemcontroller.dart';
+import '../controller/itemcontroller.dart';
+import '../data/local/item_localdb.dart';
 
 class UnitsPage extends StatelessWidget {
-  final ItemDB controller = Get.put(ItemDB());
+  final ItemController controller = Get.put(ItemController());
   UnitsPage({super.key});
 
   @override

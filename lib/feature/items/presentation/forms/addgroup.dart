@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
-import '../../data/local/itemcontroller.dart';
+import '../../data/local/item_localdb.dart';
 
 class AddGroup extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
-  final ItemDB controller = Get.put(ItemDB());
+  final ItemController controller = Get.put(ItemController());
 
   AddGroup({super.key});
 
@@ -42,8 +43,8 @@ class AddGroup extends StatelessWidget {
                       id: 'category',
                       children: controller.allCategory.value
                           .map((element) => {
-                                'name': element['name'].toString(),
-                                'id': element['id']
+                                'name': element.name,
+                                'id': element.name
                               })
                           .toList(),
                     ),

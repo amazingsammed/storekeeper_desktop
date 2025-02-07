@@ -1,13 +1,13 @@
 
 
-class Category {
+class CategoryModel {
   String name;
   bool status;
   String createdby;
   String date;
 
 //<editor-fold desc="Data Methods">
-  Category({
+  CategoryModel({
     required this.name,
     required this.status,
     required this.createdby,
@@ -17,7 +17,7 @@ class Category {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Category &&
+      (other is CategoryModel &&
           runtimeType == other.runtimeType &&
           name == other.name &&
           status == other.status &&
@@ -30,7 +30,7 @@ class Category {
 
   @override
   String toString() {
-    return 'Category{' +
+    return 'CategoryModel{' +
         ' name: $name,' +
         ' status: $status,' +
         ' createdby: $createdby,' +
@@ -38,13 +38,13 @@ class Category {
         '}';
   }
 
-  Category copyWith({
+  CategoryModel copyWith({
     String? name,
     bool? status,
     String? createdby,
     String? date,
   }) {
-    return Category(
+    return CategoryModel(
       name: name ?? this.name,
       status: status ?? this.status,
       createdby: createdby ?? this.createdby,
@@ -61,8 +61,8 @@ class Category {
     };
   }
 
-  factory Category.fromMap(Map<String, dynamic> map) {
-    return Category(
+  factory CategoryModel.fromMap(Map<String, dynamic> map) {
+    return CategoryModel(
       name: map['name'] as String,
       status: map['status'] as bool,
       createdby: map['createdby'] as String,

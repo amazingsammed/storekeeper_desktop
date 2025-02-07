@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import '../domain/models/item.dart';
-import '../domain/repository/item_abstract.dart';
+import '../domain/repository/item_repository.dart';
 
 
 class ItemSearchList extends StatelessWidget {

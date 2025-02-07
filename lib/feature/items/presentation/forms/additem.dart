@@ -5,11 +5,12 @@ import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
-import '../../data/local/itemcontroller.dart';
+import '../../controller/itemcontroller.dart';
+import '../../data/local/item_localdb.dart';
 
 class AddProduct extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
-  final ItemDB controller = Get.put(ItemDB());
+  final ItemController controller = Get.put(ItemController());
 
   AddProduct({super.key});
 
@@ -63,8 +64,8 @@ class AddProduct extends StatelessWidget {
                             id: 'group',
                             children: controller.allGroup.value
                                 .map((element) => {
-                              'name': element['name'].toString(),
-                              'id': element['id']
+                              'name': element.name,
+                              'id': element.id
                             })
                                 .toList(),
                           )),
@@ -75,8 +76,8 @@ class AddProduct extends StatelessWidget {
                             id: 'unit',
                             children: controller.allUnit.value
                                 .map((element) => {
-                              'name': element['name'].toString(),
-                              'id': element['id']
+                              'name': element.name,
+                              'id': element.id
                             })
                                 .toList(),
                           )),
