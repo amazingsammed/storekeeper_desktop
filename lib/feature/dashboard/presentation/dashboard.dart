@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/dashboard/presentation/pages.dart';
 
 import '../controller/dashboardcontroller.dart';
+import '_component/menu_bar.dart';
 
 class DashboardScreen extends StatelessWidget {
   DashboardController controller = Get.put(DashboardController());
@@ -18,37 +19,10 @@ class DashboardScreen extends StatelessWidget {
           transitionBuilder: (c,a){
             return c;
           },
-          // appBar:  NavigationAppBar(
-          //  // automaticallyImplyLeading: false,
-          //   title: MenuFlyout(
-          //
-          //       items: [
-          //         MenuFlyoutSubItem(
-          //           text: const Text('New'),
-          //           items: (context) {
-          //             return [
-          //               MenuFlyoutItem(
-          //                 text: const Text('Plain Text Documents'),
-          //                 onPressed: () {},
-          //               ),
-          //               MenuFlyoutItem(
-          //                 text: const Text('Rich Text Documents'),
-          //                 onPressed: () {},
-          //               ),
-          //               MenuFlyoutItem(
-          //                 text: const Text('Other Formats'),
-          //                 onPressed: () {},
-          //               ),
-          //             ];
-          //           },
-          //         ),
-          //         MenuFlyoutItem(text: const Text('Open'), onPressed: () {}),
-          //         MenuFlyoutItem(text: const Text('Save'), onPressed: () {}),
-          //         const MenuFlyoutSeparator(),
-          //         MenuFlyoutItem(text: const Text('Exit'), onPressed: () {}),
-          //       ]
-          //   ),
-          // ),
+          appBar:  NavigationAppBar(
+            automaticallyImplyLeading: false,
+            title: MyMenuBar(),
+          ),
           pane: NavigationPane(
             displayMode: displayMode,
             selected: controller.selectedPage.value,

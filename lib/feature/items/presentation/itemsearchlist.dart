@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:storekepper_desktop/feature/items/models/item.dart';
+
+import '../domain/models/item.dart';
+import '../domain/repository/item_abstract.dart';
+
 
 class ItemSearchList extends StatelessWidget {
   final Function(Item) onItemSelect;

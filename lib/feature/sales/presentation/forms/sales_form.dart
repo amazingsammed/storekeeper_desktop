@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:storekepper_desktop/feature/dashboard/presentation/pages.dart';
 import 'package:storekepper_desktop/feature/sales/models/salesitem.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
-import '../../../../shared/widgets/ktextfields.dart';
-import '../../../items/models/item.dart';
+import '../../../items/domain/models/item.dart';
+
 import '../../../items/presentation/itemsearchlist.dart';
 import '../../controller/salescontroller.dart';
 

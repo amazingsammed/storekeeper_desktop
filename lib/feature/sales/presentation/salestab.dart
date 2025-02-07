@@ -58,7 +58,7 @@ class _SalesTabState extends State<SalesTab> {
             if (oldIndex < newIndex) {
               newIndex -= 1;
             }
-            final item = tabs!.removeAt(oldIndex);
+            final item = tabs.removeAt(oldIndex);
             tabs!.insert(newIndex, item);
 
             if (currentIndex == newIndex) {

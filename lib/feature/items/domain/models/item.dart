@@ -174,16 +174,16 @@ class Item {
       unit_id: map['unit_id'] as String,
       store_id: map['store_id'] as String,
       user_id: map['user_id'] as String,
-      created_date: DateTime.parse(map['created_date']) as DateTime,
+      created_date: DateTime.parse(map['created_date']),
       image: (map['image']??"") as String,
-      is_featured: bool.parse(map['is_featured']) as bool,
+      is_featured: bool.parse(map['is_featured']),
       barcode: (map['barcode']??"") as String,
       salesprice: double.parse(map['salesprice']),
       category: map['category'] as String,
-      isModified: int.parse(map['isModified']) as int,
+      isModified: int.parse(map['isModified']),
       modifiedDate: DateTime.parse(map['modifiedDate']??"12121212") ,
       modifiedBy: (map['modifiedBy']??"") as String,
-      warning_limit: int.parse(map['warning_limit']??'1') as int,
+      warning_limit: int.parse(map['warning_limit']??'1'),
     );
   }
 

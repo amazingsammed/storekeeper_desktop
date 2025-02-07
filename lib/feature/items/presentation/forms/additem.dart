@@ -5,7 +5,6 @@ import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
-import '../../controller/itemcontroller.dart';
 import '../../data/local/itemcontroller.dart';
 
 class AddProduct extends StatelessWidget {

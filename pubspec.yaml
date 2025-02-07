@@ -35,7 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  fluent_ui: ^4.9.2
+  fluent_ui:
+    path: C:\Users\advan\StudioProjects\fluent_ui-master
   get: ^4.6.6
   dartz: ^0.10.1
   path: ^1.9.0
@@ -46,6 +47,7 @@ dependencies:
   form_builder_file_picker: ^4.2.0
   sqflite: ^2.3.3+1
   sqflite_common_ffi: ^2.3.3
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:

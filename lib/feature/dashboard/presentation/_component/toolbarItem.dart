@@ -62,17 +62,17 @@ class DashBoardToolBar extends StatelessWidget {
           ToolBarItem(
               title:"Purchases",
               icon: Icons.quora,
-              index: 2
+              index: 7
           ),
           ToolBarItem(
               title:"Item List",
               icon: Icons.inventory_outlined,
-              index: 3
+              index: 11
           ),
           ToolBarItem(
-              title:"Accounts",
-              icon: Icons.offline_pin_rounded,
-              index: 4
+              title:"Report",
+              icon: Icons.report,
+              index: 15
           ),
         ],
       ),
@@ -192,22 +192,22 @@ class PurchasesToolBar extends StatelessWidget {
           ToolBarItem(
               title:"Purchase",
               icon: Icons.book,
-              index: 1
+              index: 7
           ),
           ToolBarItem(
               title:"Purchase Order",
               icon: Icons.book,
-              index: 1
+              index: 8
           ),
           ToolBarItem(
               title:"Account Payable",
               icon: Icons.book,
-              index: 1
+              index: 9
           ),
           ToolBarItem(
               title:"Payment",
               icon: Icons.book,
-              index: 1
+              index: 10
           ),
 
         ],
