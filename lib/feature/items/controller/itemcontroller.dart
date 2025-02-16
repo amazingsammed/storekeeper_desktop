@@ -39,7 +39,6 @@ class ItemController extends GetxController{
       showErrorSnackbar(message: failure.message);
     }, (exists) {
       allItems.value = exists;
-
       loading.value = false;
     });
   }

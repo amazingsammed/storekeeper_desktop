@@ -18,7 +18,7 @@ class ItemLocalDatabase  implements ItemDatabaseRepository{
     List<Map<String, dynamic>> lists = await dbClient!.query('stock_item');
     var data = lists
         .map((element) =>
-            element.map((key, value) => MapEntry(key, value.toString())))
+            element.map((key, value) => MapEntry(key, value)))
         .toList();
     for (var e in data) {
       items.add(Item.fromMap(e));
@@ -45,7 +45,7 @@ WHERE
     ''');
     var data = lists
         .map((element) =>
-            element.map((key, value) => MapEntry(key, value.toString())))
+            element.map((key, value) => MapEntry(key, value)))
         .toList();
     for (var e in data) {
       items.add(Groups.fromMap(e));
@@ -60,7 +60,7 @@ WHERE
     List<Map<String, dynamic>> lists = await dbClient!.query('stock_item_unit');
     var data = lists
         .map((element) =>
-            element.map((key, value) => MapEntry(key, value.toString())))
+            element.map((key, value) => MapEntry(key, value)))
         .toList();
     for (var e in data) {
       items.add(Units.fromMap(e));
@@ -76,7 +76,7 @@ WHERE
         await dbClient!.query('stock_item_category');
     var data = lists
         .map((element) =>
-            element.map((key, value) => MapEntry(key, value.toString())))
+            element.map((key, value) => MapEntry(key, value)))
         .toList();
     for (var e in data) {
       items.add(CategoryModel.fromMap(e));

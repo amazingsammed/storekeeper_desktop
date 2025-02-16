@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:storekepper_desktop/dashboard.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/forms/sales_form.dart';
 
 import 'feature/authentication/presentation/signin.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // return MaterialApp(
+    //   home: DashBoardwithTabs(),
+    // );
         return FluentApp(
           home: GetMaterialApp(
             theme: ThemeData(

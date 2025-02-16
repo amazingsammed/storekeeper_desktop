@@ -39,7 +39,10 @@ class UnitsPage extends StatelessWidget {
           TableHead(title: 'Status', id: 'status'),
       
         ],
-        items: controller.allUnit.value,
+        items: controller.allUnit.value.map((e)=>{
+          "name":e.name,
+          "status":"Active"
+        }).toList(),
       ),
     );
 

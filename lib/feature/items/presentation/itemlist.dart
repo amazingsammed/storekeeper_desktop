@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
+import 'package:storekepper_desktop/feature/items/domain/models/item.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import '../../../shared/widgets/datalisting.dart';
 import '../controller/itemcontroller.dart';
@@ -40,10 +41,10 @@ class ItemListing extends StatelessWidget {
           heads: [
             TableHead(title: 'Name', id: 'name'),
             TableHead(title: 'Group', id: 'group'),
-            TableHead(title: 'Selling Price', id: 'salesprice'),
-            TableHead(title: 'Status', id: 'status'),
+            TableHead(title: 'Selling Price', id: 'salesprice',type: TableHeadType.double),
+            TableHead(title: 'Status', id: 'status',type: TableHeadType.int),
           ],
-          items: controller.allItems.value,
+          items:itemToMap(controller.allItems.value),
         );
       }),
     );

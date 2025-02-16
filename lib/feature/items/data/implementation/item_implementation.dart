@@ -104,6 +104,7 @@ class ItemImplementation implements ItemRepository {
 
     return Right(data);
     } catch (error) {
+      print(error);
     return Left(Failure(error.toString()));
     }
   }

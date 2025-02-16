@@ -37,12 +37,16 @@ class GroupPage extends StatelessWidget {
           },
           title: "Item Grouping",
           heads: [
-            TableHead(title: 'Date', id: 'date'),
+            // TableHead(title: 'Date', id: 'date'),
             TableHead(title: 'Name', id: 'name'),
             TableHead(title: 'Category', id: 'category'),
             TableHead(title: 'status', id: 'status'),
           ],
-          items: controller.allGroup.value,
+          items: controller.allGroup.value.map((e)=>{
+            "name":e.name,
+            "category":e.category,
+            "status":"Active"
+          }).toList(),
         );
       }),
     );

@@ -37,11 +37,13 @@ class CategoryPage extends StatelessWidget {
           },
           title: "Category of Item",
           heads: [
-            TableHead(title: 'Date', id: 'date'),
             TableHead(title: 'Name', id: 'name'),
-            TableHead(title: 'status', id: 'amount'),
+            TableHead(title: 'Status', id: 'status'),
           ],
-          items: controller.allCategory.value,
+          items: controller.allCategory.value.map((e)=>{
+            "name":e.name,
+            "status":"Active"
+          }).toList(),
         );
       }),
     );

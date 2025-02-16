@@ -32,7 +32,7 @@ class ItemSearchList extends StatelessWidget {
 
                 itemCount: 20,
                 itemBuilder: (BuildContext context, int index) {
-                  Item item=Item(item_id: 'item_id', purchaseprice: 1.2, item_name: 'item_name', unit_id: 'unit_id', store_id: 'store_id', user_id: 'user_id', created_date: DateTime.now(), image: 'image', is_featured: false, barcode: 'barcode', salesprice: 12, category: 'category', isModified: 0);
+                  Item item =  Item(id: 1, uuid: 'uuid', name: 'name', unitId: 'unit_id', storeid: 'store_id', groupId: 'group_id', createdby: 'created_by', createddate: DateTime.now(),  salesprice: 2, status: 1, isActive: 0, purchaseprice: 22, warninglimit: 1, isService: 1);
                   return ListTile(
                     onTap: ()=>onItemSelect(item),
                     title: Text('data'),subtitle: Text("${344.3}"),);

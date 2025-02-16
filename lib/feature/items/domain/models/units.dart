@@ -1,46 +1,40 @@
 class Units{
-  String id	;
+  int id	;
   String name	;
-  String qty;
-  bool status;
+  int status;
 
 //<editor-fold desc="Data Methods">
   Units({
     required this.id,
     required this.name,
-    required this.qty,
-    required this.status
+    required this.status,
   });
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          (other is Units &&
-              runtimeType == other.runtimeType &&
-              id == other.id &&
-              name == other.name &&
-              qty == other.qty &&
-              status == other.status
-          );
+      (other is Units &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          status == other.status);
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ qty.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ status.hashCode;
 
   @override
   String toString() {
-    return 'Units{' + ' id: $id,' + ' name: $name,' + ' type: $qty,' + ' $status ''}';
+    return 'Units{' + ' id: $id,' + ' name: $name,' + ' status: $status,' + '}';
   }
 
   Units copyWith({
-    String? id,
+    int? id,
     String? name,
-    String? type,
-    bool? status,
+    int? status,
   }) {
     return Units(
       id: id ?? this.id,
       name: name ?? this.name,
-      qty: type ?? this.qty,
       status: status ?? this.status,
     );
   }
@@ -49,28 +43,17 @@ class Units{
     return {
       'id': this.id,
       'name': this.name,
-      'qty': this.qty,
       'status': this.status,
     };
   }
 
   factory Units.fromMap(Map<String, dynamic> map) {
-    bool status = false;
-    if(map['status'] == 1){
-      status = true;
-    }
     return Units(
-      id: map['id'] as String,
+      id: map['id'] as int,
       name: map['name'] as String,
-      qty: map['qty'] as String,
-      status: status,
+      status: map['status'] as int,
     );
   }
-
-  factory Units.empty() {
-    return Units(id: '', name: '', qty: '', status: false);
-  }
-
 
 //</editor-fold>
 }

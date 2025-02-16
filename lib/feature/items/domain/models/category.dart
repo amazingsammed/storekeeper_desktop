@@ -1,17 +1,17 @@
 
 
 class CategoryModel {
+  int id;
   String name;
-  bool status;
+  int status;
   String createdby;
-  String date;
 
 //<editor-fold desc="Data Methods">
   CategoryModel({
+    required this.id,
     required this.name,
     required this.status,
     required this.createdby,
-    required this.date,
   });
 
   @override
@@ -19,54 +19,54 @@ class CategoryModel {
       identical(this, other) ||
       (other is CategoryModel &&
           runtimeType == other.runtimeType &&
+          id == other.id &&
           name == other.name &&
           status == other.status &&
-          createdby == other.createdby &&
-          date == other.date);
+          createdby == other.createdby);
 
   @override
   int get hashCode =>
-      name.hashCode ^ status.hashCode ^ createdby.hashCode ^ date.hashCode;
+      id.hashCode ^ name.hashCode ^ status.hashCode ^ createdby.hashCode;
 
   @override
   String toString() {
     return 'CategoryModel{' +
+        ' id: $id,' +
         ' name: $name,' +
         ' status: $status,' +
         ' createdby: $createdby,' +
-        ' date: $date,' +
         '}';
   }
 
   CategoryModel copyWith({
+    int? id,
     String? name,
-    bool? status,
+    int? status,
     String? createdby,
-    String? date,
   }) {
     return CategoryModel(
+      id: id ?? this.id,
       name: name ?? this.name,
       status: status ?? this.status,
       createdby: createdby ?? this.createdby,
-      date: date ?? this.date,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'id': this.id,
       'name': this.name,
       'status': this.status,
       'createdby': this.createdby,
-      'date': this.date,
     };
   }
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
+      id: map['id'] as int,
       name: map['name'] as String,
-      status: map['status'] as bool,
+      status: map['status'] as int,
       createdby: map['createdby'] as String,
-      date: map['date'] as String,
     );
   }
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart';
+import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
@@ -10,7 +12,7 @@ import '../../data/local/item_localdb.dart';
 
 class AddCategory extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
-  final ItemLocalDatabase controller = Get.put(ItemLocalDatabase());
+  final ItemController controller = Get.put(ItemController());
 
   AddCategory({super.key});
 
@@ -49,10 +51,7 @@ class AddCategory extends StatelessWidget {
                         return _formKey.currentState?.fields['name']!
                             .invalidate('Category is empty');
                       }
-                     await controller.addCategory(datax: {
-                        "name": _formKey.currentState?.fields['name']!.value,
-                        'status': 1
-                      });
+                     await controller.addCategory(data: CategoryModel(name: _formKey.currentState?.fields['name']!.value, status: 1, createdby: 'createdby', id: 0));
                     },
                     title: "Save",
                   )

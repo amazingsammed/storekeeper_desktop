@@ -108,7 +108,7 @@ class QuantitySelector extends GetView<SalesController> {
         width: 400,
         child: Column(
           children: [
-            Text(item.item_name),
+            Text(item.name),
             kSizedbox10,
             FormBuilderTextField(
               controller: qty,
@@ -122,7 +122,7 @@ class QuantitySelector extends GetView<SalesController> {
             PrimaryButton(
               title: "Save",
               onTap: (){
-              controller.addSalesItem(SalesItem(name: item.item_name, id: item.item_id, salesprice: item.salesprice, quantity: int.tryParse(qty.text) ??1));
+              controller.addSalesItem(SalesItem(name: item.name, id: item.uuid, salesprice: 1.2, quantity: int.tryParse(qty.text) ??1));
               Navigator.pop(context);
               },
             )

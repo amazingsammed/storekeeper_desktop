@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart';
+import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
@@ -64,10 +65,7 @@ class AddGroup extends StatelessWidget {
                         return _formKey.currentState?.fields['category']!
                             .invalidate('Category is empty');
                       }
-                      await controller.addGroup(data: {
-                        'name': _formKey.currentState!.fields['name']?.value,
-                        'category': _formKey.currentState!.fields['category']?.value
-                      });
+                      await controller.addGroup(data: Groups(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']?.value));
                       print(_formKey.currentState?.fields.keys);
                     },
                     title: "Save",
