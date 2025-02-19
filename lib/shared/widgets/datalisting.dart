@@ -10,6 +10,7 @@ class DataTableV2 extends StatefulWidget {
   final List<TableHead> heads;
   final List items;
   final Widget? titleWidget;
+  final Widget? refreshButton;
   final TableOptions? tableOptions;
 
   const DataTableV2(
@@ -20,7 +21,7 @@ class DataTableV2 extends StatefulWidget {
       required this.items,
       this.titleWidget,
       this.selecteditems,
-      this.tableOptions})
+      this.tableOptions, this.refreshButton})
       : super(key: key);
 
   @override
@@ -168,6 +169,7 @@ class _DataTableV2State extends State<DataTableV2> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
+                      widget.refreshButton??Container()
                     ],
                   ),
                 ),

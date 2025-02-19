@@ -1,8 +1,10 @@
-import 'package:fluent_ui/fluent_ui.dart';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/item.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
+import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
 import '../../../shared/widgets/datalisting.dart';
 import '../controller/itemcontroller.dart';
 import '../data/local/item_localdb.dart';
@@ -20,6 +22,7 @@ class ItemListing extends StatelessWidget {
       toolBar: ItemToolBar(),
       child: Obx(() {
         return DataTableV2(
+          refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async { await controller.getAllItems();}).withLoading(controller.loading),
           titleWidget: Row(
             children: [
               PrimaryButton(

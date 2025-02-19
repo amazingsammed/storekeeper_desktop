@@ -4,7 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:storekepper_desktop/dashboard.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/forms/sales_form.dart';
-
+import 'package:flutter/material.dart';
 import 'feature/authentication/presentation/signin.dart';
 import 'feature/authentication/presentation/signup.dart';
 import 'feature/authentication/presentation/store_selection.dart';
@@ -26,6 +26,12 @@ class MyApp extends StatelessWidget {
         return FluentApp(
           home: GetMaterialApp(
             theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                elevation: 0,
+                backgroundColor: WidgetStateColor.transparent,
+                foregroundColor: Color(0xFF070707)
+
+              ),
               useMaterial3: false
             ),
             title: 'Flutter App',

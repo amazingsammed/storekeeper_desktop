@@ -166,49 +166,74 @@ class _CustomResizableTableState extends State<CustomResizableTable> {
           // Table Header
           Row(
             children: List.generate(data[0].length, (index) {
-              return MouseRegion(
-                cursor: SystemMouseCursors.resizeColumn,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onHorizontalDragStart: (details) {
-                    setState(() {
-                      _resizingColumnIndex = index;
-                    });
-                  },
-                  onHorizontalDragUpdate: (details) {
-                    setState(() {
-                      columnWidths[_resizingColumnIndex] += details.delta.dx;
-                      columnWidths[_resizingColumnIndex] =
-                          columnWidths[_resizingColumnIndex].clamp(50.0, 500.0);
-                    });
-                  },
-                  onHorizontalDragEnd: (details) {
-                    setState(() {
-                      _resizingColumnIndex = -1;
-                    });
-                  },
-                  child: Container(
-                    width: columnWidths[index],
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          color: _resizingColumnIndex == index
-                              ? Colors.blue
-                              : Colors.grey[300]!,
-                          width: 2.0,
+              return Container(
+                width: columnWidths[index],
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                      
+                        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            right: BorderSide(
+                              color: _resizingColumnIndex == index
+                                  ? Colors.blue
+                                  : Colors.grey[300]!,
+                              width: 2.0,
+                            ),
+                          ),
+                          color: Colors.grey[200],
+                        ),
+                        child: Text(
+                          data[0][index],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
-                      color: Colors.grey[200],
                     ),
-                    child: Text(
-                      data[0][index],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                    MouseRegion(
+                      cursor: SystemMouseCursors.resizeColumn,
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onHorizontalDragStart: (details) {
+                          setState(() {
+                            _resizingColumnIndex = index;
+                          });
+                        },
+                        onHorizontalDragUpdate: (details) {
+                          setState(() {
+                            columnWidths[_resizingColumnIndex] += details.delta.dx;
+                            columnWidths[_resizingColumnIndex] =
+                                columnWidths[_resizingColumnIndex].clamp(50.0, 500.0);
+                          });
+                        },
+                        onHorizontalDragEnd: (details) {
+                          setState(() {
+                            _resizingColumnIndex = -1;
+                          });
+                        },
+                        child: Container(
+
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                color: _resizingColumnIndex == index
+                                    ? Colors.blue
+                                    : Colors.grey[300]!,
+                                width: 2.0,
+                              ),
+                            ),
+                            color: Colors.grey[200],
+                          ),
+
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               );
             }),

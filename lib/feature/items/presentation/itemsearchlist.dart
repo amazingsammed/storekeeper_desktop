@@ -2,45 +2,62 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart';
 
 import '../domain/models/item.dart';
 import '../domain/repository/item_repository.dart';
+import 'package:get/get.dart';
 
 
 class ItemSearchList extends StatelessWidget {
+  final ScrollController scrollController = ScrollController();
+  final ItemController itemController = Get.put(ItemController());
   final Function(Item) onItemSelect;
-  const ItemSearchList({super.key, required this.onItemSelect});
+   ItemSearchList({super.key, required this.onItemSelect});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Column(
-        children: [
-          FormBuilderTextField(
-            name: 'search',
-            decoration: InputDecoration(
-              hintText: "Search Item",
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(),
-            ),
-          ),
+      child: Card(
 
-          Expanded(
-            child: Scrollbar(
-              thumbVisibility: true,
-              child: ListView.builder(
-
-                itemCount: 20,
-                itemBuilder: (BuildContext context, int index) {
-                  Item item =  Item(id: 1, uuid: 'uuid', name: 'name', unitId: 'unit_id', storeid: 'store_id', groupId: 'group_id', createdby: 'created_by', createddate: DateTime.now(),  salesprice: 2, status: 1, isActive: 0, purchaseprice: 22, warninglimit: 1, isService: 1);
-                  return ListTile(
-                    onTap: ()=>onItemSelect(item),
-                    title: Text('data'),subtitle: Text("${344.3}"),);
-                },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+          child: Column(
+            children: [
+              FormBuilderTextField(
+                name: 'search',
+                decoration: InputDecoration(
+                  hintText: "Search Item",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Scrollbar(
+                    controller: scrollController,
+                    thumbVisibility: true,
+                    child: ListView.builder(
+                  shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      itemCount: itemController.allItems.value.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Item item =  itemController.allItems.value[index];
+                        return ListTile(
+                          minLeadingWidth: 5,
+                          leading: CircleAvatar(child: Text("${index+1}")),
+                          onTap: ()=>onItemSelect(item),
+                          title: Text(item.name),subtitle: Text("\$${item.salesprice}"),);
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
@@ -11,7 +13,9 @@ class ToolBarItem extends StatelessWidget {
   final IconData icon;
   final int index; 
    ToolBarItem({super.key, required this.title, required this.icon, required this.index});
-
+   List<Color> _colors=[
+     Colors.green,Colors.blue,Colors.purple,Colors.deepPurple
+   ];
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -23,16 +27,17 @@ class ToolBarItem extends StatelessWidget {
         height: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: controller.selectedPage.value == index?Colors.green:Colors.grey)
+          color: _colors[index%3].withValues(alpha: 0.2),
+          border: Border.all(color: controller.selectedPage.value == index?Colors.green:Colors.transparent)
         ),
         margin: EdgeInsets.only(right: 10),
         padding: EdgeInsets.all(12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon,size: 30,color:  controller.selectedPage.value == index?Colors.green:null,),
+            Icon(icon,size: 30,color:  controller.selectedPage.value == index?Colors.green:Colors.black54,),
             kSizedbox5,
-            Text(title,style: TextStyle(color:  controller.selectedPage.value == index?Colors.green:null,),)
+            Text(title,style: TextStyle(color:  controller.selectedPage.value == index?Colors.green:Colors.black87,),maxLines: 1,overflow: TextOverflow.ellipsis,)
           ],
         ),
       ),

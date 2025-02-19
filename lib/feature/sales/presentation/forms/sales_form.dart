@@ -5,6 +5,7 @@ import 'package:storekepper_desktop/feature/sales/models/salesitem.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
+import '../../../../shared/widgets/datalisting.dart';
 import '../../../items/domain/models/item.dart';
 
 import '../../../items/presentation/itemsearchlist.dart';
@@ -19,7 +20,7 @@ class SalesForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(icon: Icon(Icons.chevron_left),onPressed: (){
+          leading: IconButton(icon: Icon(Icons.chevron_left), onPressed: () {
             Get.back();
           },),
           title: Text("Sales Form"),
@@ -28,56 +29,32 @@ class SalesForm extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                flex: 4,
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.black12
-                      ),
-                      child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 6),
-                              child: Text("no"),
-                            ),
-                            Expanded(flex: 4, child: Text("Name of Item")),
-                            Expanded(flex: 2, child: Text("Quantity")),
-                            Expanded(child: Text("Rate")),
-                            Expanded(child: Text("Amount")),
-                          ]
-                      ),
-                    ),
-                    Obx(() {
-                      return Expanded(child: ListView.builder(
-                        itemCount: controller.salesItem.value.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          SalesItem item = controller.salesItem.value[index];
-                          return Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0, vertical: 6),
-                                child: Text("${index + 1}"),
-                              ),
-                              Expanded(flex: 4, child: Text(item.name)),
-                              Expanded(flex: 2,
-                                  child: Text(item.quantity.toString())),
-                              Expanded(child: Text(item.salesprice.toString())),
-                              Expanded(child: Text("5000")),
-                            ],
-                          );
-                        },
-                      ),
-                      );
-                    })
-
-
+                  flex: 4, child: Obx(() {
+                return DataTableV2(
+                  selecteditems: (e) {
+                    print(e);
+                  },
+                  ontap: (element) {
+                    print(element['id'].runtimeType);
+                  },
+                  title: "Sales List",
+                  heads: [
+                    TableHead(title: 'Name', id: 'name'),
+                    TableHead(title: 'Quantity',
+                        id: 'quantity',
+                        type: TableHeadType.int),
+                    TableHead(title: 'Selling Price',
+                        id: 'salesprice',
+                        type: TableHeadType.double),
+                    TableHead(title: 'Amount',
+                        id: 'amount',
+                        type: TableHeadType.double),
                   ],
-                ),
-              ),
-              kSizedbox20,
+                  items: controller.salesItem.value.map((e) => e.toMap())
+                      .toList(),
+                );
+              })),
+
               ItemSearchList(onItemSelect: (item) {
                 Get.dialog(QuantitySelector(item));
               },),
@@ -91,6 +68,7 @@ class SalesForm extends StatelessWidget {
 
 class QuantitySelector extends GetView<SalesController> {
   final TextEditingController qty = TextEditingController();
+
   QuantitySelector(this.item, {super.key});
 
   final Item item;
@@ -121,9 +99,12 @@ class QuantitySelector extends GetView<SalesController> {
             ),
             PrimaryButton(
               title: "Save",
-              onTap: (){
-              controller.addSalesItem(SalesItem(name: item.name, id: item.uuid, salesprice: 1.2, quantity: int.tryParse(qty.text) ??1));
-              Navigator.pop(context);
+              onTap: () {
+                controller.addSalesItem(SalesItem(name: item.name,
+                    id: item.uuid,
+                    salesprice: 1.2,
+                    quantity: int.tryParse(qty.text) ?? 1));
+                Navigator.pop(context);
               },
             )
           ],
