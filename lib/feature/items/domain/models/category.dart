@@ -54,7 +54,6 @@ class CategoryModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
       'name': this.name,
       'status': this.status,
       'createdby': this.createdby,

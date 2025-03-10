@@ -303,14 +303,21 @@ class _ItemListHeader extends StatelessWidget {
               )),
           ...elements.map((item) {
             return Expanded(
-              child: Text(
-                item.title,
-                style: TextStyle(
-                    color: Colors.black87, fontWeight: FontWeight.bold),
+
+              flex: item.size * item.width.toInt(),
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    item.title,
+                    style: TextStyle(
+                        color: Colors.black87, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-              flex: item.size,
             );
-          }).toList()
+          })
         ],
       ),
     );
@@ -442,7 +449,7 @@ class _ItemListBodyState extends State<_ItemListBody> {
                                           );
                                         }
                                         return Expanded(
-                                          flex: element.size,
+                                          flex: element.size  * element.width.toInt(),
                                           child: Text(data),
                                         );
                                       })
@@ -505,12 +512,14 @@ class TableHead {
   final bool isTitle;
   final bool isSubtitle;
   final TableHeadType type;
+  final double width;
   final Widget? Function(Map<String, dynamic> data)? button;
 
   TableHead({
     required this.title,
     required this.id,
     this.size = 1,
+    this.width = 200.0,
     this.isbutton = false,
     this.isTitle = false,
     this.isSubtitle = false,

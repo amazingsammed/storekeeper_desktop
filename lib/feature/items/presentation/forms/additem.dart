@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/items/domain/models/item.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
@@ -63,10 +64,8 @@ class AddProduct extends StatelessWidget {
                             title: 'Group',
                             id: 'group',
                             children: controller.allGroup.value
-                                .map((element) => {
-                              'name': element.name,
-                              'id': element.id
-                            })
+                                .map((element) =>
+                                    {'name': element.name, 'id': element.id})
                                 .toList(),
                           )),
                           kSizedbox10,
@@ -75,10 +74,8 @@ class AddProduct extends StatelessWidget {
                             title: 'Units',
                             id: 'unit',
                             children: controller.allUnit.value
-                                .map((element) => {
-                              'name': element.name,
-                              'id': element.id
-                            })
+                                .map((element) =>
+                                    {'name': element.name, 'id': element.id})
                                 .toList(),
                           )),
                         ],
@@ -103,8 +100,29 @@ class AddProduct extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     PrimaryButton(
-                      onTap: () {
-        print(_formKey.currentState?.fields);
+                      onTap: () async {
+                        Item item = Item(
+                            id: 0,
+                            name: _formKey.currentState!.fields['name']?.value,
+                            uuid: 'idsdf',
+                            unitId:
+                                _formKey.currentState!.fields['unit']!.value.toString(),
+                            groupId:
+                                _formKey.currentState!.fields['group']!.value.toString(),
+                            status: 1,
+                            createdby: 'createdby',
+                            storeid: 'storeid',
+                            createddate: DateTime.now(),
+                            isActive: 1,
+                            salesprice: double.parse( _formKey
+                                .currentState!.fields['salesprice']!.value),
+                            purchaseprice: double.parse(_formKey
+                                .currentState!.fields['purchaseprice']?.value),
+                            warninglimit: 2,
+                            isService: 0);
+                        await controller.addItem(data: item);
+                        Navigator.of(context).pop();
+                        print(item.toMap().toString());
                       },
                       title: "Save",
                     )

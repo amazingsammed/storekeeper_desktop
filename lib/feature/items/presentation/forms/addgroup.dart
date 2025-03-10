@@ -45,7 +45,7 @@ class AddGroup extends StatelessWidget {
                       children: controller.allCategory.value
                           .map((element) => {
                                 'name': element.name,
-                                'id': element.name
+                                'id': element.id
                               })
                           .toList(),
                     ),
@@ -65,8 +65,10 @@ class AddGroup extends StatelessWidget {
                         return _formKey.currentState?.fields['category']!
                             .invalidate('Category is empty');
                       }
-                      await controller.addGroup(data: Groups(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']?.value));
+
+                      await controller.addGroup(data: Groups(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString()));
                       print(_formKey.currentState?.fields.keys);
+                      Navigator.of(context).pop();
                     },
                     title: "Save",
                   )

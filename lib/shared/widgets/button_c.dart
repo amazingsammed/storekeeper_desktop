@@ -31,6 +31,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   Widget build(BuildContext context) {
     var x =MediaQuery.of(context).size.width;
     return ElevatedButton(
+
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),
         backgroundColor: MaterialStateProperty.all<Color>(widget.color ?? MyAppColors.buttonfills),

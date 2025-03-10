@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,24 @@ class SalesForm extends StatelessWidget {
               Expanded(
                   flex: 4, child: Obx(() {
                 return DataTableV2(
+                  titleWidget: Row(
+                    children: [
+                      SecondaryButtons(
+                        onTap: (){
+                          controller.salesItem.value =[];
+                        },
+                        title: "Clear All",
+                        icon: Icons.clear_all,
+                      ),
+                      kSizedbox10,
+                      PrimaryButton(
+                        onTap: () {
+                          Get.dialog(CreateSale());
+                        },
+                        title: "Create Sales",
+                      ),
+                    ],
+                  ),
                   selecteditems: (e) {
                     print(e);
                   },
@@ -85,8 +104,11 @@ class QuantitySelector extends GetView<SalesController> {
         height: 300,
         width: 400,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(item.name),
+            kSizedbox5,
+            Text(item.salesprice.toString()),
             kSizedbox10,
             FormBuilderTextField(
               controller: qty,
@@ -97,14 +119,70 @@ class QuantitySelector extends GetView<SalesController> {
                 border: OutlineInputBorder(),
               ),
             ),
+            kSizedbox10,
             PrimaryButton(
               title: "Save",
               onTap: () {
                 controller.addSalesItem(SalesItem(name: item.name,
                     id: item.uuid,
-                    salesprice: 1.2,
-                    quantity: int.tryParse(qty.text) ?? 1));
+                    salesprice: item.salesprice,
+                    quantity: int.tryParse(qty.text) ?? 1, uuid: item.uuid));
                 Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CreateSale extends GetView<SalesController> {
+  final TextEditingController qty = TextEditingController();
+
+  CreateSale({super.key});
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: ListTile(
+        leading: Icon(CupertinoIcons.cart),
+        title: Text("Create Sales"),
+subtitle: Text("Used to save a transaction"),
+      ),
+      content: Container(
+        height: 300,
+        width: 400,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              subtitle: Text("Total Number of Items"),
+title: Text("Total Cost of item"),
+            ),
+            kSizedbox10,
+            FormBuilderTextField(
+              controller: qty,
+              name: 'amount',
+              decoration: InputDecoration(
+                hintText: "Amount Paid by Customer",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+            ),
+            kSizedbox10,
+            ListTile(
+              title: Text("Balance to give Customer"),
+              subtitle: Text(" 2000 - 1900"),
+              trailing: Text("100"),
+
+            ),
+            kSizedbox10,
+            PrimaryButton(
+              title: "Save",
+              onTap: () {
               },
             )
           ],

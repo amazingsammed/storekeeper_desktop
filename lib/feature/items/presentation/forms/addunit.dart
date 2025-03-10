@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:storekepper_desktop/feature/items/domain/models/units.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
+import '../../controller/itemcontroller.dart';
 import '../../data/local/item_localdb.dart';
 
 class AddUnit extends StatelessWidget {
-  final ItemLocalDatabase controller = Get.put(ItemLocalDatabase());
+  final ItemController controller = Get.put(ItemController());
   final _formKey = GlobalKey<FormBuilderState>();
    AddUnit({super.key});
 
@@ -47,10 +49,9 @@ class AddUnit extends StatelessWidget {
                       return _formKey.currentState?.fields['name']!
                           .invalidate('Category is empty');
                     }
-                    await controller.addUnit(data: {
-                      "name": _formKey.currentState?.fields['name']!.value,
-                      'status': 1
-                    });
+                    await controller.addUnit(data: Units(id: 0, name: _formKey.currentState?.fields['name']!.value, status: 1));
+
+                    Navigator.of(context).pop();
                   },title: "Save",)
                 ],
               )

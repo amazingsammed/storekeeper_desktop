@@ -43,7 +43,7 @@ class ItemListing extends StatelessWidget {
           title: "Items List",
           heads: [
             TableHead(title: 'Name', id: 'name'),
-            TableHead(title: 'Group', id: 'group'),
+            TableHead(title: 'Group', id: 'group_id'),
             TableHead(title: 'Selling Price', id: 'salesprice',type: TableHeadType.double),
             TableHead(title: 'Status', id: 'status',type: TableHeadType.int),
           ],

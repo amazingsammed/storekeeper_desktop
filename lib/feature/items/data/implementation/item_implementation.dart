@@ -22,7 +22,7 @@ class ItemImplementation implements ItemRepository {
   await localDatabase.addCategory(data: data.toMap());
   }
 
-    return Right(true);
+    return const Right(true);
     } catch (error) {
     return Left(Failure(error.toString()));
     }

@@ -46,7 +46,6 @@ class Groups{
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
       'name': this.name,
       'category': this.category,
     };

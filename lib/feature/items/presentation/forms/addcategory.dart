@@ -52,7 +52,8 @@ class AddCategory extends StatelessWidget {
                             .invalidate('Category is empty');
                       }
                      await controller.addCategory(data: CategoryModel(name: _formKey.currentState?.fields['name']!.value, status: 1, createdby: 'createdby', id: 0));
-                    },
+                    Navigator.of(context).pop();
+                      },
                     title: "Save",
                   )
                 ],

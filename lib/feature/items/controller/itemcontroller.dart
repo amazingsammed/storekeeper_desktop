@@ -85,8 +85,9 @@ class ItemController extends GetxController{
     results.fold((failure) {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
-    }, (exists) {
-      showSuccessSnackbar(message: "Store Created Successfully");
+    }, (exists) async {
+      await getAllCategory();
+      showSuccessSnackbar(message: "Category created Successfully");
       loading.value = false;
     });
 
@@ -98,8 +99,9 @@ class ItemController extends GetxController{
     results.fold((failure) {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
-    }, (exists) {
-      showSuccessSnackbar(message: "Store Created Successfully");
+    }, (exists) async {
+      await getAllGroups();
+      showSuccessSnackbar(message: "Group created Successfully");
       loading.value = false;
     });
 
@@ -111,8 +113,22 @@ class ItemController extends GetxController{
     results.fold((failure) {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
-    }, (exists) {
-      showSuccessSnackbar(message: "Store Created Successfully");
+    }, (exists) async {
+      await getAllUnits();
+      showSuccessSnackbar(message: "Unit created Successfully");
+      loading.value = false;
+    });
+  }
+
+  addItem({required Item data}) async {
+    loading.value = true;
+    final results = await itemRepository.createSingleItem(data: data);
+    results.fold((failure) {
+      loading.value = false;
+      showErrorSnackbar(message: failure.message);
+    }, (exists) async {
+      await getAllItems();
+      showSuccessSnackbar(message: "Item created Successfully");
       loading.value = false;
     });
   }

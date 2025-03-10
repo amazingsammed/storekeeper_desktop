@@ -58,20 +58,24 @@ class DashBoardToolBar extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-
+          ToolBarItem(
+              title:"DashBoard",
+              icon: Icons.dashboard,
+              index: 0
+          ),
           ToolBarItem(
               title:"Sales",
-              icon: Icons.book,
+              icon: Icons.currency_exchange,
               index: 1
           ),
           ToolBarItem(
               title:"Purchases",
-              icon: Icons.quora,
+              icon: Icons.bubble_chart,
               index: 7
           ),
           ToolBarItem(
               title:"Item List",
-              icon: Icons.inventory_outlined,
+              icon: Icons.inventory_2_outlined,
               index: 11
           ),
           ToolBarItem(
