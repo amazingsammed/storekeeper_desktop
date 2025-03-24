@@ -49,6 +49,7 @@ class AddUnit extends StatelessWidget {
                       return _formKey.currentState?.fields['name']!
                           .invalidate('Category is empty');
                     }
+
                     await controller.addUnit(data: Units(id: 0, name: _formKey.currentState?.fields['name']!.value, status: 1));
 
                     Navigator.of(context).pop();

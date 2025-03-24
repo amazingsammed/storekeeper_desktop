@@ -122,7 +122,7 @@ class AddProduct extends StatelessWidget {
                             isService: 0);
                         await controller.addItem(data: item);
                         Navigator.of(context).pop();
-                        print(item.toMap().toString());
+
                       },
                       title: "Save",
                     )

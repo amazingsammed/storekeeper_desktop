@@ -8,7 +8,7 @@ import '_component/menu_bar.dart';
 
 class DashboardScreen extends StatelessWidget {
   DashboardController controller = Get.put(DashboardController());
-  PaneDisplayMode displayMode = PaneDisplayMode.compact;
+  PaneDisplayMode displayMode = PaneDisplayMode.open;
 
   @override
   Widget build(BuildContext context) {

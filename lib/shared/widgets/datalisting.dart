@@ -303,14 +303,14 @@ class _ItemListHeader extends StatelessWidget {
               )),
           ...elements.map((item) {
             return Expanded(
-
               flex: item.size * item.width.toInt(),
 
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    item.title,
+                    item.title,overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: Colors.black87, fontWeight: FontWeight.bold),
                   ),
@@ -356,7 +356,7 @@ class _ItemListBodyState extends State<_ItemListBody> {
         child: widget.items.isEmpty
             ? const Center(
                 child: Text(
-                'no data available',
+                'No Data Available to present',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ))
             : Column(
@@ -439,7 +439,7 @@ class _ItemListBodyState extends State<_ItemListBody> {
                                         }
                                         if (element.isbutton) {
                                           return Expanded(
-                                            flex: element.size,
+                                            flex: element.size  * element.width.toInt(),
                                             child: Row(
                                               children: [
                                                 element.button!(item) ??

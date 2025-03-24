@@ -4,9 +4,10 @@ import 'package:storekepper_desktop/feature/items/data/local/sqlite_db.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/units.dart';
+import 'package:storekepper_desktop/feature/sales/models/voucher.dart';
 
 import '../../domain/models/item.dart';
-import '../item_database_repository.dart';
+import '../local_database_repository.dart';
 
 class ItemLocalDatabase  implements ItemDatabaseRepository{
   final DatabaseX database = DatabaseX();
@@ -66,7 +67,6 @@ WHERE
     for (var e in data) {
       items.add(Units.fromMap(e));
     }
-    print(data);
     return items;
   }
 
@@ -104,8 +104,11 @@ WHERE
 
   @override
   Future<bool> addUnit({required Map<String, dynamic> data}) async {
+    print('start');
     var dbClient = await database.db;
+    print(data);
     int results= await dbClient!.insert('stock_item_unit', data);
+    print(results);
     if(results==1) return true;
     return false;
   }
@@ -116,5 +119,28 @@ WHERE
     int results= await dbClient!.insert('stock_item', data);
     if(results==1) return true;
     return false;
+  }
+
+  @override
+  Future<bool> addVoucher({required Map<String, dynamic> data}) async {
+    var dbClient = await database.db;
+    int results= await dbClient!.insert('voucher', data);
+    if(results==1) return true;
+    return false;
+  }
+
+  @override
+  Future<List<Voucher>> getAllVoucher() async {
+    List<Voucher> items=[];
+    var dbClient = await database.db;
+    List<Map<String, dynamic>> lists = await dbClient!.query('stock_item_unit');
+    var data = lists
+        .map((element) =>
+        element.map((key, value) => MapEntry(key, value)))
+        .toList();
+    for (var e in data) {
+      items.add(Voucher.fromMap(e));
+    }
+    return items;
   }
 }

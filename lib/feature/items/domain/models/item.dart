@@ -60,7 +60,6 @@ class Item {
   );
 
   Map<String, dynamic> toMap() => {
-    "id": id,
     "name": name,
     "uuid": uuid,
     "unit_id": unitId,
