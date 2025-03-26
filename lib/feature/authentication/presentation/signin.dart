@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
+import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../shared/constant/colors.dart';
@@ -70,7 +72,7 @@ class SignInScreen extends StatelessWidget {
 
 class WebLogin extends StatelessWidget {
   WebLogin({Key? key}) : super(key: key);
-
+AuthController authController = Get.put(AuthController());
   RxBool isloading = false.obs;
   FocusNode email_node = FocusNode();
   FocusNode password_node = FocusNode();
@@ -151,20 +153,29 @@ class WebLogin extends StatelessWidget {
                         ),
                       ),
                       kSizedbox10,
+                      ElevatedButton(onPressed: () async {
+                        email.text = "Sammedtwumasi2@gmail.com";
+                        password.text = "Sammed123456";
+
+                      //  final supabase = Supabase.instance.client;
+
+                          // var results= await supabase
+                          //     .from('Users')
+                          //     .insert(Profile(userid: 'userid', username: 'username', email: 'email', password: 'password').toMap());
+                         // print(results);
+
+                      }, child: Text('fill')),
                       SizedBox(
                           width: 200,
                           height: 50,
                           child: ElevatedButton(
                               focusNode: button,
                               onPressed: () async {
-                                final supabase = Supabase.instance.client;
-                                var response=  await supabase.auth.signInWithPassword(
-                                    email: email.text,
-                                    password: password.text,
-
-                                );
-                                print(response.user);
-
+                                Profile user = Profile(userid: 'userid', username: 'username', email: email.text, password: password.text);
+                              AuthResponse results= await authController.signIn(user);
+                                bool response=  await authController.addUserToDataBase(results);
+                                print(response);
+                                print(authController.currentProfile.value.toMap());
                               },
                               child: Text('Login',style: TextStyle(fontSize: 18),)
                           )),
