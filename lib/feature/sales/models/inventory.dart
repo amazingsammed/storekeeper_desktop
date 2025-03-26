@@ -2,8 +2,8 @@
 
 class Inventory{
   int id;
-  String voucherUuid;
-  String itemUuid;
+  String voucher_uuid;
+  String item_uuid;
   double quantity;
   double rate;
   double amount;
@@ -15,8 +15,8 @@ class Inventory{
 //<editor-fold desc="Data Methods">
   Inventory({
     required this.id,
-    required this.voucherUuid,
-    required this.itemUuid,
+    required this.voucher_uuid,
+    required this.item_uuid,
     required this.quantity,
     required this.rate,
     required this.amount,
@@ -32,8 +32,8 @@ class Inventory{
       (other is Inventory &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          voucherUuid == other.voucherUuid &&
-          itemUuid == other.itemUuid &&
+          voucher_uuid == other.voucher_uuid &&
+          item_uuid == other.item_uuid &&
           quantity == other.quantity &&
           rate == other.rate &&
           amount == other.amount &&
@@ -45,8 +45,8 @@ class Inventory{
   @override
   int get hashCode =>
       id.hashCode ^
-      voucherUuid.hashCode ^
-      itemUuid.hashCode ^
+      voucher_uuid.hashCode ^
+      item_uuid.hashCode ^
       quantity.hashCode ^
       rate.hashCode ^
       amount.hashCode ^
@@ -59,8 +59,8 @@ class Inventory{
   String toString() {
     return 'Inventory{' +
         ' id: $id,' +
-        ' voucherUuid: $voucherUuid,' +
-        ' itemUuid: $itemUuid,' +
+        ' voucher_uuid: $voucher_uuid,' +
+        ' item_uuid: $item_uuid,' +
         ' quantity: $quantity,' +
         ' rate: $rate,' +
         ' amount: $amount,' +
@@ -73,8 +73,8 @@ class Inventory{
 
   Inventory copyWith({
     int? id,
-    String? voucherUuid,
-    String? itemUuid,
+    String? voucher_uuid,
+    String? item_uuid,
     double? quantity,
     double? rate,
     double? amount,
@@ -85,8 +85,8 @@ class Inventory{
   }) {
     return Inventory(
       id: id ?? this.id,
-      voucherUuid: voucherUuid ?? this.voucherUuid,
-      itemUuid: itemUuid ?? this.itemUuid,
+      voucher_uuid: voucher_uuid ?? this.voucher_uuid,
+      item_uuid: item_uuid ?? this.item_uuid,
       quantity: quantity ?? this.quantity,
       rate: rate ?? this.rate,
       amount: amount ?? this.amount,
@@ -99,24 +99,23 @@ class Inventory{
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
-      'voucherUuid': this.voucherUuid,
-      'itemUuid': this.itemUuid,
-      'quantity': this.quantity,
-      'rate': this.rate,
-      'amount': this.amount,
-      'status': this.status,
-      'storeid': this.storeid,
-      'createdby': this.createdby,
-      'date': this.date,
+      'voucher_uuid': voucher_uuid,
+      'item_uuid': item_uuid,
+      'quantity': quantity,
+      'rate': rate,
+      'amount': amount,
+      'status': status,
+      'storeid': storeid,
+      'createdby': createdby,
+      'date': date.toIso8601String(),
     };
   }
 
   factory Inventory.fromMap(Map<String, dynamic> map) {
     return Inventory(
       id: map['id'] as int,
-      voucherUuid: map['voucherUuid'] as String,
-      itemUuid: map['itemUuid'] as String,
+      voucher_uuid: map['voucher_uuid'] as String,
+      item_uuid: map['item_uuid'] as String,
       quantity: map['quantity'] as double,
       rate: map['rate'] as double,
       amount: map['amount'] as double,

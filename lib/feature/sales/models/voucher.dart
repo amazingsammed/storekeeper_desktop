@@ -125,20 +125,19 @@ class Voucher {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
-      'uuid': this.uuid,
-      'date': this.date,
-      'voucherType': this.voucherType,
-      'narration': this.narration,
-      'partyName': this.partyName,
-      'isInvoice': this.isInvoice,
-      'isAccountingVoucher': this.isAccountingVoucher,
-      'isInventoryVoucher': this.isInventoryVoucher,
-      'isOrderVoucher': this.isOrderVoucher,
-      'createdby': this.createdby,
-      'storeid': this.storeid,
-      'status': this.status,
-      'isActive': this.isActive,
+      'uuid': uuid,
+      'date': date.toIso8601String(),
+      'voucher_type': voucherType,
+      'narration': narration,
+      'party_name': partyName,
+      'is_invoice': isInvoice,
+      'is_accounting_voucher': isAccountingVoucher,
+      'is_inventory_voucher': isInventoryVoucher,
+      'is_order_voucher': isOrderVoucher,
+      'createdby': createdby,
+      'storeid': storeid,
+      'status': status,
+      'is_active': isActive,
     };
   }
 

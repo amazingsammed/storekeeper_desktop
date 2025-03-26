@@ -2,13 +2,13 @@
 
 class Accounting{
   int id;
-  String voucherUuid;
+  String voucher_uuid;
   String vouchername;
-  String accountUuid;
+  String account_uuid;
   double amount;
   int status;
-  int isActive;
-  int isSystem;
+  int is_active;
+  int is_system;
   String storeid;
   String createdby;
   DateTime date;
@@ -16,13 +16,13 @@ class Accounting{
 //<editor-fold desc="Data Methods">
   Accounting({
     required this.id,
-    required this.voucherUuid,
+    required this.voucher_uuid,
     required this.vouchername,
-    required this.accountUuid,
+    required this.account_uuid,
     required this.amount,
     required this.status,
-    required this.isActive,
-    required this.isSystem,
+    required this.is_active,
+    required this.is_system,
     required this.storeid,
     required this.createdby,
     required this.date,
@@ -34,13 +34,13 @@ class Accounting{
       (other is Accounting &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          voucherUuid == other.voucherUuid &&
+          voucher_uuid == other.voucher_uuid &&
           vouchername == other.vouchername &&
-          accountUuid == other.accountUuid &&
+          account_uuid == other.account_uuid &&
           amount == other.amount &&
           status == other.status &&
-          isActive == other.isActive &&
-          isSystem == other.isSystem &&
+          is_active == other.is_active &&
+          is_system == other.is_system &&
           storeid == other.storeid &&
           createdby == other.createdby &&
           date == other.date);
@@ -48,13 +48,13 @@ class Accounting{
   @override
   int get hashCode =>
       id.hashCode ^
-      voucherUuid.hashCode ^
+      voucher_uuid.hashCode ^
       vouchername.hashCode ^
-      accountUuid.hashCode ^
+      account_uuid.hashCode ^
       amount.hashCode ^
       status.hashCode ^
-      isActive.hashCode ^
-      isSystem.hashCode ^
+      is_active.hashCode ^
+      is_system.hashCode ^
       storeid.hashCode ^
       createdby.hashCode ^
       date.hashCode;
@@ -63,13 +63,13 @@ class Accounting{
   String toString() {
     return 'Accounting{' +
         ' id: $id,' +
-        ' voucherUuid: $voucherUuid,' +
+        ' voucher_uuid: $voucher_uuid,' +
         ' vouchername: $vouchername,' +
-        ' accountUuid: $accountUuid,' +
+        ' account_uuid: $account_uuid,' +
         ' amount: $amount,' +
         ' status: $status,' +
-        ' isActive: $isActive,' +
-        ' isSystem: $isSystem,' +
+        ' is_active: $is_active,' +
+        ' is_system: $is_system,' +
         ' storeid: $storeid,' +
         ' createdby: $createdby,' +
         ' date: $date,' +
@@ -78,26 +78,26 @@ class Accounting{
 
   Accounting copyWith({
     int? id,
-    String? voucherUuid,
+    String? voucher_uuid,
     String? vouchername,
-    String? accountUuid,
+    String? account_uuid,
     double? amount,
     int? status,
-    int? isActive,
-    int? isSystem,
+    int? is_active,
+    int? is_system,
     String? storeid,
     String? createdby,
     DateTime? date,
   }) {
     return Accounting(
       id: id ?? this.id,
-      voucherUuid: voucherUuid ?? this.voucherUuid,
+      voucher_uuid: voucher_uuid ?? this.voucher_uuid,
       vouchername: vouchername ?? this.vouchername,
-      accountUuid: accountUuid ?? this.accountUuid,
+      account_uuid: account_uuid ?? this.account_uuid,
       amount: amount ?? this.amount,
       status: status ?? this.status,
-      isActive: isActive ?? this.isActive,
-      isSystem: isSystem ?? this.isSystem,
+      is_active: is_active ?? this.is_active,
+      is_system: is_system ?? this.is_system,
       storeid: storeid ?? this.storeid,
       createdby: createdby ?? this.createdby,
       date: date ?? this.date,
@@ -106,30 +106,29 @@ class Accounting{
 
   Map<String, dynamic> toMap() {
     return {
-      'id': this.id,
-      'voucherUuid': this.voucherUuid,
+      'voucher_uuid': this.voucher_uuid,
       'vouchername': this.vouchername,
-      'accountUuid': this.accountUuid,
+      'account_uuid': this.account_uuid,
       'amount': this.amount,
       'status': this.status,
-      'isActive': this.isActive,
-      'isSystem': this.isSystem,
+      'is_active': this.is_active,
+      'is_system': this.is_system,
       'storeid': this.storeid,
       'createdby': this.createdby,
-      'date': this.date,
+      'date': this.date.toIso8601String(),
     };
   }
 
   factory Accounting.fromMap(Map<String, dynamic> map) {
     return Accounting(
       id: map['id'] as int,
-      voucherUuid: map['voucherUuid'] as String,
+      voucher_uuid: map['voucher_uuid'] as String,
       vouchername: map['vouchername'] as String,
-      accountUuid: map['accountUuid'] as String,
+      account_uuid: map['account_uuid'] as String,
       amount: map['amount'] as double,
       status: map['status'] as int,
-      isActive: map['isActive'] as int,
-      isSystem: map['isSystem'] as int,
+      is_active: map['is_active'] as int,
+      is_system: map['is_system'] as int,
       storeid: map['storeid'] as String,
       createdby: map['createdby'] as String,
       date: map['date'] as DateTime,

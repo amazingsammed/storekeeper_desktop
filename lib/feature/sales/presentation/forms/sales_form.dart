@@ -15,6 +15,7 @@ import '../../../../shared/widgets/datalisting.dart';
 import '../../../items/domain/models/item.dart';
 
 import '../../../items/presentation/itemsearchlist.dart';
+import '../../controller/mytransaction.dart';
 import '../../controller/salescontroller.dart';
 import '../../models/transaction.dart';
 
@@ -174,6 +175,7 @@ class QuantitySelector extends GetView<SalesController> {
 
 class CreateSale extends GetView<SalesController> {
   final VoucherController voucherController = Get.put(VoucherController());
+  MyTransactionController transactionController = Get.put(MyTransactionController());
   final TextEditingController qty = TextEditingController();
 
   CreateSale({super.key});
@@ -240,7 +242,7 @@ class CreateSale extends GetView<SalesController> {
               kSizedbox10,
               PrimaryButton(
                 title: "Save",
-                onTap: () {
+                onTap: () async {
                   String voucherid = "vvvid";
                   String storeID = "storeid";
                   String createdBy = "createdby";
@@ -263,8 +265,8 @@ class CreateSale extends GetView<SalesController> {
                       inventory: controller.salesItem.value
                           .map((e) => Inventory(
                               id: 0,
-                              voucherUuid: voucherid,
-                              itemUuid: e.uuid,
+                              voucher_uuid: voucherid,
+                              item_uuid: e.uuid,
                               quantity: e.quantity * 1.00,
                               rate: e.salesprice,
                               amount: e.salesprice * e.quantity,
@@ -276,31 +278,31 @@ class CreateSale extends GetView<SalesController> {
                       accounting: [
                         Accounting(
                             id: 0,
-                            voucherUuid: voucherid,
+                            voucher_uuid: voucherid,
                             vouchername: 'Cash',
-                            accountUuid: 'cashuuid',
+                            account_uuid: 'cashuuid',
                             amount: controller.totalAmount(),
                             status: 1,
-                            isActive: 1,
-                            isSystem: 1,
+                            is_active: 1,
+                            is_system: 1,
                             storeid: storeID,
                             createdby: createdBy,
                             date:DateTime.now()),
                         Accounting(
                             id: 0,
-                            voucherUuid: voucherid,
+                            voucher_uuid: voucherid,
                             vouchername: 'Sales',
-                            accountUuid: 'salesuuid',
+                            account_uuid: 'salesuuid',
                             amount: controller.totalAmount() * -1,
                             status: 1,
-                            isActive: 1,
-                            isSystem: 1,
+                            is_active: 1,
+                            is_system: 1,
                             storeid: storeID,
                             createdby: createdBy,
                             date:DateTime.now()),
                       ]);
-
-                  print(saleTransaction.toMap());
+                 await transactionController.saveTransaction(saleTransaction);
+                 print(saleTransaction.toMap());
                 },
               )
             ],
