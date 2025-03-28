@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
+import 'package:storekepper_desktop/feature/items/data/remote/item_remotedb.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/item.dart';
@@ -12,7 +14,9 @@ import '../local/item_localdb.dart';
 
 class ItemImplementation implements ItemRepository {
   final ItemLocalDatabase localDatabase = ItemLocalDatabase();
+  final ItemRemoteDatabase remoteDatabase=ItemRemoteDatabase();
   final NetworkInfo networkInfo = NetworkInfoImpl();
+  final AuthController authController = Get.find();
 
   @override
   Future<Either<Failure, bool>> createSingleCategory({required CategoryModel data})async { try {
@@ -93,11 +97,12 @@ class ItemImplementation implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, List<Item>>> getAllItems() async {
+  Future<Either<Failure, List<Item>>> getAllItems({String? storeid,String? busid}) async {
     var data = <Item>[];
     try {
       if (await networkInfo.hasInternet()) {
-    data= await localDatabase.getAllItems();
+
+    data= await remoteDatabase.getAllItems(storeid: authController.myStore.storeid,busid: authController.myBusiness.busid);
     } else {
     data=  await localDatabase.getAllItems();
     }

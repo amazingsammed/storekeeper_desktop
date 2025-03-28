@@ -7,7 +7,7 @@ import '../domain/models/item.dart';
 import '../domain/models/units.dart';
 
 abstract class ItemDatabaseRepository{
-  Future<List<Item>> getAllItems() ;
+  Future<List<Item>> getAllItems({String? storeid,String? busid}) ;
 
   Future<List<Groups>> getAllGroups();
 

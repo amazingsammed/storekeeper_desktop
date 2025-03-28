@@ -26,8 +26,12 @@ class AuthController extends GetxController {
     );
   }
 
-  Business get myBusiness=>selectedBusiness.value[0];
-  Store get myStore=>selectedStore.value[0];
+  Business get myBusiness => selectedBusiness.value[0];
+
+  Store get myStore => selectedStore.value[0];
+
+  var loading = false.obs;
+
   Future<bool> addUserToDataBase(AuthResponse userinfo) async {
     try {
       var userx = userinfo.user!;
@@ -51,7 +55,7 @@ class AuthController extends GetxController {
       userdata.fold((ifLeft) {
         return false;
       }, (data) {
-        print("userdata0"+data.toString());
+        print("userdata0" + data.toString());
         currentProfile.value = data;
         return true;
       });
@@ -83,16 +87,16 @@ class AuthController extends GetxController {
     }
     return items[0];
   }
+
   Future<Store> getStoreByID(String id) async {
     List<Store> items = [];
-    try{
-
-    var data = await supabase.from('stores').select().eq('storeid', id);
-    for (var element in data) {
-      items.add(Store.fromMap(element));
-    }
-    return items[0];
-    }catch(e){
+    try {
+      var data = await supabase.from('stores').select().eq('storeid', id);
+      for (var element in data) {
+        items.add(Store.fromMap(element));
+      }
+      return items[0];
+    } catch (e) {
       print(e);
       return items[0];
     }

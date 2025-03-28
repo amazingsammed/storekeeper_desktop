@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
+import 'package:storekepper_desktop/shared/extensions/buttons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../shared/constant/colors.dart';
@@ -171,15 +172,17 @@ AuthController authController = Get.put(AuthController());
                           child: ElevatedButton(
                               focusNode: button,
                               onPressed: () async {
+                                authController.loading.value = true;
                                 Profile user = Profile(userid: 'userid', username: 'username', email: email.text, password: password.text);
                               AuthResponse results= await authController.signIn(user);
                                 bool response=  await authController.addUserToDataBase(results);
                                 print(response);
                                 await authController.getAllBusiness();
+                                authController.loading.value = false;
                                 Get.toNamed('/store_selection');
                               },
                               child: Text('Login',style: TextStyle(fontSize: 18),)
-                          )),
+                          ).withLoading(loading: authController.loading)),
 
 
                     ],

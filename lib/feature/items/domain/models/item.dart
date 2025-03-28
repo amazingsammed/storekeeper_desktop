@@ -51,7 +51,7 @@ class Item {
     status: json["status"],
     createdby: json["createdby"],
     storeid: json["storeid"],
-    createddate: DateTime.parse(json["createddate"]),
+    createddate: DateTime.now(),
     isActive: json["is_active"],
     salesprice: json["salesprice"]?.toDouble(),
     purchaseprice: json["purchaseprice"]?.toDouble(),

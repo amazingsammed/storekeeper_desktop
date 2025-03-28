@@ -22,7 +22,7 @@ class ItemListing extends StatelessWidget {
       toolBar: ItemToolBar(),
       child: Obx(() {
         return DataTableV2(
-       //   refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async { await controller.getAllItems();}).withLoading(controller.loading),
+          refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async { await controller.getAllItems();}).withLoading(controller.loading),
           titleWidget: Row(
             children: [
               PrimaryButton(

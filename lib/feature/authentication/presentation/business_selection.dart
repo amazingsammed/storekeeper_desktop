@@ -4,6 +4,7 @@ import 'package:storekepper_desktop/feature/authentication/domain/model/business
 import 'package:storekepper_desktop/feature/authentication/domain/model/user_business.dart';
 import 'package:storekepper_desktop/feature/authentication/presentation/store_selection.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
+import 'package:storekepper_desktop/shared/extensions/buttons.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:uuid/uuid.dart';
 
@@ -187,6 +188,7 @@ class CreateBusiness extends StatelessWidget {
                 },
                 icon: Icon(Icons.file_upload)),
             PrimaryButton(focusNode: buttonn, onTap: () async {
+              authController.loading.value=true;
               Business business = Business(name: name.text,
                   owner: owner.text,
                   type: type.text,
@@ -194,7 +196,9 @@ class CreateBusiness extends StatelessWidget {
                   location: location.text,
                   contact: contact.text);
               await authController.saveBusiness(business);
-            }, title: "Save")
+              authController.loading.value=false;
+              Navigator.of(context).pop();
+            }, title: "Save",icon: Icons.save,).withLoading(loading: authController.loading)
           ],
         ),
       ),

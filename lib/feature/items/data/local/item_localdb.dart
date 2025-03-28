@@ -13,7 +13,7 @@ class ItemLocalDatabase  implements ItemDatabaseRepository{
   final DatabaseX database = DatabaseX();
 
   @override
-  Future<List<Item>> getAllItems() async {
+  Future<List<Item>> getAllItems({String? storeid,String? busid}) async {
     List<Item> items = [];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists = await dbClient!.query('stock_item');
