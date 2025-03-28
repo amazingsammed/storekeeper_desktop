@@ -4,13 +4,15 @@ class UserStore{
   String userid;
   String storeid;
   String busid;
-  int status;
+  String role;
+  String status;
 
 //<editor-fold desc="Data Methods">
   UserStore({
     required this.userid,
     required this.storeid,
     required this.busid,
+    required this.role,
     required this.status,
   });
 
@@ -22,11 +24,16 @@ class UserStore{
           userid == other.userid &&
           storeid == other.storeid &&
           busid == other.busid &&
+          role == other.role &&
           status == other.status);
 
   @override
   int get hashCode =>
-      userid.hashCode ^ storeid.hashCode ^ busid.hashCode ^ status.hashCode;
+      userid.hashCode ^
+      storeid.hashCode ^
+      busid.hashCode ^
+      role.hashCode ^
+      status.hashCode;
 
   @override
   String toString() {
@@ -34,6 +41,7 @@ class UserStore{
         ' userid: $userid,' +
         ' storeid: $storeid,' +
         ' busid: $busid,' +
+        ' role: $role,' +
         ' status: $status,' +
         '}';
   }
@@ -42,12 +50,14 @@ class UserStore{
     String? userid,
     String? storeid,
     String? busid,
-    int? status,
+    String? role,
+    String? status,
   }) {
     return UserStore(
       userid: userid ?? this.userid,
       storeid: storeid ?? this.storeid,
       busid: busid ?? this.busid,
+      role: role ?? this.role,
       status: status ?? this.status,
     );
   }
@@ -57,6 +67,7 @@ class UserStore{
       'userid': this.userid,
       'storeid': this.storeid,
       'busid': this.busid,
+      'role': this.role,
       'status': this.status,
     };
   }
@@ -66,7 +77,8 @@ class UserStore{
       userid: map['userid'] as String,
       storeid: map['storeid'] as String,
       busid: map['busid'] as String,
-      status: map['status'] as int,
+      role: map['role'] as String,
+      status: map['status'] as String,
     );
   }
 

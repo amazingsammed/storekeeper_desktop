@@ -3,16 +3,17 @@ import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/business.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/user_business.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/user_store.dart';
+import 'package:storekepper_desktop/feature/dashboard/presentation/dashboard.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../shared/widgets/textfield.dart';
 import '../controller/authcontroller.dart';
+import '../domain/model/store.dart';
 
 class StoreSelectionScreen extends StatelessWidget {
   AuthController authController = Get.put(AuthController());
-
   @override
   Widget build(BuildContext context) {
 
@@ -28,6 +29,7 @@ class StoreSelectionScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListTile(
+                    leading: IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.chevron_left)),
                     title: Text(
                       "Store Selection",
                       style: TextStyle(fontSize: 20),
@@ -52,15 +54,20 @@ class StoreSelectionScreen extends StatelessWidget {
                               .value[index];
                           return FutureBuilder(
                               future: authController
-                                  .getBusinessByID(item.busid),
+                                  .getStoreByID(item.storeid),
                               builder: (BuildContext context,
                                   AsyncSnapshot snapshot) {
                                 if (snapshot.hasData) {
-                                  Business item = snapshot.data;
+                                  Store item = snapshot.data;
                                   return Card(
                                     child: ListTile(
+                                      onTap: (){
+                                        authController.selectedStore.value = [item];
+                                        Get.toNamed('/dashboard');
+                                      },
                                       title: Text(item.name),
-                                      subtitle: Text(item.owner),
+                                      subtitle: Text(item.manager),
+                                      trailing: Icon(Icons.chevron_right),
                                     ),
                                   );
                                 } else if (snapshot.hasError) {
@@ -86,7 +93,7 @@ class StoreSelectionScreen extends StatelessWidget {
 
 class CreateBusiness extends StatelessWidget {
   final TextEditingController name = TextEditingController();
-  final TextEditingController owner = TextEditingController();
+  final TextEditingController manager = TextEditingController();
   final TextEditingController type = TextEditingController();
   final TextEditingController location = TextEditingController();
   final TextEditingController contact = TextEditingController();
@@ -103,7 +110,7 @@ class CreateBusiness extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Fill in the Business Information"),
+      title: Text("Fill in the Store Information"),
       content: Container(
         height: 500,
         width: 400,
@@ -122,28 +129,18 @@ class CreateBusiness extends StatelessWidget {
             ),
             kSizedbox20,
             CustomTextField2(
-              controller: owner,
+              controller: manager,
               focusNode: ownern,
-              onFieldSubmitted: (value) {
-                typen.requestFocus();
-              },
-              icon: Icons.person,
-              label: 'Owner',
-              color: Colors.blue,
-              onChanged: (value) {},
-            ),
-            kSizedbox20,
-            CustomTextField2(
-              controller: type,
-              focusNode: typen,
               onFieldSubmitted: (value) {
                 locationn.requestFocus();
               },
-              label: 'Description or Type',
+              icon: Icons.person,
+              label: 'Manger',
               color: Colors.blue,
               onChanged: (value) {},
             ),
             kSizedbox20,
+
             CustomTextField2(
               controller: location,
               focusNode: locationn,
@@ -170,22 +167,21 @@ class CreateBusiness extends StatelessWidget {
             kSizedbox20,
             IconButton(
                 onPressed: () {
-                  name.text = "Busia Limited";
-                  owner.text = "Sammed";
-                  type.text = "Phones and Accesories";
-                  location.text = "kumasi";
+                  name.text = "Busia Head Office";
+                  manager.text = "Farouk";
+                  location.text = "tafo";
                   contact.text = "0543220177";
                   buttonn.requestFocus();
                 },
                 icon: Icon(Icons.file_upload)),
             PrimaryButton(focusNode: buttonn, onTap: () async {
-              Business business = Business(name: name.text,
-                  owner: owner.text,
-                  type: type.text,
-                  busid: Uuid().v4(),
+              Store business = Store(name: name.text,
+                  manager: manager.text,
+                  busid: authController.myBusiness.busid,
                   location: location.text,
-                  contact: contact.text);
-              await authController.saveBusiness(business);
+                  contact: contact.text, storeid: Uuid().v4());
+              await authController.saveStore(business);
+              Navigator.of(context).pop();
             }, title: "Save")
           ],
         ),

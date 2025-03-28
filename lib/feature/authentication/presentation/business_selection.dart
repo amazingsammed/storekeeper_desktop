@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/business.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/user_business.dart';
+import 'package:storekepper_desktop/feature/authentication/presentation/store_selection.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:uuid/uuid.dart';
@@ -27,6 +28,7 @@ class BusinessSelectionScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListTile(
+                    leading: IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.chevron_left)),
                     title: Text(
                       "Business Selection",
                       style: TextStyle(fontSize: 20),
@@ -57,9 +59,16 @@ class BusinessSelectionScreen extends StatelessWidget {
                                 if (snapshot.hasData) {
                                   Business item = snapshot.data;
                                   return Card(
+                                    
                                     child: ListTile(
+                                      onTap: () async {
+                                        await authController.getAllStoresbyBusinessID(item.busid);
+                                        authController.selectedBusiness.value = [item];
+                                        Get.to(()=>StoreSelectionScreen());
+                                      },
                                       title: Text(item.name),
                                       subtitle: Text(item.owner),
+                                      trailing: Icon(Icons.chevron_right),
                                     ),
                                   );
                                 } else if (snapshot.hasError) {

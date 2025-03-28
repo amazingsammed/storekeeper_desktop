@@ -2,7 +2,6 @@
 class Store{
   String name;
   String contact;
-  String owner;
   String storeid;
   String busid;
   String location;
@@ -12,7 +11,6 @@ class Store{
   Store({
     required this.name,
     required this.contact,
-    required this.owner,
     required this.storeid,
     required this.busid,
     required this.location,
@@ -26,7 +24,6 @@ class Store{
           runtimeType == other.runtimeType &&
           name == other.name &&
           contact == other.contact &&
-          owner == other.owner &&
           storeid == other.storeid &&
           busid == other.busid &&
           location == other.location &&
@@ -36,7 +33,6 @@ class Store{
   int get hashCode =>
       name.hashCode ^
       contact.hashCode ^
-      owner.hashCode ^
       storeid.hashCode ^
       busid.hashCode ^
       location.hashCode ^
@@ -47,7 +43,6 @@ class Store{
     return 'Store{' +
         ' name: $name,' +
         ' contact: $contact,' +
-        ' owner: $owner,' +
         ' storeid: $storeid,' +
         ' busid: $busid,' +
         ' location: $location,' +
@@ -58,7 +53,6 @@ class Store{
   Store copyWith({
     String? name,
     String? contact,
-    String? owner,
     String? storeid,
     String? busid,
     String? location,
@@ -67,7 +61,6 @@ class Store{
     return Store(
       name: name ?? this.name,
       contact: contact ?? this.contact,
-      owner: owner ?? this.owner,
       storeid: storeid ?? this.storeid,
       busid: busid ?? this.busid,
       location: location ?? this.location,
@@ -79,7 +72,6 @@ class Store{
     return {
       'name': this.name,
       'contact': this.contact,
-      'owner': this.owner,
       'storeid': this.storeid,
       'busid': this.busid,
       'location': this.location,
@@ -91,7 +83,6 @@ class Store{
     return Store(
       name: map['name'] as String,
       contact: map['contact'] as String,
-      owner: map['owner'] as String,
       storeid: map['storeid'] as String,
       busid: map['busid'] as String,
       location: map['location'] as String,

@@ -14,8 +14,10 @@ class AuthController extends GetxController {
   ProfileRepository profileRepository = ProfileRepositoryImpl();
 
   var currentProfile = Profile.empty().obs;
-  var userStores= <UserStore>[].obs;
-  var userBusiness= <UserBusiness>[].obs;
+  var selectedBusiness = <Business>[].obs;
+  var selectedStore = <Store>[].obs;
+  var userStores = <UserStore>[].obs;
+  var userBusiness = <UserBusiness>[].obs;
 
   Future<AuthResponse> signIn(Profile user) async {
     return await supabase.auth.signInWithPassword(
@@ -24,16 +26,17 @@ class AuthController extends GetxController {
     );
   }
 
+  Business get myBusiness=>selectedBusiness.value[0];
+  Store get myStore=>selectedStore.value[0];
   Future<bool> addUserToDataBase(AuthResponse userinfo) async {
     try {
       var userx = userinfo.user!;
       var doc = await supabase
-          .from('Users')
+          .from('users')
           .select()
           .eq('userid', userinfo.user!.id)
           .maybeSingle();
-      if (doc==null) {
-
+      if (doc == null) {
         Profile user = Profile(
             userid: userx.id,
             username: userx.userMetadata!['username'],
@@ -42,14 +45,13 @@ class AuthController extends GetxController {
         var userdata = await profileRepository.save(user);
         userdata.fold((ifLeft) {
           return false;
-        }, (data) {
-
-        });
+        }, (data) {});
       }
       var userdata = await profileRepository.retrieve(userx.id);
       userdata.fold((ifLeft) {
         return false;
       }, (data) {
+        print("userdata0"+data.toString());
         currentProfile.value = data;
         return true;
       });
@@ -60,43 +62,77 @@ class AuthController extends GetxController {
       return false;
     }
   }
- Future<List<UserBusiness>> getAllBusiness()async{
-   userBusiness.clear();
-    var data= await supabase.from('user_business').select().eq('userid',currentProfile.value.userid);
-    for(var element in data){
+
+  Future<List<UserBusiness>> getAllBusiness() async {
+    userBusiness.clear();
+    var data = await supabase
+        .from('user_business')
+        .select()
+        .eq('userid', currentProfile.value.userid);
+    for (var element in data) {
       userBusiness.add(UserBusiness.fromMap(element));
     }
     return userBusiness.value;
   }
 
-  Future<Business> getBusinessByID(String busid)async{
-    List<Business> items=[];
-    var data= await supabase.from('business').select().eq('busid',busid);
-    for(var element in data){
+  Future<Business> getBusinessByID(String busid) async {
+    List<Business> items = [];
+    var data = await supabase.from('business').select().eq('busid', busid);
+    for (var element in data) {
       items.add(Business.fromMap(element));
     }
     return items[0];
   }
+  Future<Store> getStoreByID(String id) async {
+    List<Store> items = [];
+    try{
 
-
-
-  getAllStores()async{
-    var data= await supabase.from('userstore').select().eq('userid',currentProfile.value.userid);
-    for(var element in data){
-      userStores.add(UserStore.fromMap(element));
+    var data = await supabase.from('stores').select().eq('storeid', id);
+    for (var element in data) {
+      items.add(Store.fromMap(element));
     }
-    return userStores.value;
+    return items[0];
+    }catch(e){
+      print(e);
+      return items[0];
+    }
+  }
+
+  getAllStoresbyBusinessID(String item) async {
+    userStores.clear();
+    try {
+      var data = await supabase
+          .from('user_store')
+          .select()
+          .eq('userid', currentProfile.value.userid)
+          .eq("busid", item);
+      for (var element in data) {
+        userStores.add(UserStore.fromMap(element));
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   saveStore(Store store) async {
     await supabase.from('stores').insert(store.toMap());
-    await supabase.from('userstore').insert(UserStore(userid: currentProfile.value.userid, storeid: store.storeid, status: 1, busid: '').toMap());
+    await supabase.from('user_store').insert(UserStore(
+            userid: currentProfile.value.userid,
+            storeid: store.storeid,
+            status: "active",
+            role: 'admin',
+            busid: store.busid)
+        .toMap());
+    await getAllStoresbyBusinessID(store.busid);
   }
 
- Future saveBusiness(Business business) async {
+  Future saveBusiness(Business business) async {
     await supabase.from('business').insert(business.toMap());
-    await supabase.from('user_business').insert(UserBusiness(userid: currentProfile.value.userid, busid: business.busid, status: 1).toMap());
+    await supabase.from('user_business').insert(UserBusiness(
+            userid: currentProfile.value.userid,
+            busid: business.busid,
+            status: 1)
+        .toMap());
     await getAllBusiness();
   }
-
 }
