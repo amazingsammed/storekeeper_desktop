@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -18,26 +16,20 @@ class DatabaseX {
 
   initDb() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "StoreApp4.db");
+    String path = join(documentsDirectory.path, "StoreApp5.db");
     bool dbExists = await File(path).exists();
 
-
     if (!dbExists) {
-
-      print("Creating New Database");
       ByteData data = await rootBundle.load("assets/mystore_db.db");
       List<int> bytes =
-      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
       await File(path).writeAsBytes(bytes, flush: true);
-
     }
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
 
-    var theDb = await openDatabase(
-        path
-    );
+    var theDb = await openDatabase(path);
     return theDb;
   }
 }

@@ -26,19 +26,19 @@ class ProfileRemoteDatabaseImpl implements ProfileRemoteDatabase {
   @override
   Future<void> save(Profile profile) async {
    var results= await supabase
-        .from('Users')
+        .from('users')
         .insert(profile.toMap());
   }
 
   @override
   Future<Profile> retrieve(String id) async {
-    final results = await supabase.from('Users').select().eq('userid',id).maybeSingle();
+    final results = await supabase.from('users').select().eq('userid',id).maybeSingle();
     return Profile.fromMap(results!);
   }
 
   @override
   Future<void> delete(String id) async {
-    await supabase.from('Users').select();
+    await supabase.from('users').select();
   }
 
   @override

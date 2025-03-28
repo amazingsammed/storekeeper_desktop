@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/business.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/user_business.dart';
-import 'package:storekepper_desktop/feature/authentication/domain/model/user_store.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:uuid/uuid.dart';
@@ -10,7 +9,7 @@ import 'package:uuid/uuid.dart';
 import '../../../shared/widgets/textfield.dart';
 import '../controller/authcontroller.dart';
 
-class StoreSelectionScreen extends StatelessWidget {
+class BusinessSelectionScreen extends StatelessWidget {
   AuthController authController = Get.put(AuthController());
 
   @override
@@ -29,7 +28,7 @@ class StoreSelectionScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     title: Text(
-                      "Store Selection",
+                      "Business Selection",
                       style: TextStyle(fontSize: 20),
                     ),
                     trailing: PrimaryButton(
@@ -41,14 +40,14 @@ class StoreSelectionScreen extends StatelessWidget {
                   Divider(),
                   Obx(() {
                     return Container(
-                      child: authController.userStores.value.isEmpty ? Center(
+                      child: authController.userBusiness.value.isEmpty ? Center(
                         child: Text("Empty"),) :
                       ListView.builder(
                         physics: ScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: authController.userStores.value.length,
+                        itemCount: authController.userBusiness.value.length,
                         itemBuilder: (BuildContext context, int index) {
-                          UserStore item = authController.userStores
+                          UserBusiness item = authController.userBusiness
                               .value[index];
                           return FutureBuilder(
                               future: authController

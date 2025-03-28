@@ -13,6 +13,7 @@ class PrimaryButton extends StatefulWidget {
   final double? width;
   final Color? color;
   final bool hasIcon;
+  final FocusNode? focusNode;
 
   const PrimaryButton(
       {Key? key,
@@ -22,7 +23,7 @@ class PrimaryButton extends StatefulWidget {
       this.height,
       this.width,
       this.hasIcon = true,
-      this.color})
+      this.color, this.focusNode})
       : super(key: key);
 
   @override
@@ -34,6 +35,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   Widget build(BuildContext context) {
     var x = MediaQuery.of(context).size.width;
     return ElevatedButton(
+      focusNode: widget.focusNode,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),
         backgroundColor: MaterialStateProperty.all<Color>(

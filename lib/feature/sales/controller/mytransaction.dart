@@ -1,7 +1,7 @@
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../items/data/local/sqlite_db.dart';
+import '../../sqlite_db.dart';
 import '../models/transaction.dart';
 
 class MyTransactionController extends GetxController{

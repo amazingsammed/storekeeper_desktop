@@ -175,7 +175,8 @@ AuthController authController = Get.put(AuthController());
                               AuthResponse results= await authController.signIn(user);
                                 bool response=  await authController.addUserToDataBase(results);
                                 print(response);
-                                print(authController.currentProfile.value.toMap());
+                                await authController.getAllBusiness();
+                                Get.toNamed('/store_selection');
                               },
                               child: Text('Login',style: TextStyle(fontSize: 18),)
                           )),

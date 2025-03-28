@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'feature/authentication/presentation/signin.dart';
 import 'feature/authentication/presentation/signup.dart';
-import 'feature/authentication/presentation/store_selection.dart';
+import 'feature/authentication/presentation/business_selection.dart';
 import 'feature/dashboard/presentation/dashboard.dart';
 
 Future<void> main() async {
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
             getPages: [
               GetPage(name: '/sign_in', page: () => FluentApp(home: SignInScreen())),
               GetPage(name: '/sign_up', page: () => FluentApp(home: SignUpScreen())),
-              GetPage(name: '/store_selection', page: () => FluentApp(home: StoreSelectionScreen())),
+              GetPage(name: '/store_selection', page: () => FluentApp(home: BusinessSelectionScreen())),
               GetPage(name: '/dashboard', page: () => FluentApp(home: DashboardScreen())),
               GetPage(name: '/salesform', page: () => FluentApp(home: SalesForm())),
             ],

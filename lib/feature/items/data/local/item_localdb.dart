@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:storekepper_desktop/feature/items/data/local/sqlite_db.dart';
+import 'package:storekepper_desktop/feature/sqlite_db.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/units.dart';
