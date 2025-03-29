@@ -8,6 +8,7 @@ import 'package:storekepper_desktop/feature/items/domain/models/units.dart';
 
 import 'package:storekepper_desktop/feature/sales/models/voucher.dart';
 
+import '../../../authentication/domain/model/store.dart';
 import '../../../supabase_db.dart';
 import '../local_database_repository.dart';
 
@@ -43,24 +44,22 @@ class ItemRemoteDatabase implements ItemDatabaseRepository {
   }
 
   @override
-  Future<List<CategoryModel>> getAllCategory() {
+  Future<List<CategoryModel>> getAllCategory({required Store store}) {
     // TODO: implement getAllCategory
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Groups>> getAllGroups() {
+  Future<List<Groups>> getAllGroups({required Store store}) {
     // TODO: implement getAllGroups
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Item>> getAllItems({String? storeid,String? busid}) async {
+  Future<List<Item>> getAllItems({required Store store}) async {
     List<Item> items = [];
-    print(storeid);
-    print(busid);
     var data =
-        await stockItemDB.select().eq('storeid', storeid.toString()).eq('busid', busid.toString());
+        await stockItemDB.select().eq('storeid', store.storeid).eq('busid', store.busid);
     for (var element in data) {
       items.add(Item.fromMap(element));
     }
@@ -68,13 +67,13 @@ class ItemRemoteDatabase implements ItemDatabaseRepository {
   }
 
   @override
-  Future<List<Units>> getAllUnits() {
+  Future<List<Units>> getAllUnits({required Store store}) {
     // TODO: implement getAllUnits
     throw UnimplementedError();
   }
 
   @override
-  Future<List<Voucher>> getAllVoucher() {
+  Future<List<Voucher>> getAllVoucher({required Store store}) {
     // TODO: implement getAllVoucher
     throw UnimplementedError();
   }

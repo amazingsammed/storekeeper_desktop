@@ -69,9 +69,9 @@ class ItemImplementation implements ItemRepository {
     var data = <CategoryModel>[];
     try {
       if (await networkInfo.hasInternet()) {
-    data= await localDatabase.getAllCategory();
+    data= await localDatabase.getAllCategory(store: authController.myStore);
     } else {
-        data=  await localDatabase.getAllCategory();
+        data=  await localDatabase.getAllCategory(store: authController.myStore);
     }
 
     return Right(data);
@@ -85,9 +85,9 @@ class ItemImplementation implements ItemRepository {
     var data = <Groups>[];
     try {
       if (await networkInfo.hasInternet()) {
-    data= await localDatabase.getAllGroups();
+    data= await localDatabase.getAllGroups(store: authController.myStore);
     } else {
-    data=  await localDatabase.getAllGroups();
+    data=  await localDatabase.getAllGroups(store: authController.myStore);
     }
 
     return Right(data);
@@ -102,9 +102,9 @@ class ItemImplementation implements ItemRepository {
     try {
       if (await networkInfo.hasInternet()) {
 
-    data= await remoteDatabase.getAllItems(storeid: authController.myStore.storeid,busid: authController.myBusiness.busid);
+    data= await remoteDatabase.getAllItems(store: authController.myStore);
     } else {
-    data=  await localDatabase.getAllItems();
+    data=  await localDatabase.getAllItems(store: authController.myStore);
     }
 
     return Right(data);
@@ -119,9 +119,9 @@ class ItemImplementation implements ItemRepository {
     var data = <Units>[];
     try {
       if (await networkInfo.hasInternet()) {
-    data= await localDatabase.getAllUnits();
+    data= await localDatabase.getAllUnits(store: authController.myStore);
     } else {
-    data=  await localDatabase.getAllUnits();
+    data=  await localDatabase.getAllUnits(store: authController.myStore);
     }
 
     return Right(data);

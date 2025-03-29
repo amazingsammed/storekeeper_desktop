@@ -1,5 +1,7 @@
 
 
+import 'package:storekepper_desktop/feature/authentication/domain/model/store.dart';
+
 import '../../sales/models/voucher.dart';
 import '../domain/models/category.dart';
 import '../domain/models/group.dart';
@@ -7,14 +9,14 @@ import '../domain/models/item.dart';
 import '../domain/models/units.dart';
 
 abstract class ItemDatabaseRepository{
-  Future<List<Item>> getAllItems({String? storeid,String? busid}) ;
+  Future<List<Item>> getAllItems({required Store store}) ;
 
-  Future<List<Groups>> getAllGroups();
+  Future<List<Groups>> getAllGroups({required Store store});
 
-  Future<List<Units>> getAllUnits();
+  Future<List<Units>> getAllUnits({required Store store});
 
-  Future<List<CategoryModel>> getAllCategory();
-  Future<List<Voucher>> getAllVoucher();
+  Future<List<CategoryModel>> getAllCategory({ required Store store});
+  Future<List<Voucher>> getAllVoucher({required Store store});
 
   Future<bool> addCategory({required Map<String, dynamic> data});
 

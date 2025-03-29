@@ -6,6 +6,7 @@ import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/units.dart';
 import 'package:storekepper_desktop/feature/sales/models/voucher.dart';
 
+import '../../../authentication/domain/model/store.dart';
 import '../../domain/models/item.dart';
 import '../local_database_repository.dart';
 
@@ -13,7 +14,7 @@ class ItemLocalDatabase  implements ItemDatabaseRepository{
   final DatabaseX database = DatabaseX();
 
   @override
-  Future<List<Item>> getAllItems({String? storeid,String? busid}) async {
+  Future<List<Item>> getAllItems({required Store store}) async {
     List<Item> items = [];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists = await dbClient!.query('stock_item');
@@ -28,7 +29,7 @@ class ItemLocalDatabase  implements ItemDatabaseRepository{
   }
 
   @override
-  Future<List<Groups>> getAllGroups() async {
+  Future<List<Groups>> getAllGroups({required Store store}) async {
     List<Groups> items = [];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists = await dbClient!.rawQuery('''
@@ -56,7 +57,7 @@ WHERE
   }
 
   @override
-  Future<List<Units>> getAllUnits() async {
+  Future<List<Units>> getAllUnits({required Store store}) async {
     List<Units> items=[];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists = await dbClient!.query('stock_item_unit');
@@ -71,7 +72,7 @@ WHERE
   }
 
   @override
-  Future<List<CategoryModel>> getAllCategory() async {
+  Future<List<CategoryModel>> getAllCategory({required Store store}) async {
     List<CategoryModel> items=[];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists =
@@ -130,7 +131,7 @@ WHERE
   }
 
   @override
-  Future<List<Voucher>> getAllVoucher() async {
+  Future<List<Voucher>> getAllVoucher({required Store store}) async {
     List<Voucher> items=[];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists = await dbClient!.query('stock_item_unit');

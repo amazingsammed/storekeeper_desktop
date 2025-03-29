@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/dashboard/presentation/pages.dart';
 
+import '../../settings/presentation/settings.dart';
 import '../controller/dashboardcontroller.dart';
 import '_component/menu_bar.dart';
 
@@ -36,7 +37,7 @@ class DashboardScreen extends StatelessWidget {
               PaneItem(
                 icon: const Icon(FluentIcons.settings),
                 title: const Text('Settings'),
-                body: Container(),
+                body: MySettingsPage(),
               ),
             ],
           ),
