@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:storekepper_desktop/feature/sales/controller/vouchercontroller.dart';
 import 'package:storekepper_desktop/feature/sales/models/accounting.dart';
 import 'package:storekepper_desktop/feature/sales/models/inventory.dart';

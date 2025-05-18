@@ -71,12 +71,12 @@ class Business{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'owner': this.owner,
-      'type': this.type,
-      'busid': this.busid,
-      'location': this.location,
-      'contact': this.contact,
+      'name': name,
+      'owner': owner,
+      'type': type,
+      'busid': busid,
+      'location': location,
+      'contact': contact,
     };
   }
 

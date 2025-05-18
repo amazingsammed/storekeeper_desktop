@@ -64,11 +64,11 @@ class Profile{
 
   Map<String, dynamic> toMap() {
     return {
-      'userid': this.userid,
-      'username': this.username,
-      'email': this.email,
-      'password': this.password,
-      'type': this.type,
+      'userid': userid,
+      'username': username,
+      'email': email,
+      'password': password,
+      'type': type,
     };
   }
   factory Profile.empty(){

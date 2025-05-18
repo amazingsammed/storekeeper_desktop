@@ -63,7 +63,7 @@ import '../../../shared/widgets/textfield.dart';
 
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class SignInScreen extends StatelessWidget {
 }
 
 class WebLogin extends StatelessWidget {
-  WebLogin({Key? key}) : super(key: key);
+  WebLogin({super.key});
 AuthController authController = Get.put(AuthController());
   RxBool isloading = false.obs;
   FocusNode email_node = FocusNode();
@@ -175,7 +175,6 @@ AuthController authController = Get.put(AuthController());
                                 Profile user = Profile(userid: 'userid', username: 'username', email: email.text, password: password.text);
                               AuthResponse results= await authController.signIn(user);
                                 bool response=  await authController.addUserToDataBase(results);
-                                print(response);
                                 // await authController.getAllBusiness();
                                 authController.loading.value = false;
                                 // Get.toNamed('/store_selection');

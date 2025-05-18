@@ -77,12 +77,12 @@ class Groups{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'category': this.category,
-      'createdby': this.createdby,
-      'storeid': this.storeid,
-      'is_active': this.is_active,
-      'busid': this.busid,
+      'name': name,
+      'category': category,
+      'createdby': createdby,
+      'storeid': storeid,
+      'is_active': is_active,
+      'busid': busid,
     };
   }
 

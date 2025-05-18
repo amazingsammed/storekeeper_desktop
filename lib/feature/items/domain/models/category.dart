@@ -78,12 +78,12 @@ class CategoryModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'status': this.status,
-      'createdby': this.createdby,
-      'is_active': this.is_active,
-      'storeid': this.storeid,
-      'busid': this.busid,
+      'name': name,
+      'status': status,
+      'createdby': createdby,
+      'is_active': is_active,
+      'storeid': storeid,
+      'busid': busid,
     };
   }
 

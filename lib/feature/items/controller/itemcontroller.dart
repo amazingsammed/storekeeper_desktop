@@ -5,7 +5,6 @@ import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 
 import '../../../shared/ui/snackbars.dart';
-import '../../sqlite_db.dart';
 import '../domain/models/item.dart';
 import '../domain/models/units.dart';
 import '../domain/repository/item_repository.dart';

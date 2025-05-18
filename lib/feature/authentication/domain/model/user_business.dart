@@ -46,9 +46,9 @@ class UserBusiness{
 
   Map<String, dynamic> toMap() {
     return {
-      'userid': this.userid,
-      'busid': this.busid,
-      'status': this.status,
+      'userid': userid,
+      'busid': busid,
+      'status': status,
     };
   }
 

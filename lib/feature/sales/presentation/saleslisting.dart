@@ -7,7 +7,6 @@ import 'package:storekepper_desktop/feature/sales/presentation/forms/sales_form.
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 //import '../../../shared/widgets/datalisting.dart';
-import '../../dashboard/presentation/_component/toolbarItem.dart';
 
 class Saleslisting extends StatelessWidget {
   const Saleslisting({super.key});

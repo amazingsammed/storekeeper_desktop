@@ -116,13 +116,13 @@ class CreateBusiness extends StatelessWidget {
   final TextEditingController type = TextEditingController();
   final TextEditingController location = TextEditingController();
   final TextEditingController contact = TextEditingController();
-  AuthController authController = Get.put(AuthController());
-  FocusNode namen = FocusNode();
-  FocusNode ownern = FocusNode();
-  FocusNode typen = FocusNode();
-  FocusNode locationn = FocusNode();
-  FocusNode contactn = FocusNode();
-  FocusNode buttonn = FocusNode();
+  final AuthController authController = Get.put(AuthController());
+  final  FocusNode namen = FocusNode();
+  final  FocusNode ownern = FocusNode();
+  final  FocusNode typen = FocusNode();
+  final  FocusNode locationn = FocusNode();
+  final  FocusNode contactn = FocusNode();
+  final  FocusNode buttonn = FocusNode();
 
   CreateBusiness({super.key});
 

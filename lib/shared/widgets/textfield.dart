@@ -104,13 +104,13 @@ class CustomTextFieldNonEmpty extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const CustomTextFieldNonEmpty({
-    Key? key,
+    super.key,
     this.icon, // Optional icon
     required this.label, // Label is required
     required this.color, // Text field color
     this.controller, // Required controller
     required this.onChanged, // onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -143,13 +143,13 @@ class CustomTextFieldName extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const CustomTextFieldName({
-    Key? key,
+    super.key,
     this.icon, // Optional icon
     required this.label, // Label is required
     required this.color, // Text field color
     this.controller, // Required controller
     required this.onChanged, // onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

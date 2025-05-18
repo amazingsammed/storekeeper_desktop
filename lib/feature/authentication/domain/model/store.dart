@@ -70,12 +70,12 @@ class Store{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'contact': this.contact,
-      'storeid': this.storeid,
-      'busid': this.busid,
-      'location': this.location,
-      'manager': this.manager,
+      'name': name,
+      'contact': contact,
+      'storeid': storeid,
+      'busid': busid,
+      'location': location,
+      'manager': manager,
     };
   }
 

@@ -64,11 +64,11 @@ class UserStore{
 
   Map<String, dynamic> toMap() {
     return {
-      'userid': this.userid,
-      'storeid': this.storeid,
-      'busid': this.busid,
-      'role': this.role,
-      'status': this.status,
+      'userid': userid,
+      'storeid': storeid,
+      'busid': busid,
+      'role': role,
+      'status': status,
     };
   }
 

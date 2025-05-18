@@ -2,7 +2,6 @@
 
 
 
-import 'dart:math';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/saleslisting.dart';
@@ -59,7 +58,7 @@ class _SalesTabState extends State<SalesTab> {
               newIndex -= 1;
             }
             final item = tabs.removeAt(oldIndex);
-            tabs!.insert(newIndex, item);
+            tabs.insert(newIndex, item);
 
             if (currentIndex == newIndex) {
               currentIndex = oldIndex;

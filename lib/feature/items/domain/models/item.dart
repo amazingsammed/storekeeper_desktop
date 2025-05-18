@@ -126,19 +126,19 @@ class Item {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'uuid': this.uuid,
-      'busid': this.busid,
-      'unit_id': this.unit_id,
-      'group_id': this.group_id,
-      'status': this.status,
-      'createdby': this.createdby,
-      'storeid': this.storeid,
-      'is_active': this.is_active,
-      'salesprice': this.salesprice,
-      'purchaseprice': this.purchaseprice,
-      'warninglimit': this.warninglimit,
-      'is_service': this.is_service,
+      'name': name,
+      'uuid': uuid,
+      'busid': busid,
+      'unit_id': unit_id,
+      'group_id': group_id,
+      'status': status,
+      'createdby': createdby,
+      'storeid': storeid,
+      'is_active': is_active,
+      'salesprice': salesprice,
+      'purchaseprice': purchaseprice,
+      'warninglimit': warninglimit,
+      'is_service': is_service,
     };
   }
 

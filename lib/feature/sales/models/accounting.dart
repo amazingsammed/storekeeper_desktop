@@ -106,16 +106,16 @@ class Accounting{
 
   Map<String, dynamic> toMap() {
     return {
-      'voucher_uuid': this.voucher_uuid,
-      'vouchername': this.vouchername,
-      'account_uuid': this.account_uuid,
-      'amount': this.amount,
-      'status': this.status,
-      'is_active': this.is_active,
-      'is_system': this.is_system,
-      'storeid': this.storeid,
-      'createdby': this.createdby,
-      'date': this.date.toIso8601String(),
+      'voucher_uuid': voucher_uuid,
+      'vouchername': vouchername,
+      'account_uuid': account_uuid,
+      'amount': amount,
+      'status': status,
+      'is_active': is_active,
+      'is_system': is_system,
+      'storeid': storeid,
+      'createdby': createdby,
+      'date': date.toIso8601String(),
     };
   }
 
