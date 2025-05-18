@@ -3,12 +3,20 @@ class Groups{
   int id;
   String name;
   String category;
+  String createdby;
+  String storeid;
+  int is_active;
+  String busid;
 
 //<editor-fold desc="Data Methods">
   Groups({
     required this.id,
     required this.name,
     required this.category,
+    required this.createdby,
+    required this.storeid,
+    required this.is_active,
+    required this.busid,
   });
 
   @override
@@ -18,10 +26,21 @@ class Groups{
           runtimeType == other.runtimeType &&
           id == other.id &&
           name == other.name &&
-          category == other.category);
+          category == other.category &&
+          createdby == other.createdby &&
+          storeid == other.storeid &&
+          is_active == other.is_active &&
+          busid == other.busid);
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ category.hashCode;
+  int get hashCode =>
+      id.hashCode ^
+      name.hashCode ^
+      category.hashCode ^
+      createdby.hashCode ^
+      storeid.hashCode ^
+      is_active.hashCode ^
+      busid.hashCode;
 
   @override
   String toString() {
@@ -29,6 +48,10 @@ class Groups{
         ' id: $id,' +
         ' name: $name,' +
         ' category: $category,' +
+        ' createdby: $createdby,' +
+        ' storeid: $storeid,' +
+        ' is_active: $is_active,' +
+        ' busid: $busid,' +
         '}';
   }
 
@@ -36,11 +59,19 @@ class Groups{
     int? id,
     String? name,
     String? category,
+    String? createdby,
+    String? storeid,
+    int? is_active,
+    String? busid,
   }) {
     return Groups(
       id: id ?? this.id,
       name: name ?? this.name,
       category: category ?? this.category,
+      createdby: createdby ?? this.createdby,
+      storeid: storeid ?? this.storeid,
+      is_active: is_active ?? this.is_active,
+      busid: busid ?? this.busid,
     );
   }
 
@@ -48,6 +79,10 @@ class Groups{
     return {
       'name': this.name,
       'category': this.category,
+      'createdby': this.createdby,
+      'storeid': this.storeid,
+      'is_active': this.is_active,
+      'busid': this.busid,
     };
   }
 
@@ -56,6 +91,10 @@ class Groups{
       id: map['id'] as int,
       name: map['name'] as String,
       category: map['category'] as String,
+      createdby: map['createdby'] as String,
+      storeid: map['storeid'] as String,
+      is_active: map['is_active'] as int,
+      busid: map['busid'] as String,
     );
   }
 

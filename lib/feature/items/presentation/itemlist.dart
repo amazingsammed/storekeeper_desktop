@@ -12,15 +12,16 @@ import 'forms/additem.dart';
 
 
 class ItemListing extends StatelessWidget {
-  final ItemController controller = Get.put(ItemController());
 
   ItemListing({super.key});
 
+  final ItemController controller = Get.put(ItemController());
+
+
   @override
   Widget build(BuildContext context) {
-    return MainPageWithToolBar(
-      toolBar: ItemToolBar(),
-      child: Obx(() {
+    return Scaffold(
+      body: Obx(() {
         return DataTableV2(
           refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async { await controller.getAllItems();}).withLoading(controller.loading),
           titleWidget: Row(
@@ -47,7 +48,14 @@ class ItemListing extends StatelessWidget {
             TableHead(title: 'Selling Price', id: 'salesprice',type: TableHeadType.double),
             TableHead(title: 'Status', id: 'status',type: TableHeadType.int),
           ],
-          items:itemToMap(controller.allItems.value),
+          items:controller.allItems.value.map((element){
+            return {
+              'name': element.name,
+              'group_id':element.group_id,
+              'salesprice':element.salesprice,
+              'status': element.status
+            };
+          }).toList(),
         );
       }),
     );

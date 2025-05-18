@@ -1,5 +1,5 @@
-
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
 import 'package:storekepper_desktop/feature/items/data/implementation/item_implementation.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
@@ -10,10 +10,13 @@ import '../domain/models/item.dart';
 import '../domain/models/units.dart';
 import '../domain/repository/item_repository.dart';
 
-class ItemController extends GetxController{
+class ItemController extends GetxController {
   var hasOpeningBal = false.obs;
-  final ItemRepository itemRepository=ItemImplementation();
+  final ItemRepository itemRepository = ItemImplementation();
+  final AuthController authController = Get.find();
   var loading = false.obs;
+
+
   @override
   Future<void> onInit() async {
     await getAllItems();
@@ -23,13 +26,10 @@ class ItemController extends GetxController{
     super.onInit();
   }
 
-
   var allItems = <Item>[].obs;
   var allGroup = <Groups>[].obs;
   var allUnit = <Units>[].obs;
   var allCategory = <CategoryModel>[].obs;
-
-
 
   Future<void> getAllItems() async {
     loading.value = true;
@@ -74,14 +74,19 @@ class ItemController extends GetxController{
       loading.value = false;
       showErrorSnackbar(message: failure.message);
     }, (exists) {
-     allCategory.value = exists;
+      allCategory.value = exists;
       loading.value = false;
     });
-
   }
+
   Future<void> addCategory({required CategoryModel data}) async {
     loading.value = true;
-    final results = await itemRepository.createSingleCategory(data: data);
+    final results = await itemRepository.createSingleCategory(
+      data: data.copyWith(
+          createdby: authController.currentProfile.value.userid,
+          storeid: authController.myStore.storeid,
+          busid: authController.myStore.busid),
+    );
     results.fold((failure) {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
@@ -90,12 +95,14 @@ class ItemController extends GetxController{
       showSuccessSnackbar(message: "Category created Successfully");
       loading.value = false;
     });
-
   }
 
-  Future<void> addGroup({ required Groups data}) async {
+  Future<void> addGroup({required Groups data}) async {
     loading.value = true;
-    final results = await itemRepository.createSingleGroup(data: data);
+    final results = await itemRepository.createSingleGroup(data: data.copyWith(
+        createdby: authController.currentProfile.value.userid,
+        storeid: authController.myStore.storeid,
+        busid: authController.myStore.busid),);
     results.fold((failure) {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
@@ -104,12 +111,14 @@ class ItemController extends GetxController{
       showSuccessSnackbar(message: "Group created Successfully");
       loading.value = false;
     });
-
   }
 
   addUnit({required Units data}) async {
     loading.value = true;
-    final results = await itemRepository.createSingleUnit(data: data);
+    final results = await itemRepository.createSingleUnit(data: data.copyWith(
+        createdby: authController.currentProfile.value.userid,
+        storeid: authController.myStore.storeid,
+        busid: authController.myStore.busid),);
     results.fold((failure) {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
@@ -122,7 +131,10 @@ class ItemController extends GetxController{
 
   addItem({required Item data}) async {
     loading.value = true;
-    final results = await itemRepository.createSingleItem(data: data);
+    final results = await itemRepository.createSingleItem(data: data.copyWith(
+        createdby: authController.currentProfile.value.userid,
+        storeid: authController.myStore.storeid,
+        busid: authController.myStore.busid),);
     results.fold((failure) {
       loading.value = false;
       showErrorSnackbar(message: failure.message);

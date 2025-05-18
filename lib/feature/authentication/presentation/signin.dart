@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/authentication/businessinfo.dart';
 import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
+import 'package:storekepper_desktop/feature/authentication/presentation/store_selection.dart';
 import 'package:storekepper_desktop/shared/extensions/buttons.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -107,8 +109,7 @@ AuthController authController = Get.put(AuthController());
             child: Container(
               height: 500,
               width: 400,
-              child:   Card(
-
+              child: Card(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                   child: Column(
@@ -140,19 +141,17 @@ AuthController authController = Get.put(AuthController());
                         onChanged: (value) {},
 
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        alignment: Alignment.bottomRight,
-                        child: TextButton(
 
-                          onPressed: () {
-                            Get.toNamed('/sign_up');
-                          },
-                          child: const Text('Sign up'),
-                        ),
-                      ),
+                      // Container(
+                      //   alignment: Alignment.bottomRight,
+                      //   child: TextButton(
+                      //
+                      //     onPressed: () {
+                      //       Get.toNamed('/sign_up');
+                      //     },
+                      //     child: const Text('Sign up'),
+                      //   ),
+                      // ),
                       kSizedbox10,
                       ElevatedButton(onPressed: () async {
                         email.text = "Sammedtwumasi2@gmail.com";
@@ -177,9 +176,12 @@ AuthController authController = Get.put(AuthController());
                               AuthResponse results= await authController.signIn(user);
                                 bool response=  await authController.addUserToDataBase(results);
                                 print(response);
-                                await authController.getAllBusiness();
+                                // await authController.getAllBusiness();
                                 authController.loading.value = false;
-                                Get.toNamed('/store_selection');
+                                // Get.toNamed('/store_selection');
+                                await authController.getAllStoresbyBusinessID(appbusiness.busid);
+                                authController.selectedBusiness.value = [appbusiness];
+                                Get.to(()=>StoreSelectionScreen());
                               },
                               child: Text('Login',style: TextStyle(fontSize: 18),)
                           ).withLoading(loading: authController.loading)),

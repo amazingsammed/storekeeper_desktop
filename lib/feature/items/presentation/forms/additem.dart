@@ -105,21 +105,20 @@ class AddProduct extends StatelessWidget {
                             id: 0,
                             name: _formKey.currentState!.fields['name']?.value,
                             uuid: 'idsdf',
-                            unitId:
+                            unit_id:
                                 _formKey.currentState!.fields['unit']!.value.toString(),
-                            groupId:
+                            group_id:
                                 _formKey.currentState!.fields['group']!.value.toString(),
                             status: 1,
                             createdby: 'createdby',
                             storeid: 'storeid',
-                            createddate: DateTime.now(),
-                            isActive: 1,
+                            is_active: 1,
                             salesprice: double.parse( _formKey
                                 .currentState!.fields['salesprice']!.value),
                             purchaseprice: double.parse(_formKey
                                 .currentState!.fields['purchaseprice']?.value),
                             warninglimit: 2,
-                            isService: 0);
+                            is_service: 0, busid: 'busid');
                         await controller.addItem(data: item);
                         Navigator.of(context).pop();
 

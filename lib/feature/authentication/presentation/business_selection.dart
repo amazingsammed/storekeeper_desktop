@@ -20,7 +20,7 @@ class BusinessSelectionScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          height: 500,
+          height: 600,
           width: 600,
           child: Card(
             child: Padding(
@@ -28,19 +28,34 @@ class BusinessSelectionScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    leading: IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.chevron_left)),
-                    title: Text(
-                      "Business Selection",
-                      style: TextStyle(fontSize: 20),
+                  Container(
+                    height: 100,
+                    child: Row(
+
+                      children: [
+                        Text(
+                          "Business Selection",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Spacer(),
+
+                        PrimaryButton(
+                            onTap: () {
+                              Get.dialog(CreateBusiness());
+                            },
+                            title: 'Create'),
+                        kSizedbox20,
+                        PrimaryButton(
+                            color: Colors.black,
+                            icon: Icons.logout,
+                            onTap: () {
+                              Get.back();
+                            },
+                            title: 'Logout'),
+                      ],
                     ),
-                    trailing: PrimaryButton(
-                        onTap: () {
-                          Get.dialog(CreateBusiness());
-                        },
-                        title: 'Create'),
                   ),
-                  Divider(),
+
                   Obx(() {
                     return Container(
                       child: authController.userBusiness.value.isEmpty ? Center(
@@ -62,6 +77,8 @@ class BusinessSelectionScreen extends StatelessWidget {
                                   return Card(
                                     
                                     child: ListTile(
+                                      leading: CircleAvatar(child: Text("${index+1}")),
+                                      
                                       onTap: () async {
                                         await authController.getAllStoresbyBusinessID(item.busid);
                                         authController.selectedBusiness.value = [item];

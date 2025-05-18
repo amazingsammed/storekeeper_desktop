@@ -9,34 +9,31 @@ class QuotePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MainPageWithToolBar(
-      toolBar: SalesToolBar(),
-      child: DataTableV2(
-        titleWidget: Row(
-          children: [
-            Button(
-              onPressed: () {},
-              child: Text("Create New"),
-            ),
-          ],
-        ),
-        selecteditems: (e) {
-          print(e);
-        },
-        ontap: (element) {
-          print(element['id'].runtimeType);
-        },
-        title: "Quote",
-        heads: [
-          TableHead(title: 'Date', id: 'date'),
-          TableHead(title: 'Quote', id: 'narration'),
-          TableHead(title: 'Customer', id: 'account_name'),
-          TableHead(title: "Sales Person", id: 'createdby'),
-          TableHead(title: 'Status', id: 'amount'),
-          TableHead(title: 'Amount', id: 'amount'),
+    return  DataTableV2(
+      titleWidget: Row(
+        children: [
+          Button(
+            onPressed: () {},
+            child: Text("Create New"),
+          ),
         ],
-        items: [],
       ),
+      selecteditems: (e) {
+        print(e);
+      },
+      ontap: (element) {
+        print(element['id'].runtimeType);
+      },
+      title: "Quote",
+      heads: [
+        TableHead(title: 'Date', id: 'date'),
+        TableHead(title: 'Quote', id: 'narration'),
+        TableHead(title: 'Customer', id: 'account_name'),
+        TableHead(title: "Sales Person", id: 'createdby'),
+        TableHead(title: 'Status', id: 'amount'),
+        TableHead(title: 'Amount', id: 'amount'),
+      ],
+      items: [],
     );
   }
 }

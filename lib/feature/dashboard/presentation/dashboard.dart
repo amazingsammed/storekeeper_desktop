@@ -1,48 +1,100 @@
-import 'package:fluent_ui/fluent_ui.dart';
+// import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:storekepper_desktop/feature/dashboard/presentation/pages.dart';
 
-import '../../settings/presentation/settings.dart';
 import '../controller/dashboardcontroller.dart';
+import '_component/dashboard_action.dart';
 import '_component/menu_bar.dart';
 
-class DashboardScreen extends StatelessWidget {
+
+class MainDashboard extends StatelessWidget {
   DashboardController controller = Get.put(DashboardController());
-  PaneDisplayMode displayMode = PaneDisplayMode.open;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
-
-        body: NavigationView(
-          transitionBuilder: (c,a){
-            return c;
-          },
-          appBar:  NavigationAppBar(
-            automaticallyImplyLeading: false,
-            title: MyMenuBar(),
-          ),
-          pane: NavigationPane(
-            displayMode: displayMode,
-            selected: controller.selectedPage.value,
-            onItemPressed: (index) {
-              // print(index);
-              controller.selectedPage.value = index;
-            },
-            onChanged: (index) {},
-            items: items,
-            footerItems: [
-              PaneItem(
-                icon: const Icon(FluentIcons.settings),
-                title: const Text('Settings'),
-                body: MySettingsPage(),
-              ),
-            ],
-          ),
-        ),
-      );
-    });
+    return Scaffold(
+      body: Obx(() {
+        return Row(
+          children: [
+            NavigationRail(
+              labelType: NavigationRailLabelType.all,
+              leading: FlutterLogo(size: 40,),
+              destinations:navItems.map((element)=>NavigationRailDestination(
+                  icon: Icon(element.icon), label: Text(element.title))).toList(),
+              selectedIndex: controller.selectedPage.value,
+              onDestinationSelected: (index) {
+                controller.selectedPage.value = index;
+              },),
+            Expanded(child: IndexedStack(
+              index: controller.selectedPage.value,
+              children: navItems.map((element)=>MyMainPage(tabs: element.tabs,)).toList(),
+            ))
+            // Expanded(
+            //   child: NavigationView(
+            //     transitionBuilder: (c, a) {
+            //       return c;
+            //     },
+            //     appBar: NavigationAppBar(
+            //         automaticallyImplyLeading: false,
+            //         // title: MyMenuBar(),
+            //         //title: Text(authController.myStore.name),
+            //         actions: DashboardAction()),
+            //     pane: NavigationPane(
+            //       displayMode: displayMode,
+            //       selected: controller.selectedPage.value,
+            //       onItemPressed: (index) {
+            //         // print(index);
+            //         controller.selectedPage.value = index;
+            //       },
+            //       onChanged: (index) {},
+            //       items: items,
+            //       footerItems: [
+            //         PaneItem(
+            //           icon: const Icon(FluentIcons.settings),
+            //           title: const Text('Settings'),
+            //           body: MySettingsPage(),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+          ],
+        );
+      }),
+    );
   }
 }
+
+class MyMainPage extends StatefulWidget {
+  final List<MyTabBar> tabs;
+  const MyMainPage({super.key, required this.tabs});
+
+  @override
+  State<MyMainPage> createState() => _MyMainPageState();
+}
+
+class _MyMainPageState extends State<MyMainPage> with SingleTickerProviderStateMixin{
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController= TabController(length: widget.tabs.length, vsync: this);// TODO: implement initState
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: TabBar(
+            padding: EdgeInsets.zero,
+            labelColor: Colors.black,
+            dividerColor: Colors.black12,
+            controller: tabController,
+            isScrollable: true,
+            tabs: widget.tabs.map((element)=>Tab(text: element.title,)).toList()),
+      ),
+      body: TabBarView(controller:tabController,children: widget.tabs.map((element)=>element.body).toList() ),
+    );
+  }
+}
+

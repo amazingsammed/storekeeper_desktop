@@ -14,31 +14,34 @@ import '../local/item_localdb.dart';
 
 class ItemImplementation implements ItemRepository {
   final ItemLocalDatabase localDatabase = ItemLocalDatabase();
-  final ItemRemoteDatabase remoteDatabase=ItemRemoteDatabase();
+  final ItemRemoteDatabase remoteDatabase = ItemRemoteDatabase();
   final NetworkInfo networkInfo = NetworkInfoImpl();
   final AuthController authController = Get.find();
 
   @override
-  Future<Either<Failure, bool>> createSingleCategory({required CategoryModel data})async { try {
-    if (await networkInfo.hasInternet()) {
-  await localDatabase.addCategory(data: data.toMap());
-  } else {
-  await localDatabase.addCategory(data: data.toMap());
-  }
+  Future<Either<Failure, bool>> createSingleCategory(
+      {required CategoryModel data}) async {
+    try {
+      if (await networkInfo.hasInternet()) {
+        await remoteDatabase.addCategory(data: data.toMap());
+        await localDatabase.addCategory(data: data.toMap());
+      } else {
+        await localDatabase.addCategory(data: data.toMap());
+      }
 
-    return const Right(true);
+      return const Right(true);
     } catch (error) {
-    return Left(Failure(error.toString()));
+      print("$error category add");
+      return Left(Failure(error.toString()));
     }
   }
-
-
 
   @override
   Future<Either<Failure, bool>> createSingleItem({required Item data}) async {
     try {
       if (await networkInfo.hasInternet()) {
-        await localDatabase.addItem(data: data.toMap());
+        await remoteDatabase.addItem(data: data.toMap());
+       // await localDatabase.addItem(data: data.toMap());
       } else {
         await localDatabase.addItem(data: data.toMap());
       }
@@ -50,33 +53,36 @@ class ItemImplementation implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> createSingleUnit({required Units data})async {
+  Future<Either<Failure, bool>> createSingleUnit({required Units data}) async {
     try {
       if (await networkInfo.hasInternet()) {
-    await localDatabase.addUnit(data: data.toMap());
-    } else {
-    await localDatabase.addUnit(data: data.toMap());
-    }
+        await remoteDatabase.addUnit(data: data.toMap());
+        await localDatabase.addUnit(data: data.toMap());
+      } else {
+        await localDatabase.addUnit(data: data.toMap());
+      }
 
-    return Right(true);
+      return Right(true);
     } catch (error) {
-    return Left(Failure(error.toString()));
+      return Left(Failure(error.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, List<CategoryModel>>> getAllCategory()async {
+  Future<Either<Failure, List<CategoryModel>>> getAllCategory() async {
     var data = <CategoryModel>[];
     try {
       if (await networkInfo.hasInternet()) {
-    data= await localDatabase.getAllCategory(store: authController.myStore);
-    } else {
-        data=  await localDatabase.getAllCategory(store: authController.myStore);
-    }
+        data =
+            await remoteDatabase.getAllCategory(store: authController.myStore);
+      } else {
+        data =
+            await localDatabase.getAllCategory(store: authController.myStore);
+      }
 
-    return Right(data);
+      return Right(data);
     } catch (error) {
-    return Left(Failure(error.toString()));
+      return Left(Failure(error.toString()));
     }
   }
 
@@ -85,32 +91,31 @@ class ItemImplementation implements ItemRepository {
     var data = <Groups>[];
     try {
       if (await networkInfo.hasInternet()) {
-    data= await localDatabase.getAllGroups(store: authController.myStore);
-    } else {
-    data=  await localDatabase.getAllGroups(store: authController.myStore);
-    }
+        data = await remoteDatabase.getAllGroups(store: authController.myStore);
+      } else {
+        data = await localDatabase.getAllGroups(store: authController.myStore);
+      }
 
-    return Right(data);
+      return Right(data);
     } catch (error) {
-    return Left(Failure(error.toString()));
+      return Left(Failure(error.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, List<Item>>> getAllItems({String? storeid,String? busid}) async {
+  Future<Either<Failure, List<Item>>> getAllItems(
+      {String? storeid, String? busid}) async {
     var data = <Item>[];
     try {
       if (await networkInfo.hasInternet()) {
+        data = await remoteDatabase.getAllItems(store: authController.myStore);
+      } else {
+        data = await localDatabase.getAllItems(store: authController.myStore);
+      }
 
-    data= await remoteDatabase.getAllItems(store: authController.myStore);
-    } else {
-    data=  await localDatabase.getAllItems(store: authController.myStore);
-    }
-
-    return Right(data);
+      return Right(data);
     } catch (error) {
-      print(error);
-    return Left(Failure(error.toString()));
+      return Left(Failure(error.toString()));
     }
   }
 
@@ -119,29 +124,31 @@ class ItemImplementation implements ItemRepository {
     var data = <Units>[];
     try {
       if (await networkInfo.hasInternet()) {
-    data= await localDatabase.getAllUnits(store: authController.myStore);
-    } else {
-    data=  await localDatabase.getAllUnits(store: authController.myStore);
-    }
+        data = await remoteDatabase.getAllUnits(store: authController.myStore);
+      } else {
+        data = await localDatabase.getAllUnits(store: authController.myStore);
+      }
 
-    return Right(data);
+      return Right(data);
     } catch (error) {
-    return Left(Failure(error.toString()));
+      return Left(Failure(error.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> createSingleGroup({required Groups data}) async {
+  Future<Either<Failure, bool>> createSingleGroup(
+      {required Groups data}) async {
     try {
       if (await networkInfo.hasInternet()) {
-    await localDatabase.addGroup(data: data.toMap());
-    } else {
-    await localDatabase.addGroup(data: data.toMap());
-    }
+        await remoteDatabase.addGroup(data: data.toMap());
+        await localDatabase.addGroup(data: data.toMap());
+      } else {
+        await localDatabase.addGroup(data: data.toMap());
+      }
 
-    return Right(true);
+      return Right(true);
     } catch (error) {
-    return Left(Failure(error.toString()));
+      return Left(Failure(error.toString()));
     }
   }
 }

@@ -66,7 +66,7 @@ class AddGroup extends StatelessWidget {
                             .invalidate('Category is empty');
                       }
 
-                      await controller.addGroup(data: Groups(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString()));
+                      await controller.addGroup(data: Groups(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
                       print(_formKey.currentState?.fields.keys);
                       Navigator.of(context).pop();
                     },

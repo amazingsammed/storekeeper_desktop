@@ -1,84 +1,131 @@
-
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
+import 'package:storekepper_desktop/feature/items/presentation/itemlist.dart';
+import 'package:storekepper_desktop/feature/purchases/presentation/purchaselisting.dart';
+import 'package:storekepper_desktop/feature/sales/presentation/saleslisting.dart';
 
+import '../../../items/presentation/category.dart';
+import '../../../items/presentation/group.dart';
+import '../../../items/presentation/units.dart';
+import '../../../purchases/presentation/accountspayable.dart';
+import '../../../purchases/presentation/payment.dart';
+import '../../../purchases/presentation/purchaseorder.dart';
+import '../../../sales/presentation/customer.dart';
+import '../../../sales/presentation/invoice.dart';
+import '../../../sales/presentation/qoute.dart';
+import '../../../sales/presentation/salesorder.dart';
 
-class MyMenuBar extends StatelessWidget {
-   MyMenuBar({super.key});
+class MyTabBar {
+  final String title;
+  final IconData icon;
+  final Widget body;
 
-  @override
-  Widget build(BuildContext context) {
-    return MenuBar(
-      items: [
-        MenuBarItem(title: 'File', items: [
-          MenuFlyoutSubItem(
-            text: const Text('New'),
-            items: (context) {
-              return [
-                MenuFlyoutItem(
-                  text: const Text('Plain Text Documents'),
-                  onPressed: () {},
-                ),
-                MenuFlyoutItem(
-                  text: const Text('Rich Text Documents'),
-                  onPressed: () {},
-                ),
-                MenuFlyoutItem(
-                  text: const Text('Other Formats'),
-                  onPressed: () {},
-                ),
-              ];
-            },
-          ),
-          MenuFlyoutItem(text: const Text('Open'), onPressed: () {}),
-          MenuFlyoutItem(text: const Text('Save'), onPressed: () {}),
-          const MenuFlyoutSeparator(),
-          MenuFlyoutItem(text: const Text('Exit'), onPressed: () {}),
-        ]),
-        MenuBarItem(title: 'Edit', items: [
-          MenuFlyoutItem(text: const Text('Undo'), onPressed: () {}),
-          MenuFlyoutItem(text: const Text('Cut'), onPressed: () {}),
-          MenuFlyoutItem(text: const Text('Copy'), onPressed: () {}),
-          MenuFlyoutItem(text: const Text('Paste'), onPressed: () {}),
-        ]),
-        MenuBarItem(title: 'View', items: [
-          MenuFlyoutItem(text: const Text('Output'), onPressed: () {}),
-          const MenuFlyoutSeparator(),
-          // RadioMenuFlyoutItem<String>(
-          //   text: const Text('Landscape'),
-          //   value: 'landscape',
-          //   groupValue: _orientation,
-          //   onChanged: (v) => setState(() => _orientation = v),
-          // ),
-          // RadioMenuFlyoutItem<String>(
-          //   text: const Text('Portrait'),
-          //   value: 'portrait',
-          //   groupValue: _orientation,
-          //   onChanged: (v) => setState(() => _orientation = v),
-          // ),
-          // const MenuFlyoutSeparator(),
-          // RadioMenuFlyoutItem<String>(
-          //   text: const Text('Small icons'),
-          //   value: 'small_icons',
-          //   groupValue: _iconSize,
-          //   onChanged: (v) => setState(() => _iconSize = v),
-          // ),
-          // RadioMenuFlyoutItem<String>(
-          //   text: const Text('Medium icons'),
-          //   value: 'medium_icons',
-          //   groupValue: _iconSize,
-          //   onChanged: (v) => setState(() => _iconSize = v),
-          // ),
-          // RadioMenuFlyoutItem<String>(
-          //   text: const Text('Large icons'),
-          //   value: 'large_icons',
-          //   groupValue: _iconSize,
-          //   onChanged: (v) => setState(() => _iconSize = v),
-          // ),
-        ]),
-        MenuBarItem(title: 'Help', items: [
-          MenuFlyoutItem(text: const Text('About'), onPressed: () {}),
-        ]),
-      ],
-    );
-  }
+  MyTabBar({
+    required this.title,
+    required this.icon,
+    required this.body,
+  });
 }
+
+class MainNavigation {
+  final String title;
+  final IconData icon;
+  final List<MyTabBar> tabs;
+
+  const MainNavigation({
+    required this.title,
+    required this.icon,
+    required this.tabs,
+  });
+}
+
+List<MainNavigation> navItems = [
+  MainNavigation(title: 'Home', icon: Icons.dashboard, tabs: [
+    MyTabBar(title: 'Dashboard', icon: Icons.dashboard, body: Container())
+  ]),
+  MainNavigation(title: 'Sales', icon: Icons.shopping_bag, tabs: [
+    MyTabBar(title: 'Sale Listing', icon: Icons.list, body: Saleslisting()),
+    MyTabBar(
+      icon: FluentIcons.quotes,
+      title: 'Quote',
+      body: QuotePage(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.invoice,
+      title: 'Invoice',
+      body: InvoicePage(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.order_lock,
+      title: 'Sales Orders',
+      body: SalesOrder(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.user_followed,
+      title: 'Customer',
+      body: CustomerPage(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.mail,
+      title: 'Refund',
+      body: Container(),
+    ),
+  ]),
+  MainNavigation(title: 'Purchases', icon: Icons.add_shopping_cart, tabs: [
+    MyTabBar(title: 'Purchase Listing', icon: Icons.list, body: PurchaseListing()),
+    MyTabBar(
+      icon: FluentIcons.calendar,
+      title: 'Purchase Order',
+      body: PurchaseOrder(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.calendar,
+      title: 'Account Payable',
+      body: AccountsPayable(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.calendar,
+      title: 'Payment',
+      body: PaymentPage(),
+    ),
+  ]),
+  MainNavigation(title: 'Inventory', icon: Icons.inventory, tabs: [
+    MyTabBar(title: 'Inventory', icon: Icons.list, body: ItemListing()),
+    MyTabBar(
+      icon: Icons.category,
+      title: 'Category',
+      body: CategoryPage(),
+    ),
+    MyTabBar(
+      icon: Icons.group_work,
+      title: 'Group',
+      body: GroupPage(),
+    ),
+    MyTabBar(
+      icon: Icons.scale,
+      title: 'Unit',
+      body: UnitsPage(),
+    ),
+  ]),
+  MainNavigation(title: 'Reports', icon: Icons.report, tabs: [
+    MyTabBar(title: 'Dashboard', icon: Icons.dashboard, body: Container()),
+    MyTabBar(
+      icon: FluentIcons.mail,
+      title: 'Items',
+      body: Container(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.mail,
+      title: 'Sales',
+      body: Container(),
+    ),
+    MyTabBar(
+      icon: FluentIcons.mail,
+      title: 'Purchases',
+      body: Container(),
+    )
+  ]),
+  MainNavigation(title: 'Settings', icon: Icons.settings, tabs: [
+    MyTabBar(title: 'General', icon: Icons.dashboard, body: Container())
+  ]),
+];

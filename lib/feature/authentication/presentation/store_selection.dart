@@ -15,73 +15,103 @@ import '../domain/model/store.dart';
 
 class StoreSelectionScreen extends StatelessWidget {
   AuthController authController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Center(
         child: Container(
-          height: 500,
-          width: 600,
+          height: 800,
+          width: 700,
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Card(
+                  //   child: ListTile(
+                  //     title: Text(authController.myBusiness.name),
+                  //     subtitle: Text('Click here to log into business'),
+                  //     trailing: Icon(Icons.chevron_right),
+                  //   ),
+                  // ),
+                  // Divider(),
+                  kSizedbox20,
                   ListTile(
-                    leading: IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.chevron_left)),
                     title: Text(
                       "Store Selection",
                       style: TextStyle(fontSize: 20),
                     ),
-                    trailing: PrimaryButton(
-                        onTap: () {
-                          Get.dialog(CreateBusiness());
-                        },
-                        title: 'Create'),
+                    subtitle: Text(
+                      "List of stores under the business",
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                      if(authController.currentProfile.value.type=="Admin")  PrimaryButton(
+                            onTap: () {
+                              Get.dialog(CreateBusiness());
+                            },
+                            title: 'Create'),
+                        kSizedbox20,
+                        PrimaryButton(
+                            color: Colors.black,
+                            icon: Icons.arrow_back_ios_new,
+                            onTap: () {
+                              authController.loading.value==false;
+                              Get.back();
+                            },
+                            title: 'Back'),
+                      ],
+                    ),
                   ),
+
                   Divider(),
+                  kSizedbox20,
                   Obx(() {
                     return Container(
-                      child: authController.userStores.value.isEmpty ? Center(
-                        child: Text("Empty"),) :
-                      ListView.builder(
-                        physics: ScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: authController.userStores.value.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          UserStore item = authController.userStores
-                              .value[index];
-                          return FutureBuilder(
-                              future: authController
-                                  .getStoreByID(item.storeid),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                if (snapshot.hasData) {
-                                  Store item = snapshot.data;
-                                  return Card(
-                                    child: ListTile(
-                                      onTap: (){
-                                        authController.selectedStore.value = [item];
-                                        Get.toNamed('/dashboard');
-                                      },
-                                      title: Text(item.name),
-                                      subtitle: Text(item.manager),
-                                      trailing: Icon(Icons.chevron_right),
-                                    ),
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return Icon(Icons.error_outline);
-                                } else {
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                }
-                              });
-                        },
-                      ),);
+                      child: authController.userStores.value.isEmpty
+                          ? Center(
+                              child: Text("Empty"),
+                            )
+                          : ListView.builder(
+                              physics: ScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: authController.userStores.value.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                UserStore item =
+                                    authController.userStores.value[index];
+                                return FutureBuilder(
+                                    future: authController
+                                        .getStoreByID(item.storeid),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot snapshot) {
+                                      if (snapshot.hasData) {
+                                        Store item = snapshot.data;
+                                        return Card(
+                                          child: ListTile(
+                                            onTap: () {
+                                              authController
+                                                  .selectedStore.value = [item];
+                                              Get.toNamed('/dashboard');
+                                            },
+                                            title: Text(item.name),
+                                            subtitle: Text(item.manager),
+                                            trailing: Icon(Icons.chevron_right),
+                                          ),
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return Icon(Icons.error_outline);
+                                      } else {
+                                        return const Center(
+                                            child: CircularProgressIndicator());
+                                      }
+                                    });
+                              },
+                            ),
+                    );
                   })
-
                 ],
               ),
             ),
@@ -141,7 +171,6 @@ class CreateBusiness extends StatelessWidget {
               onChanged: (value) {},
             ),
             kSizedbox20,
-
             CustomTextField2(
               controller: location,
               focusNode: locationn,
@@ -175,17 +204,23 @@ class CreateBusiness extends StatelessWidget {
                   buttonn.requestFocus();
                 },
                 icon: Icon(Icons.file_upload)),
-            PrimaryButton(focusNode: buttonn, onTap: () async {
-              authController.loading.value = true;
-              Store business = Store(name: name.text,
-                  manager: manager.text,
-                  busid: authController.myBusiness.busid,
-                  location: location.text,
-                  contact: contact.text, storeid: Uuid().v4());
-              await authController.saveStore(business);
-              authController.loading.value=false;
-              Navigator.of(context).pop();
-            }, title: "Save").withLoading(loading: authController.loading)
+            PrimaryButton(
+                    focusNode: buttonn,
+                    onTap: () async {
+                      authController.loading.value = true;
+                      Store business = Store(
+                          name: name.text,
+                          manager: manager.text,
+                          busid: authController.myBusiness.busid,
+                          location: location.text,
+                          contact: contact.text,
+                          storeid: Uuid().v4());
+                      await authController.saveStore(business);
+                      authController.loading.value = false;
+                      Navigator.of(context).pop();
+                    },
+                    title: "Save")
+                .withLoading(loading: authController.loading)
           ],
         ),
       ),

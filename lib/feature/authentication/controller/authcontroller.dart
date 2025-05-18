@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/authentication/businessinfo.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/business.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/repositories/profile_repository.dart';
@@ -9,7 +10,9 @@ import '../domain/model/store.dart';
 import '../domain/model/user_business.dart';
 import '../domain/model/user_store.dart';
 
+AuthController authController = AuthController.instance;
 class AuthController extends GetxController {
+  static AuthController instance = Get.find();
   final supabase = Supabase.instance.client;
   ProfileRepository profileRepository = ProfileRepositoryImpl();
 
@@ -18,6 +21,8 @@ class AuthController extends GetxController {
   var selectedStore = <Store>[].obs;
   var userStores = <UserStore>[].obs;
   var userBusiness = <UserBusiness>[].obs;
+
+  var storemembers=[].obs;
 
   Future<AuthResponse> signIn(Profile user) async {
     return await supabase.auth.signInWithPassword(
@@ -115,6 +120,24 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       print(e);
+    }
+  }
+  Future getUsersInStore() async {
+storemembers.clear();
+    try {
+      var data = await supabase
+          .from('user_store')
+          .select()
+          .eq('storeid', selectedStore.value[0].storeid)
+          .eq("busid", appbusiness.busid);
+      print(data);
+      for (var element in data) {
+      var data= await supabase.from('users').select().eq('userid', element['userid']);
+      storemembers.add(data[0]);
+      }
+      return storemembers;
+    } catch (e) {
+      return storemembers;
     }
   }
 

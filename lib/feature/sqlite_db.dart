@@ -16,7 +16,7 @@ class DatabaseX {
 
   initDb() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "StoreApp5.db");
+    String path = join(documentsDirectory.path, "StoreApp7.db");
     bool dbExists = await File(path).exists();
 
     if (!dbExists) {
