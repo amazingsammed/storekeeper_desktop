@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   datatablex
   file_selector_windows
+  sqlbase
   url_launcher_windows
 )
 

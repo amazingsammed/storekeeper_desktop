@@ -35,8 +35,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  fluent_ui:
-    path: C:\Users\advan\StudioProjects\fluent_ui-master
+  sqlbase:
+    path: C:\Users\advan\StudioProjects\sqlbase
   get: ^4.6.6
   dartz: ^0.10.1
   path: ^1.9.0

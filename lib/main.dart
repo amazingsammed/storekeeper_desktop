@@ -1,6 +1,7 @@
-import 'package:fluent_ui/fluent_ui.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sqlbase/sqlbase.dart';
 import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/forms/sales_form.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -11,6 +12,7 @@ import 'feature/dashboard/presentation/dashboard.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Sqlbase.initialize(url: "http://localhost/sqlbase.php", key: '123456');
 
   await Supabase.initialize(
     url: "https://eecfdatzqwpecvxyszqu.supabase.co",
@@ -26,11 +28,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   home: DashBoardwithTabs(),
-    // );
-        return FluentApp(
-          home: GetMaterialApp(
+         return GetMaterialApp(
             theme: ThemeData(
               appBarTheme: const AppBarTheme(
                 elevation: 0,
@@ -41,16 +39,15 @@ class MyApp extends StatelessWidget {
               useMaterial3: false
             ),
             title: 'Flutter App',
-            initialRoute: '/dashboard',
+            initialRoute: '/sign_in',
             getPages: [
-              GetPage(name: '/sign_in', page: () => FluentApp(home: SignInScreen())),
-              GetPage(name: '/sign_up', page: () => FluentApp(home: SignUpScreen())),
-              GetPage(name: '/store_selection', page: () => FluentApp(home: BusinessSelectionScreen())),
-              GetPage(name: '/dashboard', page: () => FluentApp(home: MainDashboard())),
-              GetPage(name: '/salesform', page: () => FluentApp(home: SalesForm())),
+              GetPage(name: '/sign_in', page: () =>  const SignInScreen()),
+              GetPage(name: '/sign_up', page: () =>  const SignUpScreen()),
+              GetPage(name: '/store_selection', page: () =>  BusinessSelectionScreen()),
+              GetPage(name: '/dashboard', page: () =>  MainDashboard()),
+              GetPage(name: '/salesform', page: () =>  SalesForm()),
             ],
-          ),
-        );
+          );
 
   }
 }

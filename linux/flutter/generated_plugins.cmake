@@ -6,6 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   datatablex
   file_selector_linux
   gtk
+  sqlbase
   url_launcher_linux
 )
 

@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
+import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../shared/constant/colors.dart';
@@ -33,7 +34,7 @@ import '../../../shared/widgets/textfield.dart';
 //               obscureText: true,
 //             ),
 //             SizedBox(height: 20),
-//             Button(
+//             ElevatedButton (
 //               onPressed: () {
 //                 // Handle sign up logic, then navigate
 //                 Get.toNamed('/sign_in');
@@ -89,100 +90,96 @@ class WebLogin extends StatelessWidget {
         onKey: (event) {
           // Check if the Enter Key is pressed
           if (event.isKeyPressed(LogicalKeyboardKey.enter)) {
-
             /*  if(userid.hasFocus){
               password.requestFocus();
             }*/
-
           }
           // Check if Right Shift is also pressed
-
         },
         child: Center(
             child: Container(
-              height: 500,
-              width: 400,
-              child:    Card(
-
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-                      CustomTextField2(
-                        controller: username,
-                        focusNode: username_node,
-                        onFieldSubmitted: (value) {
-                          email_node.requestFocus();
-                        },
-                        icon: Icons.person,
-                        label: 'Username',
-                        color: Colors.blue,
-                        onChanged: (value) {},
-
-                      ),
-                      kSizedbox20,
-                      CustomTextField2(
-                        controller: email,
-                        focusNode: email_node,
-                        onFieldSubmitted: (value) {
-                          password_node.requestFocus();
-                        },
-                        icon: Icons.person,
-                        label: 'Email',
-                        color: Colors.blue,
-                        onChanged: (value) {},
-
-                      ),
-                      kSizedbox20,
-                      CustomTextFieldPwd(
-                        controller: password,
-                        focusNode: password_node,
-                        onFieldSubmitted: (value) {
-                          button.requestFocus();
-                        },
-                        icon: Icons.lock,
-                        label: 'Password',
-                        color: Colors.blue,
-                        onChanged: (value) {},
-
-                      ),
-                     kSizedbox10,
-                      Container(
-                        alignment: Alignment.bottomRight,
-                        child: TextButton(
-                          onPressed: () {
-                            Get.toNamed('/sign_in');
-                          },
-                          child: const Text('Sign In'),
-                        ),
-                      ),
-                      kSizedbox10,
-                      SizedBox(
-                          width: 200,
-                          height: 50,
-                          child: ElevatedButton(
-                              focusNode: button,
-                              onPressed: () async {
-                                final supabase = Supabase.instance.client;
-                               var response=  await supabase.auth.signUp(
-                                  email: email.text,
-                                  password: password.text,
-                                 data: {"username":username.text,"password":password.text,"email":email.text}
-                               );
-                               print(response.user);
-                              },
-                              child: Text('Create account',style: TextStyle(fontSize: 18),)
-                          )),
-
-
-                    ],
+          height: 500,
+          width: 400,
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Welcome",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
-                ),
+                  kSizedbox5,
+                  const Text("Enter your credentials to register your account"),
+                  kSizedbox20,
+                  CustomTextField2(
+                    controller: username,
+                    focusNode: username_node,
+                    onFieldSubmitted: (value) {
+                      email_node.requestFocus();
+                    },
+                    icon: Icons.person,
+                    label: 'Username',
+                    color: Colors.blue,
+                    onChanged: (value) {},
+                  ),
+                  kSizedbox20,
+                  CustomTextField2(
+                    controller: email,
+                    focusNode: email_node,
+                    onFieldSubmitted: (value) {
+                      password_node.requestFocus();
+                    },
+                    icon: Icons.mail,
+                    label: 'Email',
+                    color: Colors.blue,
+                    onChanged: (value) {},
+                  ),
+                  kSizedbox20,
+                  CustomTextFieldPwd(
+                    controller: password,
+                    focusNode: password_node,
+                    onFieldSubmitted: (value) {
+                      button.requestFocus();
+                    },
+                    icon: Icons.lock,
+                    label: 'Password',
+                    color: Colors.blue,
+                    onChanged: (value) {},
+                  ),
+                  kSizedbox10,
+                  Container(
+                    alignment: Alignment.bottomRight,
+                    child: TextButton(
+                      onPressed: () {
+                        Get.toNamed('/sign_in');
+                      },
+                      child: const Text('Sign In'),
+                    ),
+                  ),
+                  kSizedbox10,
+                  SizedBox(
+                      width: 200,
+                      height: 50,
+                      child: ElevatedButton(
+                          focusNode: button,
+                          onPressed: () async {
+                            var data = await authController.signUp(Profile(
+                                userid: 'userid',
+                                username: username.text,
+                                email: email.text,
+                                password: password.text));
+                            print(data);
+                          },
+                          child: Text(
+                            'Create account',
+                            style: TextStyle(fontSize: 18),
+                          ))),
+                ],
               ),
-            )));
+            ),
+          ),
+        )));
   }
 }
-
-

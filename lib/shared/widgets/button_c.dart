@@ -387,7 +387,7 @@ class ProgressButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         // Disable button during loading
         style: ElevatedButton.styleFrom(
-          backgroundColor: buttonColor, // Button color
+          backgroundColor: buttonColor, // ElevatedButton  color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12), // Rounded corners
           ),
@@ -405,7 +405,7 @@ class ProgressButton extends StatelessWidget {
         // Display icon when not loading
         label: isLoading
             ? const Text("Loading...") // Loading text while loading
-            : Text(buttonText), // Button text when not loading
+            : Text(buttonText), // ElevatedButton  text when not loading
       ),
     );
   }

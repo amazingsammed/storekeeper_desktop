@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -7,60 +6,11 @@ import 'package:storekepper_desktop/feature/authentication/controller/authcontro
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
 import 'package:storekepper_desktop/feature/authentication/presentation/store_selection.dart';
 import 'package:storekepper_desktop/shared/extensions/buttons.dart';
+import 'package:storekepper_desktop/shared/ui/snackbars.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../shared/constant/colors.dart';
 import '../../../shared/widgets/textfield.dart';
-
-// class SignInScreen extends StatelessWidget {
-//   final TextEditingController emailController = TextEditingController();
-//   final TextEditingController passwordController = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Spacer(),
-//               Text("Email"),
-//               TextField(
-//                 controller: emailController,
-//                 keyboardType: TextInputType.emailAddress,
-//               ),
-//               SizedBox(height: 20),
-//               Text("Password"),
-//               TextBox(
-//                 controller: passwordController,
-//                 placeholder: 'Enter your password',
-//                 obscureText: true,
-//               ),
-//               SizedBox(height: 20),
-//               Button(
-//                 onPressed: () {
-//                   Get.toNamed('/store_selection');
-//                 },
-//                 child: Text('Sign In'),
-//               ),
-//               SizedBox(height: 20),
-//               HyperlinkButton(
-//                 onPressed: () {
-//                   Get.toNamed('/sign_up');
-//                 },
-//                 child: Text('Don\'t have an account? Sign up'),
-//               ),
-//               Spacer()
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -75,7 +25,8 @@ class SignInScreen extends StatelessWidget {
 
 class WebLogin extends StatelessWidget {
   WebLogin({super.key});
-AuthController authController = Get.put(AuthController());
+
+  AuthController authController = Get.put(AuthController());
   RxBool isloading = false.obs;
   FocusNode email_node = FocusNode();
   FocusNode password_node = FocusNode();
@@ -90,106 +41,107 @@ AuthController authController = Get.put(AuthController());
       email_node.requestFocus();
     });
 
-    return RawKeyboardListener(
+    return KeyboardListener(
         autofocus: true,
         focusNode: FocusNode(),
-        onKey: (event) {
-          // Check if the Enter Key is pressed
-          if (event.isKeyPressed(LogicalKeyboardKey.enter)) {
-
-            /*  if(userid.hasFocus){
-              password.requestFocus();
-            }*/
-
-          }
-          // Check if Right Shift is also pressed
-
-        },
         child: Center(
-            child: Container(
-              height: 500,
-              width: 400,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+            child: SizedBox(
 
-                      CustomTextField2(
-                        controller: email,
-                        focusNode: email_node,
-                        onFieldSubmitted: (value) {
-                          password_node.requestFocus();
-                        },
-                        icon: Icons.person,
-                        label: 'Email',
-                        color: Colors.blue,
-                        onChanged: (value) {},
+          width: 400,
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
 
+                mainAxisSize: MainAxisSize.min,
+
+                children: [
+                      Text(
+                        "Welcome back",
+                        style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(height: 20),
-                      CustomTextFieldPwd(
-                        controller: password,
-                        focusNode: password_node,
-                        onFieldSubmitted: (value) {
-                          button.requestFocus();
-                        },
-                        icon: Icons.lock,
-                        label: 'Password',
-                        color: Colors.blue,
-                        onChanged: (value) {},
+                      kSizedbox5,
+                      Text("Enter your credentials to access your account"),
+                      kSizedbox20,
+                  
+                  CustomTextField2(
+                    controller: email,
+                    focusNode: email_node,
+                    onFieldSubmitted: (value) {
+                      password_node.requestFocus();
+                    },
+                    icon: Icons.person,
+                    label: 'Email',
+                    color: Colors.blue,
+                    onChanged: (value) {},
+                  ),
+                  kSizedbox20,
+                  CustomTextFieldPwd(
+                    controller: password,
+                    focusNode: password_node,
+                    onFieldSubmitted: (value) {
+                      button.requestFocus();
+                    },
+                    icon: Icons.lock,
+                    label: 'Password',
+                    color: Colors.blue,
+                    onChanged: (value) {},
+                  ),
 
-                      ),
+                  Container(
+                    alignment: Alignment.bottomRight,
+                    child: TextButton(
 
-                      // Container(
-                      //   alignment: Alignment.bottomRight,
-                      //   child: TextButton(
-                      //
-                      //     onPressed: () {
-                      //       Get.toNamed('/sign_up');
-                      //     },
-                      //     child: const Text('Sign up'),
-                      //   ),
-                      // ),
-                      kSizedbox10,
-                      ElevatedButton(onPressed: () async {
+                      onPressed: () {
+                        Get.toNamed('/sign_up');
+                      },
+                      child: const Text('Sign up'),
+                    ),
+                  ),
+                  kSizedbox10,
+                  ElevatedButton(
+                      onPressed: () async {
                         email.text = "Sammedtwumasi2@gmail.com";
                         password.text = "Sammed123456";
+                      },
+                      child: Text('fill')),
+                  SizedBox(
+                      width: 200,
+                      height: 50,
+                      child: ElevatedButton(
+                          focusNode: button,
+                          onPressed: () async {
+                            authController.loading.value = true;
 
-                      //  final supabase = Supabase.instance.client;
+                            Profile? results =
+                                await authController.signIn(Profile(
+                                    userid: 'userid',
+                                    username: 'username',
+                                    email: email.text.trim(),
+                                    password: password.text.trim()));
 
-                          // var results= await supabase
-                          //     .from('Users')
-                          //     .insert(Profile(userid: 'userid', username: 'username', email: 'email', password: 'password').toMap());
-                         // print(results);
-
-                      }, child: Text('fill')),
-                      SizedBox(
-                          width: 200,
-                          height: 50,
-                          child: ElevatedButton(
-                              focusNode: button,
-                              onPressed: () async {
-                                authController.loading.value = true;
-                                Profile user = Profile(userid: 'userid', username: 'username', email: email.text, password: password.text);
-                              AuthResponse results= await authController.signIn(user);
-                                bool response=  await authController.addUserToDataBase(results);
-                                // await authController.getAllBusiness();
-                                authController.loading.value = false;
-                                // Get.toNamed('/store_selection');
-                                await authController.getAllStoresbyBusinessID(appbusiness.busid);
-                                authController.selectedBusiness.value = [appbusiness];
-                                Get.to(()=>StoreSelectionScreen());
-                              },
-                              child: Text('Login',style: TextStyle(fontSize: 18),)
-                          ).withLoading(loading: authController.loading)),
-
-
-                    ],
-                  ),
-                ),
+                            if(results ==null){
+                              showErrorSnackbar(message: "Sign-In not successfully");
+                              authController.loading.value = false;
+                            }else{
+                              await authController
+                                  .getAllStoresbyBusinessID(appbusiness.busid);
+                              authController.selectedBusiness.value = [
+                                appbusiness
+                              ];
+                              authController.loading.value = false;
+                              Get.to(() => StoreSelectionScreen());
+                            }
+                          },
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(fontSize: 18),
+                          )).withLoading(loading: authController.loading),),
+                ],
               ),
-            )));
+            ),
+          ),
+        )));
   }
 }

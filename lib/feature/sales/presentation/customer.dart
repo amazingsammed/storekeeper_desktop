@@ -1,4 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart';
+ 
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
@@ -13,7 +13,7 @@ class CustomerPage extends StatelessWidget {
     return  DataTableV2(
       titleWidget: Row(
         children: [
-          Button(
+          ElevatedButton (
             onPressed: () {},
             child: Text("Create New"),
           ),

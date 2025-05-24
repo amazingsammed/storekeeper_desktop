@@ -1,4 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart';
+ 
 import 'package:flutter/material.dart';
 import 'package:storekepper_desktop/feature/items/presentation/itemlist.dart';
 import 'package:storekepper_desktop/feature/purchases/presentation/purchaselisting.dart';
@@ -46,27 +46,27 @@ List<MainNavigation> navItems = [
   MainNavigation(title: 'Sales', icon: Icons.shopping_bag, tabs: [
     MyTabBar(title: 'Sale Listing', icon: Icons.list, body: Saleslisting()),
     MyTabBar(
-      icon: FluentIcons.quotes,
+      icon: Icons.quora,
       title: 'Quote',
       body: QuotePage(),
     ),
     MyTabBar(
-      icon: FluentIcons.invoice,
+      icon: Icons.folder,
       title: 'Invoice',
       body: InvoicePage(),
     ),
     MyTabBar(
-      icon: FluentIcons.order_lock,
+      icon: Icons.home,
       title: 'Sales Orders',
       body: SalesOrder(),
     ),
     MyTabBar(
-      icon: FluentIcons.user_followed,
+      icon: Icons.home,
       title: 'Customer',
       body: CustomerPage(),
     ),
     MyTabBar(
-      icon: FluentIcons.mail,
+      icon: Icons.home,
       title: 'Refund',
       body: Container(),
     ),
@@ -74,17 +74,17 @@ List<MainNavigation> navItems = [
   MainNavigation(title: 'Purchases', icon: Icons.add_shopping_cart, tabs: [
     MyTabBar(title: 'Purchase Listing', icon: Icons.list, body: PurchaseListing()),
     MyTabBar(
-      icon: FluentIcons.calendar,
+      icon: Icons.home,
       title: 'Purchase Order',
       body: PurchaseOrder(),
     ),
     MyTabBar(
-      icon: FluentIcons.calendar,
+      icon: Icons.home,
       title: 'Account Payable',
       body: AccountsPayable(),
     ),
     MyTabBar(
-      icon: FluentIcons.calendar,
+      icon: Icons.home,
       title: 'Payment',
       body: PaymentPage(),
     ),
@@ -110,17 +110,17 @@ List<MainNavigation> navItems = [
   MainNavigation(title: 'Reports', icon: Icons.report, tabs: [
     MyTabBar(title: 'Dashboard', icon: Icons.dashboard, body: Container()),
     MyTabBar(
-      icon: FluentIcons.mail,
+      icon: Icons.mail,
       title: 'Items',
       body: Container(),
     ),
     MyTabBar(
-      icon: FluentIcons.mail,
+      icon: Icons.mail,
       title: 'Sales',
       body: Container(),
     ),
     MyTabBar(
-      icon: FluentIcons.mail,
+      icon: Icons.mail,
       title: 'Purchases',
       body: Container(),
     )
