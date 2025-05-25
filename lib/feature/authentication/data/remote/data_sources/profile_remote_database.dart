@@ -1,6 +1,6 @@
 
 
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 
 import '../../../domain/model/profile.dart';
 
@@ -22,7 +22,7 @@ abstract class ProfileRemoteDatabase {
 }
 
 class ProfileRemoteDatabaseImpl implements ProfileRemoteDatabase {
-  final supabase = Supabase.instance.client;
+  final supabase = null;
   @override
   Future<void> save(Profile profile) async {
    var results= await supabase

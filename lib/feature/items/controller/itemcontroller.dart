@@ -16,14 +16,22 @@ class ItemController extends GetxController {
   var loading = false.obs;
 
 
-  @override
-  Future<void> onInit() async {
-    await getAllItems();
+  // @override
+  // Future<void> onInit() async {
+  //   await getAllCategory();
+  //   await getAllGroups();
+  //   await getAllUnits();
+  //   await getAllItems();
+  //   super.onInit();
+  // }
+
+  Future<void> startup()async{
+    await getAllCategory();
     await getAllGroups();
     await getAllUnits();
-    await getAllCategory();
-    super.onInit();
+    await getAllItems();
   }
+
 
   var allItems = <Item>[].obs;
   var allGroup = <Groups>[].obs;

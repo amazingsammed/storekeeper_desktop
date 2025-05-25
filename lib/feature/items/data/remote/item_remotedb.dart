@@ -10,7 +10,7 @@ import 'package:storekepper_desktop/feature/items/domain/models/units.dart';
 import 'package:storekepper_desktop/feature/sales/models/voucher.dart';
 
 import '../../../authentication/domain/model/store.dart';
-import '../../../supabase_db.dart';
+import '../../../sqlbase_db.dart';
 import '../local_database_repository.dart';
 
 class ItemRemoteDatabase implements ItemDatabaseRepository {
@@ -77,7 +77,6 @@ class ItemRemoteDatabase implements ItemDatabaseRepository {
     List<Item> items = [];
     var data =
         await stockItemDB.where('storeid', isEqualTo:store.storeid).where('busid', isEqualTo:store.busid).get();
-    print(data);
     for (var element in data.data['data']) {
       items.add(Item.fromMap(element));
     }

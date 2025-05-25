@@ -3,57 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:storekepper_desktop/feature/authentication/presentation/signin.dart';
+
 
 import '../../../shared/constant/colors.dart';
 import '../../../shared/widgets/textfield.dart';
 
-// class SignUpScreen extends StatelessWidget {
-//   final TextEditingController emailController = TextEditingController();
-//   final TextEditingController passwordController = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ScaffoldPage(
-//       header: Text('Sign Up'),
-//       content: Container(
-//         width: 400,
-//         height: 500,
-//         alignment: Alignment.center,
-//         child: Column(
-//           children: [
-//             TextBox(
-//               controller: emailController,
-//               placeholder: 'Enter your email',
-//               keyboardType: TextInputType.emailAddress,
-//             ),
-//             SizedBox(height: 20),
-//             TextBox(
-//               controller: passwordController,
-//               placeholder: 'Enter your password',
-//               obscureText: true,
-//             ),
-//             SizedBox(height: 20),
-//             ElevatedButton (
-//               onPressed: () {
-//                 // Handle sign up logic, then navigate
-//                 Get.toNamed('/sign_in');
-//               },
-//               child: Text('Sign Up'),
-//             ),
-//             SizedBox(height: 20),
-//             HyperlinkButton(
-//               onPressed: () {
-//                 Get.toNamed('/sign_in');
-//               },
-//               child: Text('Already have an account? Sign in'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -169,7 +125,10 @@ class WebLogin extends StatelessWidget {
                                 userid: 'userid',
                                 username: username.text,
                                 email: email.text,
-                                password: password.text));
+                                password: password.text)
+                            );
+                            if(data ==null) return;
+                            Get.to(()=>SignInScreen(autoemail:email.text,autopassword:password.text));
 
                           },
                           child: Text(

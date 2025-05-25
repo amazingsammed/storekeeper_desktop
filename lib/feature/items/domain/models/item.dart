@@ -165,6 +165,7 @@ class Item {
 
 //</editor-fold>
   String getGroup(List<Groups> value) {
+    if(value.isEmpty) return 'loading..';
    return value.firstWhere((element)=>element.id==int.parse(group_id)).name;
   }
   String getStatus() {

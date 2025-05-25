@@ -1,6 +1,7 @@
 //  
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart';
 
 import '../controller/dashboardcontroller.dart';
 import '_component/dashboard_action.dart';
@@ -8,7 +9,7 @@ import '_component/menu_bar.dart';
 
 
 class MainDashboard extends StatelessWidget {
-  DashboardController controller = Get.put(DashboardController());
+  DashboardController controller = Get.put(DashboardController(),permanent: true);
 
   @override
   Widget build(BuildContext context) {

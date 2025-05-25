@@ -5,7 +5,7 @@ import 'package:storekepper_desktop/feature/authentication/businessinfo.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/business.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/repositories/profile_repository.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 
 import '../data/repositories/profile_repository_impl.dart';
 import '../domain/model/store.dart';
@@ -16,7 +16,7 @@ AuthController authController = AuthController.instance;
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  final supabase = Supabase.instance.client;
+  final supabase = null;
   ProfileRepository profileRepository = ProfileRepositoryImpl();
 
   var currentProfile = Profile
@@ -29,6 +29,8 @@ class AuthController extends GetxController {
 
   var storemembers = [].obs;
   Sqlbase mydb = Sqlbase();
+
+
 
   Future <Profile?> signIn(Profile user) async {
     //print()
@@ -96,22 +98,17 @@ class AuthController extends GetxController {
     }
   }
 
- Future<List> getAllStoresbyUserid() async {
+ Future<void> getAllStoresbyUserid() async {
     userStores.clear();
     try {
       SqlBaseResponse data = await mydb.table('user_store')
           .where('userid', isEqualTo: currentProfile.value.userid)
           .get();
-      print(data);
       for (var element in data.data['data']) {
         userStores.add(UserStore.fromMap(element));
       }
-      List stores = userStores.value;
-      print(stores);
-      return stores;
     } catch (e) {
       print(e);
-      return [];
     }
   }
 

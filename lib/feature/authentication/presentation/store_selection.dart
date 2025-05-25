@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/user_store.dart';
 import 'package:storekepper_desktop/feature/dashboard/presentation/dashboard.dart';
+import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/extensions/buttons.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
@@ -14,6 +15,7 @@ import '../domain/model/store.dart';
 
 class StoreSelectionScreen extends StatelessWidget {
   AuthController authController = Get.put(AuthController());
+  ItemController itemController = Get.put(ItemController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +46,12 @@ class StoreSelectionScreen extends StatelessWidget {
                             color: Colors.black,
                             icon: Icons.arrow_back_ios_new,
                             onTap: () {
-                              authController.loading.value==false;
+                              authController.loading.value == false;
                               Get.back();
                             },
                             title: 'Back'),
                         kSizedbox20,
-                       PrimaryButton(
+                        PrimaryButton(
                             onTap: () {
                               Get.dialog(CreateStore());
                             },
@@ -61,57 +63,48 @@ class StoreSelectionScreen extends StatelessWidget {
                   Divider(),
                   kSizedbox20,
                   Expanded(
-                    child: FutureBuilder(
-                        future: authController.getAllStoresbyUserid(),
-                        builder: (BuildContext context,  AsyncSnapshot snapshot) {
-                          print(snapshot);
-                          if (snapshot.hasData) {
-                            if(snapshot.data!.isEmpty)return Center(child: Text('Empty '),);
-                            return ListView.builder(
-                              physics: ScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: authController.userStores.value.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                UserStore item =
-                                authController.userStores.value[index];
-                                return FutureBuilder(
-                                    future: authController
-                                        .getStoreByID(item.storeid),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot snapshot) {
-                                      if (snapshot.hasData) {
-                                        Store item = snapshot.data;
-                                        return Card(
-                                          child: ListTile(
-                                            onTap: () {
-                                              authController
-                                                  .selectedStore.value = [item];
-                                              Get.to(()=>MainDashboard());
+                    child: Obx(() {
+                      if(authController.userStores.isEmpty)return const Center(child: Text('data'),);
+                      return ListView.builder(
 
-                                            },
-                                            title: Text(item.name),
-                                            subtitle: Text(item.manager),
-                                            trailing: Icon(Icons.chevron_right),
-                                          ),
-                                        );
-                                      } else if (snapshot.hasError) {
-                                        return Icon(Icons.error_outline);
-                                      } else {
-                                        return const Center(
-                                            child: CircularProgressIndicator());
-                                      }
-                                    });
-                              },
-                            );
-                          } else if (snapshot.hasError) {
-                            print(snapshot.error);
-                            return Icon(Icons.error_outline);
-                          } else {
-                            return const Center(
-                                child: CircularProgressIndicator()
-                            );
-                          }
-                        }),
+                        physics: ScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: authController.userStores.value.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          UserStore item =
+                          authController.userStores.value[index];
+                          return FutureBuilder(
+                              future: authController
+                                  .getStoreByID(item.storeid),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (snapshot.hasData) {
+                                  Store item = snapshot.data;
+                                  return Card(
+                                    child: ListTile(
+                                      onTap: () async {
+                                        authController
+                                            .selectedStore.clear();
+                                        authController
+                                            .selectedStore.add(item);
+                                        await itemController.startup();
+                                        Get.to(() => MainDashboard());
+                                      },
+                                      title: Text(item.name),
+                                      subtitle: Text(item.manager),
+                                      trailing: Icon(Icons.chevron_right),
+                                    ),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return Icon(Icons.error_outline);
+                                } else {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+                              });
+                        },
+                      );
+                    }),
                   )
 
                 ],
@@ -207,29 +200,27 @@ class CreateStore extends StatelessWidget {
                 },
                 icon: Icon(Icons.file_upload)),
             PrimaryButton(
-                    focusNode: buttonn,
-                    onTap: () async {
-                      try{
-
-                      authController.loading.value = true;
-                      Store business = Store(
-                          name: name.text,
-                          manager: manager.text,
-                          busid: appbusiness.busid,
-                          location: location.text,
-                          contact: contact.text,
-                          createdby: authController.currentProfile.value.userid,
-                          storeid: Uuid().v4());
-                      await authController.saveStore(business);
-                      }catch(e){
-                        print(e);
-                      }finally{
-
-                      authController.loading.value = false;
-                      Navigator.of(context).pop();
-                      }
-                    },
-                    title: "Save")
+                focusNode: buttonn,
+                onTap: () async {
+                  try {
+                    authController.loading.value = true;
+                    Store business = Store(
+                        name: name.text,
+                        manager: manager.text,
+                        busid: appbusiness.busid,
+                        location: location.text,
+                        contact: contact.text,
+                        createdby: authController.currentProfile.value.userid,
+                        storeid: Uuid().v4());
+                    await authController.saveStore(business);
+                  } catch (e) {
+                    print(e);
+                  } finally {
+                    authController.loading.value = false;
+                    Navigator.of(context).pop();
+                  }
+                },
+                title: "Save")
                 .withLoading(loading: authController.loading)
           ],
         ),

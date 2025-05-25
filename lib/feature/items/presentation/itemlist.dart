@@ -39,7 +39,6 @@ class ItemListing extends StatelessWidget {
             print(e);
           },
           ontap: (element) {
-            print(element['id'].runtimeType);
           },
           title: "Items List",
           heads: [
@@ -48,7 +47,7 @@ class ItemListing extends StatelessWidget {
             TableHead(title: 'Selling Price', id: 'salesprice',type: TableHeadType.double),
             TableHead(title: 'Status', id: 'status',type: TableHeadType.int),
           ],
-          items:controller.allItems.value.map((element){
+          items:controller.allItems.value.isEmpty?[]:controller.allItems.value.map((element){
             return {
               'name': element.name,
               'group_id':element.getGroup(controller.allGroup.value),
