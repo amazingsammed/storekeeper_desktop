@@ -37,7 +37,9 @@ class ItemController extends GetxController {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
     }, (exists) {
+
       allItems.value = exists;
+      print('all items ${allItems.value.length}');
       loading.value = false;
     });
   }
@@ -73,6 +75,9 @@ class ItemController extends GetxController {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
     }, (exists) {
+      print('exists data \n\n');
+      print(exists);
+      print('exists data \n\n');
       allCategory.value = exists;
       loading.value = false;
     });

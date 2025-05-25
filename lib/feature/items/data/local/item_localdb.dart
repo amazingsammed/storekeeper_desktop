@@ -20,6 +20,7 @@ class ItemLocalDatabase  implements ItemDatabaseRepository{
         .map((element) =>
             element.map((key, value) => MapEntry(key, value)))
         .toList();
+    print(data);
     for (var e in data) {
       items.add(Item.fromMap(e));
     }

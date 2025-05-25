@@ -39,14 +39,7 @@ class MyApp extends StatelessWidget {
               useMaterial3: false
             ),
             title: 'Flutter App',
-            initialRoute: '/sign_in',
-            getPages: [
-              GetPage(name: '/sign_in', page: () =>  const SignInScreen()),
-              GetPage(name: '/sign_up', page: () =>  const SignUpScreen()),
-              GetPage(name: '/store_selection', page: () =>  BusinessSelectionScreen()),
-              GetPage(name: '/dashboard', page: () =>  MainDashboard()),
-              GetPage(name: '/salesform', page: () =>  SalesForm()),
-            ],
+            home: SignInScreen(),
           );
 
   }

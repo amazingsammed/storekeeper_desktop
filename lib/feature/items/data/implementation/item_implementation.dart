@@ -22,12 +22,13 @@ class ItemImplementation implements ItemRepository {
   Future<Either<Failure, bool>> createSingleCategory(
       {required CategoryModel data}) async {
     try {
-      if (await networkInfo.hasInternet()) {
         await remoteDatabase.addCategory(data: data.toMap());
-        await localDatabase.addCategory(data: data.toMap());
-      } else {
-        await localDatabase.addCategory(data: data.toMap());
-      }
+      // if (await networkInfo.hasInternet()) {
+      //   await remoteDatabase.addCategory(data: data.toMap());
+      //   await localDatabase.addCategory(data: data.toMap());
+      // } else {
+      //   await localDatabase.addCategory(data: data.toMap());
+      // }
 
       return const Right(true);
     } catch (error) {
@@ -39,12 +40,12 @@ class ItemImplementation implements ItemRepository {
   @override
   Future<Either<Failure, bool>> createSingleItem({required Item data}) async {
     try {
-      if (await networkInfo.hasInternet()) {
         await remoteDatabase.addItem(data: data.toMap());
-       // await localDatabase.addItem(data: data.toMap());
-      } else {
-        await localDatabase.addItem(data: data.toMap());
-      }
+      // if (await networkInfo.hasInternet()) {
+      //  // await localDatabase.addItem(data: data.toMap());
+      // } else {
+      //   await localDatabase.addItem(data: data.toMap());
+      // }
 
       return Right(true);
     } catch (error) {
@@ -55,12 +56,13 @@ class ItemImplementation implements ItemRepository {
   @override
   Future<Either<Failure, bool>> createSingleUnit({required Units data}) async {
     try {
-      if (await networkInfo.hasInternet()) {
         await remoteDatabase.addUnit(data: data.toMap());
-        await localDatabase.addUnit(data: data.toMap());
-      } else {
-        await localDatabase.addUnit(data: data.toMap());
-      }
+      // if (await networkInfo.hasInternet()) {
+      //   await remoteDatabase.addUnit(data: data.toMap());
+      //   await localDatabase.addUnit(data: data.toMap());
+      // } else {
+      //   await localDatabase.addUnit(data: data.toMap());
+      // }
 
       return Right(true);
     } catch (error) {
@@ -72,13 +74,14 @@ class ItemImplementation implements ItemRepository {
   Future<Either<Failure, List<CategoryModel>>> getAllCategory() async {
     var data = <CategoryModel>[];
     try {
-      if (await networkInfo.hasInternet()) {
-        data =
-            await remoteDatabase.getAllCategory(store: authController.myStore);
-      } else {
-        data =
-            await localDatabase.getAllCategory(store: authController.myStore);
-      }
+      data =   await remoteDatabase.getAllCategory(store: authController.myStore);
+      // if (await networkInfo.hasInternet()) {
+      //   data =
+      //       await remoteDatabase.getAllCategory(store: authController.myStore);
+      // } else {
+      //   data =
+      //       await localDatabase.getAllCategory(store: authController.myStore);
+      // }
 
       return Right(data);
     } catch (error) {
@@ -90,11 +93,12 @@ class ItemImplementation implements ItemRepository {
   Future<Either<Failure, List<Groups>>> getAllGroups() async {
     var data = <Groups>[];
     try {
-      if (await networkInfo.hasInternet()) {
         data = await remoteDatabase.getAllGroups(store: authController.myStore);
-      } else {
-        data = await localDatabase.getAllGroups(store: authController.myStore);
-      }
+      // if (await networkInfo.hasInternet()) {
+      //   data = await remoteDatabase.getAllGroups(store: authController.myStore);
+      // } else {
+      //   data = await localDatabase.getAllGroups(store: authController.myStore);
+      // }
 
       return Right(data);
     } catch (error) {
@@ -107,14 +111,16 @@ class ItemImplementation implements ItemRepository {
       {String? storeid, String? busid}) async {
     var data = <Item>[];
     try {
-      if (await networkInfo.hasInternet()) {
-        data = await remoteDatabase.getAllItems(store: authController.myStore);
-      } else {
-        data = await localDatabase.getAllItems(store: authController.myStore);
-      }
+      data = await remoteDatabase.getAllItems(store: authController.myStore);
+      // if (await networkInfo.hasInternet()) {
+      //   data = await remoteDatabase.getAllItems(store: authController.myStore);
+      // } else {
+      //   data = await localDatabase.getAllItems(store: authController.myStore);
+      // }
 
       return Right(data);
     } catch (error) {
+      print(error);
       return Left(Failure(error.toString()));
     }
   }
@@ -123,11 +129,12 @@ class ItemImplementation implements ItemRepository {
   Future<Either<Failure, List<Units>>> getAllUnits() async {
     var data = <Units>[];
     try {
-      if (await networkInfo.hasInternet()) {
         data = await remoteDatabase.getAllUnits(store: authController.myStore);
-      } else {
-        data = await localDatabase.getAllUnits(store: authController.myStore);
-      }
+      // if (await networkInfo.hasInternet()) {
+      //   data = await remoteDatabase.getAllUnits(store: authController.myStore);
+      // } else {
+      //   data = await localDatabase.getAllUnits(store: authController.myStore);
+      // }
 
       return Right(data);
     } catch (error) {
@@ -139,12 +146,13 @@ class ItemImplementation implements ItemRepository {
   Future<Either<Failure, bool>> createSingleGroup(
       {required Groups data}) async {
     try {
-      if (await networkInfo.hasInternet()) {
         await remoteDatabase.addGroup(data: data.toMap());
-        await localDatabase.addGroup(data: data.toMap());
-      } else {
-        await localDatabase.addGroup(data: data.toMap());
-      }
+      // if (await networkInfo.hasInternet()) {
+      //   await remoteDatabase.addGroup(data: data.toMap());
+      //   await localDatabase.addGroup(data: data.toMap());
+      // } else {
+      //   await localDatabase.addGroup(data: data.toMap());
+      // }
 
       return Right(true);
     } catch (error) {

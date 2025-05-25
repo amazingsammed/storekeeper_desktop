@@ -103,7 +103,7 @@ class WebLogin extends StatelessWidget {
                   ElevatedButton(
                       onPressed: () async {
                         email.text = "Sammedtwumasi2@gmail.com";
-                        password.text = "Sammed123456";
+                        password.text = "Sammedtwumasi2@gmail.com";
                       },
                       child: Text('fill')),
                   SizedBox(
@@ -125,11 +125,6 @@ class WebLogin extends StatelessWidget {
                               showErrorSnackbar(message: "Sign-In not successfully");
                               authController.loading.value = false;
                             }else{
-                              await authController
-                                  .getAllStoresbyBusinessID(appbusiness.busid);
-                              authController.selectedBusiness.value = [
-                                appbusiness
-                              ];
                               authController.loading.value = false;
                               Get.to(() => StoreSelectionScreen());
                             }

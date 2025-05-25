@@ -6,6 +6,7 @@ class Store{
   String busid;
   String location;
   String manager;
+  String createdby;
 
 //<editor-fold desc="Data Methods">
   Store({
@@ -15,6 +16,7 @@ class Store{
     required this.busid,
     required this.location,
     required this.manager,
+    required this.createdby,
   });
 
   @override
@@ -27,7 +29,8 @@ class Store{
           storeid == other.storeid &&
           busid == other.busid &&
           location == other.location &&
-          manager == other.manager);
+          manager == other.manager &&
+          createdby == other.createdby);
 
   @override
   int get hashCode =>
@@ -36,7 +39,8 @@ class Store{
       storeid.hashCode ^
       busid.hashCode ^
       location.hashCode ^
-      manager.hashCode;
+      manager.hashCode ^
+      createdby.hashCode;
 
   @override
   String toString() {
@@ -47,6 +51,7 @@ class Store{
         ' busid: $busid,' +
         ' location: $location,' +
         ' manager: $manager,' +
+        ' createdby: $createdby,' +
         '}';
   }
 
@@ -57,6 +62,7 @@ class Store{
     String? busid,
     String? location,
     String? manager,
+    String? createdby,
   }) {
     return Store(
       name: name ?? this.name,
@@ -65,17 +71,19 @@ class Store{
       busid: busid ?? this.busid,
       location: location ?? this.location,
       manager: manager ?? this.manager,
+      createdby: createdby ?? this.createdby,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'contact': contact,
-      'storeid': storeid,
-      'busid': busid,
-      'location': location,
-      'manager': manager,
+      'name': this.name,
+      'contact': this.contact,
+      'storeid': this.storeid,
+      'busid': this.busid,
+      'location': this.location,
+      'manager': this.manager,
+      'createdby': this.createdby,
     };
   }
 
@@ -87,6 +95,7 @@ class Store{
       busid: map['busid'] as String,
       location: map['location'] as String,
       manager: map['manager'] as String,
+      createdby: map['createdby'] as String,
     );
   }
 

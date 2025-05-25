@@ -5,7 +5,7 @@ class UserStore{
   String storeid;
   String busid;
   String role;
-  String status;
+  int status;
 
 //<editor-fold desc="Data Methods">
   UserStore({
@@ -51,7 +51,7 @@ class UserStore{
     String? storeid,
     String? busid,
     String? role,
-    String? status,
+    int? status,
   }) {
     return UserStore(
       userid: userid ?? this.userid,
@@ -64,11 +64,11 @@ class UserStore{
 
   Map<String, dynamic> toMap() {
     return {
-      'userid': userid,
-      'storeid': storeid,
-      'busid': busid,
-      'role': role,
-      'status': status,
+      'userid': this.userid,
+      'storeid': this.storeid,
+      'busid': this.busid,
+      'role': this.role,
+      'status': this.status,
     };
   }
 
@@ -78,7 +78,7 @@ class UserStore{
       storeid: map['storeid'] as String,
       busid: map['busid'] as String,
       role: map['role'] as String,
-      status: map['status'] as String,
+      status: map['status'] as int,
     );
   }
 

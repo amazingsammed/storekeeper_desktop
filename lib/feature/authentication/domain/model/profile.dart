@@ -78,7 +78,7 @@ class Profile{
   factory Profile.fromMap(Map<String, dynamic> map) {
     return Profile(
       userid: map['userid'] as String,
-      username: map['username'] as String,
+      username: (map['username']??map['name']) as String,
       email: map['email'] as String,
       password: map['password'] as String,
       type: (map['type'] ?? 'subsidiary') as String,

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/user_store.dart';
+import 'package:storekepper_desktop/feature/dashboard/presentation/dashboard.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/extensions/buttons.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../shared/widgets/textfield.dart';
+import '../businessinfo.dart';
 import '../controller/authcontroller.dart';
 import '../domain/model/store.dart';
 
@@ -18,7 +20,7 @@ class StoreSelectionScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Container(
-          height: 800,
+          height: 700,
           width: 700,
           child: Card(
             child: Padding(
@@ -26,14 +28,6 @@ class StoreSelectionScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Card(
-                  //   child: ListTile(
-                  //     title: Text(authController.myBusiness.name),
-                  //     subtitle: Text('Click here to log into business'),
-                  //     trailing: Icon(Icons.chevron_right),
-                  //   ),
-                  // ),
-                  // Divider(),
                   kSizedbox20,
                   ListTile(
                     title: Text(
@@ -46,12 +40,6 @@ class StoreSelectionScreen extends StatelessWidget {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                      if(authController.currentProfile.value.type=="Admin")  PrimaryButton(
-                            onTap: () {
-                              Get.dialog(CreateBusiness());
-                            },
-                            title: 'Create'),
-                        kSizedbox20,
                         PrimaryButton(
                             color: Colors.black,
                             icon: Icons.arrow_back_ios_new,
@@ -60,25 +48,32 @@ class StoreSelectionScreen extends StatelessWidget {
                               Get.back();
                             },
                             title: 'Back'),
+                        kSizedbox20,
+                       PrimaryButton(
+                            onTap: () {
+                              Get.dialog(CreateStore());
+                            },
+                            title: 'Create'),
                       ],
                     ),
                   ),
 
                   Divider(),
                   kSizedbox20,
-                  Obx(() {
-                    return Container(
-                      child: authController.userStores.value.isEmpty
-                          ? Center(
-                              child: Text("Empty"),
-                            )
-                          : ListView.builder(
+                  Expanded(
+                    child: FutureBuilder(
+                        future: authController.getAllStoresbyUserid(),
+                        builder: (BuildContext context,  AsyncSnapshot snapshot) {
+                          print(snapshot);
+                          if (snapshot.hasData) {
+                            if(snapshot.data!.isEmpty)return Center(child: Text('Empty '),);
+                            return ListView.builder(
                               physics: ScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: authController.userStores.value.length,
                               itemBuilder: (BuildContext context, int index) {
                                 UserStore item =
-                                    authController.userStores.value[index];
+                                authController.userStores.value[index];
                                 return FutureBuilder(
                                     future: authController
                                         .getStoreByID(item.storeid),
@@ -91,7 +86,8 @@ class StoreSelectionScreen extends StatelessWidget {
                                             onTap: () {
                                               authController
                                                   .selectedStore.value = [item];
-                                              Get.toNamed('/dashboard');
+                                              Get.to(()=>MainDashboard());
+
                                             },
                                             title: Text(item.name),
                                             subtitle: Text(item.manager),
@@ -106,9 +102,18 @@ class StoreSelectionScreen extends StatelessWidget {
                                       }
                                     });
                               },
-                            ),
-                    );
-                  })
+                            );
+                          } else if (snapshot.hasError) {
+                            print(snapshot.error);
+                            return Icon(Icons.error_outline);
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator()
+                            );
+                          }
+                        }),
+                  )
+
                 ],
               ),
             ),
@@ -119,7 +124,7 @@ class StoreSelectionScreen extends StatelessWidget {
   }
 }
 
-class CreateBusiness extends StatelessWidget {
+class CreateStore extends StatelessWidget {
   final TextEditingController name = TextEditingController();
   final TextEditingController manager = TextEditingController();
   final TextEditingController type = TextEditingController();
@@ -133,7 +138,7 @@ class CreateBusiness extends StatelessWidget {
   FocusNode contactn = FocusNode();
   FocusNode buttonn = FocusNode();
 
-  CreateBusiness({super.key});
+  CreateStore({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -204,17 +209,25 @@ class CreateBusiness extends StatelessWidget {
             PrimaryButton(
                     focusNode: buttonn,
                     onTap: () async {
+                      try{
+
                       authController.loading.value = true;
                       Store business = Store(
                           name: name.text,
                           manager: manager.text,
-                          busid: authController.myBusiness.busid,
+                          busid: appbusiness.busid,
                           location: location.text,
                           contact: contact.text,
+                          createdby: authController.currentProfile.value.userid,
                           storeid: Uuid().v4());
                       await authController.saveStore(business);
+                      }catch(e){
+                        print(e);
+                      }finally{
+
                       authController.loading.value = false;
                       Navigator.of(context).pop();
+                      }
                     },
                     title: "Save")
                 .withLoading(loading: authController.loading)

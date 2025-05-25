@@ -170,7 +170,7 @@ class WebLogin extends StatelessWidget {
                                 username: username.text,
                                 email: email.text,
                                 password: password.text));
-                            print(data);
+
                           },
                           child: Text(
                             'Create account',

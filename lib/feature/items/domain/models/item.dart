@@ -1,4 +1,6 @@
 
+import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
+
 class Item {
   final int id;
   final String name;
@@ -154,12 +156,21 @@ class Item {
       createdby: map['createdby'] as String,
       storeid: map['storeid'] as String,
       is_active: map['is_active'] as int,
-      salesprice: map['salesprice'] as double,
-      purchaseprice: map['purchaseprice'] as double,
+      salesprice: double.parse(map['salesprice'].toString()),
+      purchaseprice: double.parse(map['purchaseprice'].toString()),
       warninglimit: map['warninglimit'] as int,
       is_service: map['is_service'] as int,
     );
   }
 
 //</editor-fold>
+  String getGroup(List<Groups> value) {
+   return value.firstWhere((element)=>element.id==int.parse(group_id)).name;
+  }
+  String getStatus() {
+    if(status==0)return 'inactive';
+    return 'active';
+
+  }
+
 }

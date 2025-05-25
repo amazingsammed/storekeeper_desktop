@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
 import '../../../shared/widgets/datalisting.dart';
@@ -20,7 +21,9 @@ class ItemListing extends StatelessWidget {
     return Scaffold(
       body: Obx(() {
         return DataTableV2(
-          refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async { await controller.getAllItems();}).withLoading(controller.loading),
+          refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async {
+
+            await controller.getAllItems();}).withLoading(controller.loading),
           titleWidget: Row(
             children: [
               PrimaryButton(
@@ -48,9 +51,9 @@ class ItemListing extends StatelessWidget {
           items:controller.allItems.value.map((element){
             return {
               'name': element.name,
-              'group_id':element.group_id,
+              'group_id':element.getGroup(controller.allGroup.value),
               'salesprice':element.salesprice,
-              'status': element.status
+              'status': element.getStatus()
             };
           }).toList(),
         );

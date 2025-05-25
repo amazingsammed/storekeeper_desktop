@@ -16,6 +16,7 @@ class ItemSearchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(itemController.allItems.value);
     return Expanded(
       child: Card(
 

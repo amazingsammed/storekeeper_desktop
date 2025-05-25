@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sqlbase/sqlbase.dart';
 import 'package:storekepper_desktop/feature/authentication/businessinfo.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/business.dart';
@@ -40,17 +41,19 @@ class AuthController extends GetxController {
   }
 
   Future<Profile?> signUp(Profile user) async {
-    SqlBaseResponse response = await mydb.auth('users').signUp(
-        email: user.email, password: user.password, data: {
-      "username": user.username
+    SqlBaseResponse response = await mydb.auth('user').signUp(
+        email: user.email,
+        password: user.password, data: {
+      "name": user.username
     }
     );
+    print(response);
     if (response.statusCode == 0) return null;
-    currentProfile.value = Profile.fromMap(response.data);
+    currentProfile.value = Profile.fromMap(response.data['data']);
     return currentProfile.value;
   }
 
-  Business get myBusiness => selectedBusiness.value[0];
+  // Business get myBusiness => selectedBusiness.value[0];
 
   Store get myStore => selectedStore.value[0];
 
@@ -81,8 +84,9 @@ class AuthController extends GetxController {
   Future<Store> getStoreByID(String id) async {
     List<Store> items = [];
     try {
-      var data = await supabase.from('stores').select().eq('storeid', id);
-      for (var element in data) {
+
+      var response = await mydb.table('store').where('storeid',isEqualTo: id).get();
+      for (var element in response.data['data']) {
         items.add(Store.fromMap(element));
       }
       return items[0];
@@ -92,23 +96,22 @@ class AuthController extends GetxController {
     }
   }
 
-  getAllStoresbyBusinessID(String item) async {
+ Future<List> getAllStoresbyUserid() async {
     userStores.clear();
     try {
-      var data = await mydb.table('user_store')
-          .where('busid', isEqualTo: item)
+      SqlBaseResponse data = await mydb.table('user_store')
           .where('userid', isEqualTo: currentProfile.value.userid)
           .get();
-      // var data = await supabase
-      //     .from('user_store')
-      //     .select()
-      //     .eq('userid', currentProfile.value.userid)
-      //     .eq("busid", item);
+      print(data);
       for (var element in data.data['data']) {
         userStores.add(UserStore.fromMap(element));
       }
+      List stores = userStores.value;
+      print(stores);
+      return stores;
     } catch (e) {
       print(e);
+      return [];
     }
   }
 
@@ -133,15 +136,23 @@ class AuthController extends GetxController {
   }
 
   saveStore(Store store) async {
-    await supabase.from('stores').insert(store.toMap());
-    await supabase.from('user_store').insert(UserStore(
+    try{
+
+   SqlBaseResponse response = await mydb.table('store').add(store.toMap());
+   if(response.statusCode==0) print(response);
+    response = await mydb.table('user_store').add(UserStore(
         userid: currentProfile.value.userid,
         storeid: store.storeid,
-        status: "active",
+        status: 1,
         role: 'admin',
         busid: store.busid)
         .toMap());
-    await getAllStoresbyBusinessID(store.busid);
+   if(response.statusCode==0) print(response);
+    }catch(e){
+      print(e);
+    }
+
+
   }
 
   Future saveBusiness(Business business) async {

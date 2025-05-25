@@ -29,35 +29,7 @@ class MainDashboard extends StatelessWidget {
               index: controller.selectedPage.value,
               children: navItems.map((element)=>MyMainPage(tabs: element.tabs,)).toList(),
             ))
-            // Expanded(
-            //   child: NavigationView(
-            //     transitionBuilder: (c, a) {
-            //       return c;
-            //     },
-            //     appBar: NavigationAppBar(
-            //         automaticallyImplyLeading: false,
-            //         // title: MyMenuBar(),
-            //         //title: Text(authController.myStore.name),
-            //         actions: DashboardAction()),
-            //     pane: NavigationPane(
-            //       displayMode: displayMode,
-            //       selected: controller.selectedPage.value,
-            //       onItemPressed: (index) {
-            //         // print(index);
-            //         controller.selectedPage.value = index;
-            //       },
-            //       onChanged: (index) {},
-            //       items: items,
-            //       footerItems: [
-            //         PaneItem(
-            //           icon: const Icon(FluentIcons.settings),
-            //           title: const Text('Settings'),
-            //           body: MySettingsPage(),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
+
           ],
         );
       }),
