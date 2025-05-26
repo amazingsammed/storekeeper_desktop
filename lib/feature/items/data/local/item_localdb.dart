@@ -20,7 +20,6 @@ class ItemLocalDatabase  implements ItemDatabaseRepository{
         .map((element) =>
             element.map((key, value) => MapEntry(key, value)))
         .toList();
-    print(data);
     for (var e in data) {
       items.add(Item.fromMap(e));
     }
@@ -51,7 +50,6 @@ WHERE
     for (var e in data) {
       items.add(Groups.fromMap(e));
     }
-    print(items);
     return items;
   }
 
@@ -104,11 +102,8 @@ WHERE
 
   @override
   Future<bool> addUnit({required Map<String, dynamic> data}) async {
-    print('start');
     var dbClient = await database.db;
-    print(data);
     int results= await dbClient!.insert('stock_item_unit', data);
-    print(results);
     if(results==1) return true;
     return false;
   }

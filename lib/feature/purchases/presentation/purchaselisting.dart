@@ -18,10 +18,8 @@ class PurchaseListing extends StatelessWidget {
         ],
       ),
       selecteditems: (e) {
-        print(e);
       },
       ontap: (element) {
-        print(element['id'].runtimeType);
       },
       title: "Purchase Listing",
       heads: [

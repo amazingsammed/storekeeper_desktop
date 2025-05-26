@@ -3,6 +3,7 @@ import 'package:storekepper_desktop/feature/authentication/controller/authcontro
 import 'package:storekepper_desktop/feature/items/data/implementation/item_implementation.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../shared/ui/snackbars.dart';
 import '../domain/models/item.dart';
@@ -97,7 +98,10 @@ class ItemController extends GetxController {
       data: data.copyWith(
           createdby: authController.currentProfile.value.userid,
           storeid: authController.myStore.storeid,
-          busid: authController.myStore.busid),
+          busid: authController.myStore.busid,
+
+
+      ),
     );
     results.fold((failure) {
       loading.value = false;
@@ -144,6 +148,7 @@ class ItemController extends GetxController {
   addItem({required Item data}) async {
     loading.value = true;
     final results = await itemRepository.createSingleItem(data: data.copyWith(
+      unit_id: const Uuid().v4(),
         createdby: authController.currentProfile.value.userid,
         storeid: authController.myStore.storeid,
         busid: authController.myStore.busid),);

@@ -53,9 +53,9 @@ class MyTransaction{
 
   Map<String, dynamic> toMap() {
     return {
-      'voucher': this.voucher,
-      'inventory': this.inventory,
-      'accounting': this.accounting,
+      'voucher': voucher,
+      'inventory': inventory,
+      'accounting': accounting,
     };
   }
 

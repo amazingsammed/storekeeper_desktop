@@ -7,6 +7,7 @@ import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
 import '../../controller/itemcontroller.dart';
+import 'package:uuid/uuid.dart' ;
 import '../../data/local/item_localdb.dart';
 
 class AddProduct extends StatelessWidget {

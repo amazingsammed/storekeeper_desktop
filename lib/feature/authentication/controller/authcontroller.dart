@@ -23,12 +23,14 @@ class AuthController extends GetxController {
       .empty()
       .obs;
   var selectedBusiness = <Business>[].obs;
-  var selectedStore = <Store>[].obs;
+  var selectedStoreList = <Store>[].obs;
   var userStores = <UserStore>[].obs;
   var userBusiness = <UserBusiness>[].obs;
 
   var storemembers = [].obs;
   Sqlbase mydb = Sqlbase();
+
+  Store get selectedStore=>selectedStoreList.value[0];
 
 
 
@@ -57,7 +59,7 @@ class AuthController extends GetxController {
 
   // Business get myBusiness => selectedBusiness.value[0];
 
-  Store get myStore => selectedStore.value[0];
+  Store get myStore => selectedStoreList.value[0];
 
   var loading = false.obs;
 
@@ -118,7 +120,7 @@ class AuthController extends GetxController {
       var data = await supabase
           .from('user_store')
           .select()
-          .eq('storeid', selectedStore.value[0].storeid)
+          .eq('storeid', selectedStoreList.value[0].storeid)
           .eq("busid", appbusiness.busid);
       print(data);
       for (var element in data) {

@@ -63,11 +63,11 @@ class SalesItem{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'id': this.id,
-      'uuid': this.uuid,
-      'salesprice': this.salesprice,
-      'quantity': this.quantity,
+      'name': name,
+      'id': id,
+      'uuid': uuid,
+      'salesprice': salesprice,
+      'quantity': quantity,
       'amount': quantity*salesprice
     };
   }

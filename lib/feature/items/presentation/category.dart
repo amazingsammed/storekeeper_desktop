@@ -29,10 +29,8 @@ class CategoryPage extends StatelessWidget {
           ],
         ),
         selecteditems: (e) {
-          print(e);
         },
         ontap: (element) {
-          print(element['id'].runtimeType);
         },
         title: "Category of Item",
         heads: [

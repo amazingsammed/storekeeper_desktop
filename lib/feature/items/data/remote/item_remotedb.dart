@@ -17,35 +17,30 @@ class ItemRemoteDatabase implements ItemDatabaseRepository {
   @override
   Future<bool> addCategory({required Map<String, dynamic> data}) async {
     var results = await categoryDB.add(data);
-    print("$results add cat");
     return true;
   }
 
   @override
   Future<bool> addGroup({required Map<String, dynamic> data}) async {
     var results = await groupDB.add(data);
-    print("$results add group");
     return true;
   }
 
   @override
   Future<bool> addItem({required Map<String, dynamic> data}) async {
     var results = await stockItemDB.add(data);
-    print("$results add item");
     return true;
   }
 
   @override
   Future<bool> addUnit({required Map<String, dynamic> data}) async {
     var results = await unitDB.add(data);
-    print("$results add unit");
     return true;
   }
 
   @override
   Future<bool> addVoucher({required Map<String, dynamic> data}) async {
     var results = await voucherDB.add(data);
-    print("$results add voucher");
     return true;
   }
 
@@ -54,7 +49,6 @@ class ItemRemoteDatabase implements ItemDatabaseRepository {
     List<CategoryModel> items = [];
     var data =
         await categoryDB.where('storeid',isEqualTo: store.storeid).where('busid', isEqualTo:store.busid).get();
-    print(data);
     for (var element in data.data['data']) {
       items.add(CategoryModel.fromMap(element));
     }

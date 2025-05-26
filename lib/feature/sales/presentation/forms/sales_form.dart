@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
 import 'package:storekepper_desktop/feature/sales/controller/vouchercontroller.dart';
 import 'package:storekepper_desktop/feature/sales/models/accounting.dart';
 import 'package:storekepper_desktop/feature/sales/models/inventory.dart';
@@ -9,6 +10,7 @@ import 'package:storekepper_desktop/feature/sales/models/salesitem.dart';
 import 'package:storekepper_desktop/feature/sales/models/voucher.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../shared/widgets/datalisting.dart';
 import '../../../items/domain/models/item.dart';
@@ -173,6 +175,7 @@ class QuantitySelector extends GetView<SalesController> {
 }
 
 class CreateSale extends GetView<SalesController> {
+  final AuthController authController =  Get.find();
   final VoucherController voucherController = Get.put(VoucherController());
   MyTransactionController transactionController = Get.put(MyTransactionController());
   final TextEditingController qty = TextEditingController();
@@ -242,25 +245,26 @@ class CreateSale extends GetView<SalesController> {
               PrimaryButton(
                 title: "Save",
                 onTap: () async {
-                  String voucherid = "vvvid";
-                  String storeID = "storeid";
-                  String createdBy = "createdby";
+                  String voucherid = const Uuid().v4();
+                  String storeID = authController.selectedStore.storeid;
+                  String createdBy = authController.currentProfile.value.userid;
                   MyTransaction saleTransaction = MyTransaction(
                       voucher: Voucher(
                           id: 0,
                           uuid: voucherid,
                           date: DateTime.now(),
-                          voucherType: 12345,
+                          voucher_type: 22,
                           narration: 'Cash Sales',
-                          partyName: 'Cash',
-                          isInvoice: 0,
-                          isAccountingVoucher: 1,
-                          isInventoryVoucher: 1,
-                          isOrderVoucher: 0,
+                          party_name: 'Cash',
+                          is_invoice: 0,
+                          is_accounting_voucher: 1,
+                          is_inventory_voucher: 1,
+                          is_order_voucher: 0,
                           createdby: createdBy,
                           storeid: storeID,
                           status: 1,
-                          isActive: 1),
+                          amount: controller.totalAmount(),
+                          is_active: 1),
                       inventory: controller.salesItem.value
                           .map((e) => Inventory(
                               id: 0,
@@ -300,8 +304,9 @@ class CreateSale extends GetView<SalesController> {
                             createdby: createdBy,
                             date:DateTime.now()),
                       ]);
-                 await transactionController.saveTransaction(saleTransaction);
-                 print(saleTransaction.toMap());
+                final results=  await transactionController.saveTransaction(saleTransaction);
+                if(results) Navigator.of(context).pop();
+                controller.salesItem.clear();
                 },
               )
             ],

@@ -104,9 +104,9 @@ class SecondaryButtons extends StatelessWidget {
     var x = MediaQuery.of(context).size.width;
     return ElevatedButton(
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all(0),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          side: MaterialStateProperty.all<BorderSide>(
+          elevation: WidgetStateProperty.all(0),
+          backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          side: WidgetStateProperty.all<BorderSide>(
               BorderSide(color: Colors.black12)),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(

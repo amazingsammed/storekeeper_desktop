@@ -84,9 +84,9 @@ class StoreSelectionScreen extends StatelessWidget {
                                     child: ListTile(
                                       onTap: () async {
                                         authController
-                                            .selectedStore.clear();
+                                            .selectedStoreList.clear();
                                         authController
-                                            .selectedStore.add(item);
+                                            .selectedStoreList.add(item);
                                         await itemController.startup();
                                         Get.to(() => MainDashboard());
                                       },
@@ -211,7 +211,7 @@ class CreateStore extends StatelessWidget {
                         location: location.text,
                         contact: contact.text,
                         createdby: authController.currentProfile.value.userid,
-                        storeid: Uuid().v4());
+                        storeid: const Uuid().v4());
                     await authController.saveStore(business);
                   } catch (e) {
                     print(e);

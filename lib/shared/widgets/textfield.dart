@@ -15,13 +15,13 @@ class CustomTextField2 extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
   final FocusNode? focusNode;
   const CustomTextField2({
-    Key? key,
+    super.key,
     this.icon, // Optional icon
     required this.label, // Label is required
     required this.color, // Text field color
      this.controller, // Required controller
     required this.onChanged, this.focusNode, this.onFieldSubmitted, // onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +56,13 @@ class CustomTextFieldPwd extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
   final FocusNode? focusNode;
   const CustomTextFieldPwd({
-    Key? key,
+    super.key,
     this.icon, // Optional icon
     required this.label, // Label is required
     required this.color, // Text field color
     this.controller, // Required controller
     required this.onChanged, this.onFieldSubmitted, this.focusNode, // onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -182,13 +182,13 @@ class CustomTextFieldEmail extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const CustomTextFieldEmail({
-    Key? key,
+    super.key,
     this.icon, // Optional icon
     required this.label, // Label is required
     required this.color, // Text field color
     this.controller, // Required controller
     required this.onChanged, // onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -221,13 +221,13 @@ class CustomTextFieldPhone extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const CustomTextFieldPhone({
-    Key? key,
+    super.key,
     this.icon, // Optional icon
     required this.label, // Label is required
     required this.color, // Text field color
     this.controller, // Required controller
     required this.onChanged, // onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -260,13 +260,13 @@ class CustomTextFieldOnlyNumber extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const CustomTextFieldOnlyNumber({
-    Key? key,
+    super.key,
     this.icon, // Optional icon
     required this.label, // Label is required
     required this.color, // Text field color
     this.controller, // Required controller
     required this.onChanged, // onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -298,12 +298,12 @@ class CustomDatePicker extends StatelessWidget {
   final ValueChanged<String> onChanged;
 
   const CustomDatePicker({
-    Key? key,
+    super.key,
     required this.label,
     required this.color,
     this.controller,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
