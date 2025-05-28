@@ -38,7 +38,7 @@ class AuthController extends GetxController {
     //print()
     SqlBaseResponse response = await mydb.auth('user').signIn(
         email: user.email, password: user.password);
-    print(response.data);
+
     if (response.statusCode == 0) return null;
     currentProfile.value = Profile.fromMap(response.data['data']);
     return currentProfile.value;

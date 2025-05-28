@@ -62,7 +62,7 @@ class WebLogin extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Welcome",
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
@@ -131,7 +131,7 @@ class WebLogin extends StatelessWidget {
                             Get.to(()=>SignInScreen(autoemail:email.text,autopassword:password.text));
 
                           },
-                          child: Text(
+                          child: const Text(
                             'Create account',
                             style: TextStyle(fontSize: 18),
                           ))),

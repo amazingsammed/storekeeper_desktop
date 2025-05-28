@@ -22,22 +22,23 @@ class _DashBoardwithTabsState extends State<DashBoardwithTabs>
   Widget build(BuildContext context) {
     return Scaffold(
         body: Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
+
+          SizedBox(
             height: 50,
             width: double.maxFinite,
             child: TabBar(
               padding: EdgeInsets.zero,
                 indicatorColor: Colors.blue,
-                indicator: BoxDecoration(
+                indicator: const BoxDecoration(
                   color: Colors.transparent,
                 ),
                 isScrollable: true,
                 controller: tabBarController,
-                tabs: [
+                tabs: const [
                   Tab(
                     child: Text("data"),
                   ),
@@ -51,15 +52,9 @@ class _DashBoardwithTabsState extends State<DashBoardwithTabs>
           ),
           Expanded(
               child: TabBarView(controller: tabBarController, children: [
-            Container(
-              child: Text("Body 1"),
-            ),
-            Container(
-              child: Text("Body 2"),
-            ),
-            Container(
-              child: Text("Body 3"),
-            )
+            const Text("Body 1"),
+            const Text("Body 2"),
+            const Text("Body 3")
           ]))
         ],
       ),

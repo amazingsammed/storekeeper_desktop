@@ -32,11 +32,11 @@ class StoreSelectionScreen extends StatelessWidget {
                 children: [
                   kSizedbox20,
                   ListTile(
-                    title: Text(
+                    title: const Text(
                       "Store Selection",
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
-                    subtitle: Text(
+                    subtitle: const Text(
                       "List of stores under the business",
                     ),
                     trailing: Row(
@@ -60,14 +60,14 @@ class StoreSelectionScreen extends StatelessWidget {
                     ),
                   ),
 
-                  Divider(),
+                  const Divider(),
                   kSizedbox20,
                   Expanded(
                     child: Obx(() {
                       if(authController.userStores.isEmpty)return const Center(child: Text('data'),);
                       return ListView.builder(
 
-                        physics: ScrollPhysics(),
+                        physics: const ScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: authController.userStores.value.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -92,11 +92,11 @@ class StoreSelectionScreen extends StatelessWidget {
                                       },
                                       title: Text(item.name),
                                       subtitle: Text(item.manager),
-                                      trailing: Icon(Icons.chevron_right),
+                                      trailing: const Icon(Icons.chevron_right),
                                     ),
                                   );
                                 } else if (snapshot.hasError) {
-                                  return Icon(Icons.error_outline);
+                                  return const Icon(Icons.error_outline);
                                 } else {
                                   return const Center(
                                       child: CircularProgressIndicator());
@@ -136,8 +136,8 @@ class CreateStore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Fill in the Store Information"),
-      content: Container(
+      title: const Text("Fill in the Store Information"),
+      content: SizedBox(
         height: 500,
         width: 400,
         child: ListView(
@@ -198,7 +198,7 @@ class CreateStore extends StatelessWidget {
                   contact.text = "0543220177";
                   buttonn.requestFocus();
                 },
-                icon: Icon(Icons.file_upload)),
+                icon: const Icon(Icons.file_upload)),
             PrimaryButton(
                 focusNode: buttonn,
                 onTap: () async {

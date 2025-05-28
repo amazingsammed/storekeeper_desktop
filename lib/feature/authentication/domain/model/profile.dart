@@ -37,9 +37,7 @@ class Profile{
 
   @override
   String toString() {
-    return 'Profile{' +
-        ' userid: $userid,' +
-        ' username: $username,' +
+    return 'Profile{' ' userid: $userid,' ' username: $username,' +
         ' email: $email,' +
         ' password: $password,' +
         ' type: $type,' +
