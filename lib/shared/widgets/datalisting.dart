@@ -132,7 +132,7 @@ class _DataTableV2State extends State<DataTableV2> {
                             return SizedBox();
                           }
                           return ListTile(
-                            title: Text(item[element.id] ?? ""),
+                            title: Text(item[element.id].toString() ?? ""),
                             subtitle: Text(element.title),
                           );
                         }).toList(),

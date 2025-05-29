@@ -1,21 +1,28 @@
  
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 // ignore: unused_import
 import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
+import 'package:storekepper_desktop/feature/people/presentation/_component/addsupplier.dart';
 
+import '../../../shared/widgets/button_c.dart';
 import '../../../shared/widgets/datalisting.dart';
+import '_component/addcustomer.dart';
 
-class CustomerPage extends StatelessWidget {
-  const CustomerPage({super.key});
+class SuppliersPage extends StatelessWidget {
+  const SuppliersPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return  DataTableV2(
       titleWidget: Row(
         children: [
-          ElevatedButton (
-            onPressed: () {},
-            child: Text("Create New"),
+          PrimaryButton (
+            onTap: () {
+              Get.dialog(AddSupplier());
+            },
+            title: "Add Supplier",
           ),
         ],
       ),

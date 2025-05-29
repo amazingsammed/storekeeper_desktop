@@ -3,8 +3,10 @@ import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/forms/sales_form.dart';
+import 'package:storekepper_desktop/shared/extensions/strings.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
+import 'package:storekepper_desktop/shared/widgets/datetimex.dart';
 
 import '../controller/salescontroller.dart';
 
@@ -54,7 +56,7 @@ class Saleslisting extends GetView<SalesController> {
             return {
               'account_name': element.party_name,
               'narration': element.narration,
-              'date': element.date.toString(),
+              'date': element.date.mdy,
               'amount': element.amount.toString(),
               'createdby': element.createdby
             };

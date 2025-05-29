@@ -12,7 +12,8 @@ class ItemSearchList extends StatelessWidget {
   final ScrollController scrollController = ScrollController();
   final ItemController itemController = Get.put(ItemController());
   final Function(Item) onItemSelect;
-   ItemSearchList({super.key, required this.onItemSelect});
+  final bool isPurchases;
+  ItemSearchList({super.key, required this.onItemSelect,  this.isPurchases = false});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class ItemSearchList extends StatelessWidget {
                           minLeadingWidth: 5,
                           leading: CircleAvatar(child: Text("${index+1}")),
                           onTap: ()=>onItemSelect(item),
-                          title: Text(item.name),subtitle: Text("\$${item.salesprice}"),);
+                          title: Text(item.name),subtitle: isPurchases?Text("\$${item.purchaseprice}"):Text("\$${item.salesprice}"),);
                       },
                     ),
                   ),

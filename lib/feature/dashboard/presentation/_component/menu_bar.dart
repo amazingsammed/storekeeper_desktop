@@ -1,6 +1,6 @@
- 
 import 'package:flutter/material.dart';
 import 'package:storekepper_desktop/feature/items/presentation/itemlist.dart';
+import 'package:storekepper_desktop/feature/people/presentation/suppliers.dart';
 import 'package:storekepper_desktop/feature/purchases/presentation/purchaselisting.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/saleslisting.dart';
 
@@ -10,10 +10,12 @@ import '../../../items/presentation/units.dart';
 import '../../../purchases/presentation/accountspayable.dart';
 import '../../../purchases/presentation/payment.dart';
 import '../../../purchases/presentation/purchaseorder.dart';
-import '../../../sales/presentation/customer.dart';
+import '../../../people/presentation/customer.dart';
 import '../../../sales/presentation/invoice.dart';
 import '../../../sales/presentation/qoute.dart';
 import '../../../sales/presentation/salesorder.dart';
+import '../../../settings/presentation/settings.dart';
+import '../../../settings/presentation/users.dart';
 
 class MyTabBar {
   final String title;
@@ -72,7 +74,8 @@ List<MainNavigation> navItems = [
     ),
   ]),
   MainNavigation(title: 'Purchases', icon: Icons.add_shopping_cart, tabs: [
-    MyTabBar(title: 'Purchase Listing', icon: Icons.list, body: PurchaseListing()),
+    MyTabBar(
+        title: 'Purchase Listing', icon: Icons.list, body: PurchaseListing()),
     MyTabBar(
       icon: Icons.home,
       title: 'Purchase Order',
@@ -107,25 +110,25 @@ List<MainNavigation> navItems = [
       body: UnitsPage(),
     ),
   ]),
-  MainNavigation(title: 'Reports', icon: Icons.report, tabs: [
-    MyTabBar(title: 'Dashboard', icon: Icons.dashboard, body: Container()),
+  MainNavigation(title: 'People', icon: Icons.person, tabs: [
+    MyTabBar(title: 'Customers', icon: Icons.person, body: CustomerPage()),
     MyTabBar(
-      icon: Icons.mail,
-      title: 'Items',
-      body: Container(),
-    ),
-    MyTabBar(
-      icon: Icons.mail,
-      title: 'Sales',
-      body: Container(),
-    ),
-    MyTabBar(
-      icon: Icons.mail,
-      title: 'Purchases',
-      body: Container(),
+      icon: Icons.person_2,
+      title: 'Suppliers',
+      body: SuppliersPage(),
     )
   ]),
   MainNavigation(title: 'Settings', icon: Icons.settings, tabs: [
-    MyTabBar(title: 'General', icon: Icons.dashboard, body: Container())
+    MyTabBar(title: 'General', icon: Icons.dashboard, body: GeneralPage()),
+    MyTabBar(title: 'Users', icon: Icons.person, body: UsersTable()),
+    MyTabBar(title: 'Chart of Accounts', icon: Icons.person, body: Container()),
+    MyTabBar(
+        title: 'About',
+        icon: Icons.dashboard,
+        body: Container(
+          child: Center(
+            child: Text('About'),
+          ),
+        )),
   ]),
 ];

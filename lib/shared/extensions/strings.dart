@@ -1,3 +1,5 @@
+import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
+
 extension StringInitialsExtension on String {
   String get initials {
     List<String> names = split(" ");
@@ -11,5 +13,9 @@ extension StringInitialsExtension on String {
     }
 
     return initials;
+  }
+
+  String  userName(List<Profile> users){
+    return users.firstWhere((element)=>element.userid==this).username;
   }
 }
