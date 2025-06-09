@@ -11,19 +11,26 @@ import 'package:uuid/uuid.dart';
 import '../../../../shared/constant/colors.dart';
 import '../../../../shared/widgets/ktextfields.dart';
 
-class AddCustomer extends StatelessWidget {
+class EditCustomer extends StatelessWidget {
+  final CustomerModel customer;
   final _formKey = GlobalKey<FormBuilderState>();
   final PeopleController controller = Get.put(PeopleController());
   final AuthController authController = Get.find();
 
-  AddCustomer({super.key});
+  EditCustomer({super.key, required this.customer});
 
   @override
   Widget build(BuildContext context) {
+
     return AlertDialog(
       title: ListTile(
-        title: Text("Add New Customer"),
-        subtitle: Text("Use this form to create a new Customer"),
+        title: Text("Edit Customer"),
+        subtitle: Text("Use this form to edit Customer Information"),
+        trailing: IconButton(onPressed: (){
+          _formKey.currentState?.fields['namex']?.didChange(customer.name);
+          _formKey.currentState?.fields['phone']?.didChange(customer.phone);
+          _formKey.currentState?.fields['address']?.didChange(customer.address);
+        }, icon: Icon(Icons.file_download_done)),
       ),
       content: FormBuilder(
         key: _formKey,
@@ -80,23 +87,11 @@ class AddCustomer extends StatelessWidget {
                 children: [
                   PrimaryButton(
                     onTap: () async {
-                      String uuid = Uuid().v4();
 
-                      CustomerRecord accounts = CustomerRecord(
-                          accounts: ChatofAccounts(
-                              uuid: uuid,
-                              code: 4566,
-                              name: _formKey.currentState!.fields['namex']?.value,
-                              group: "692AC7B4-98AE-4ED5-9D2D-BE8C70D4FBBE",
-                              opening_bal: double.parse(_formKey.currentState!.fields['openbal']?.value??'0'),
-                              description: 'customer',
-                              storeid: authController.storeid,
-                              createdby: authController.createdby,
-                              date: DateTime.now(),
-                              status: 1),
-                          customer: CustomerModel(
+
+                      CustomerModel    customerx= CustomerModel(
                             name: _formKey.currentState!.fields['namex']?.value,
-                            coa_uuid: uuid,
+                            coa_uuid: customer.coa_uuid,
                             address: _formKey
                                 .currentState!.fields['address']!.value
                                 .toString(),
@@ -105,9 +100,9 @@ class AddCustomer extends StatelessWidget {
                             storeid: authController.storeid,
                             createdby: authController.createdby,
                             status: 1,
-                          ));
+                          );
 
-                      await controller.addCustomer(transaction: accounts);
+                      await controller.editCustomer(customer: customerx);
                       Navigator.of(context).pop();
                     },
                     title: "Save",

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,15 +17,14 @@ class PrimaryButton extends StatefulWidget {
   final FocusNode? focusNode;
 
   const PrimaryButton(
-      {Key? key,
+      {super.key,
       this.onTap,
       this.title,
       this.icon,
       this.height,
       this.width,
       this.hasIcon = true,
-      this.color, this.focusNode})
-      : super(key: key);
+      this.color, this.focusNode});
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonState();
@@ -37,10 +37,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     return ElevatedButton(
       focusNode: widget.focusNode,
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all(0),
-        backgroundColor: MaterialStateProperty.all<Color>(
+        elevation: WidgetStateProperty.all(0),
+        backgroundColor: WidgetStateProperty.all<Color>(
             widget.color ?? MyAppColors.buttonfills),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
@@ -48,7 +48,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       ),
       onPressed: widget.onTap ??
           () {
-            print('add a function');
+            if (kDebugMode) {
+              print('add a function');
+            }
           },
       child: SizedBox(
         height: 50,
@@ -69,15 +71,15 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                         color: Colors.white,
                       ),
                     if (widget.hasIcon)
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                     Text(
                       widget.title ?? 'Add Product',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     if (widget.hasIcon)
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       )
                   ],
@@ -230,12 +232,12 @@ class ContainerWithIconCentered extends StatelessWidget {
       onLongPress: onLongPress,
       onDoubleTap: onDoubleTap,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+        margin: width<600?null:EdgeInsets.symmetric(horizontal: 5, vertical: 2),
         alignment: Alignment.center,
         // height: 40,
         // width: 40,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
+        padding: width<600?null:EdgeInsets.all(10),
+        decoration: width<600?null:BoxDecoration(
             color: variant==Variant.Solid?bgColor:Colors.transparent,
             borderRadius: BorderRadius.circular(6),
           border: variant==Variant.Outline?Border.all(color:
@@ -243,9 +245,9 @@ class ContainerWithIconCentered extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          color:variant==Variant.Outline?bgColor: Colors.white60,
+          color:width<600?bgColor:variant==Variant.Outline?bgColor: Colors.white60,
           // size: width<600?20: width/70,
-          size: 20,
+          size: width<600?null: 20,
         ),
       ),
     );

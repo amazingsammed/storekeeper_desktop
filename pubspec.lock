@@ -132,11 +132,10 @@ packages:
   datatablex:
     dependency: "direct main"
     description:
-      name: datatablex
-      sha256: a1e53ed5f0291dc42cbfb004d84a87e5756dc4464a97b555f41f0d1017f169af
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
+      path: "C:\\Users\\advan\\StudioProjects\\datatablex"
+      relative: false
+    source: path
+    version: "0.0.5"
   dbus:
     dependency: transitive
     description:
@@ -656,7 +655,7 @@ packages:
       path: "C:\\Users\\advan\\StudioProjects\\sqlbase"
       relative: false
     source: path
-    version: "0.0.1"
+    version: "0.0.2"
   sqlite3:
     dependency: transitive
     description:

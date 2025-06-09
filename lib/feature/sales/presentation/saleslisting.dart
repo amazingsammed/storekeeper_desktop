@@ -22,6 +22,8 @@ class Saleslisting extends GetView<SalesController> {
     return
       Obx(() {
         return DataTableX(
+
+
           refreshButton: IconButton(
               icon: const Icon(Icons.refresh), onPressed: () async {
             await controller.getAllSales();
@@ -39,7 +41,8 @@ class Saleslisting extends GetView<SalesController> {
           // selecteditems: (e) {
           //   print(e);
           // },
-          ontap: (element) {
+
+          onTap: (element) {
             print(element['id'].runtimeType);
           },
           title: "Sales Listing",
@@ -61,6 +64,7 @@ class Saleslisting extends GetView<SalesController> {
               'createdby': element.createdby
             };
           }).toList(),
+
         );
       });
   }

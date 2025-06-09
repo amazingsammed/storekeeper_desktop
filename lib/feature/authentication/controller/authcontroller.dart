@@ -33,6 +33,8 @@ class AuthController extends GetxController {
   Store get selectedStore=>selectedStoreList.value[0];
 
 
+  String get createdby=>authController.currentProfile.value.userid;
+  String get storeid=>authController.selectedStore.storeid;
 
   Future <Profile?> signIn(Profile user) async {
     //print()

@@ -17,7 +17,7 @@ class MainDashboard extends StatelessWidget {
           children: [
             NavigationRail(
               labelType: NavigationRailLabelType.all,
-              leading: FlutterLogo(size: 40,),
+              leading: const FlutterLogo(size: 40,),
               destinations:navItems.map((element)=>NavigationRailDestination(
                   icon: Icon(element.icon), label: Text(element.title))).toList(),
               selectedIndex: controller.selectedPage.value,
@@ -49,7 +49,7 @@ class _MyMainPageState extends State<MyMainPage> with SingleTickerProviderStateM
 
   @override
   void initState() {
-    tabController= TabController(length: widget.tabs.length, vsync: this);// TODO: implement initState
+    tabController= TabController(length: widget.tabs.length, vsync: this);
     super.initState();
   }
   @override
