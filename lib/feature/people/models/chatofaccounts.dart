@@ -99,16 +99,16 @@ class ChatofAccounts{
 
   Map<String, dynamic> toMap() {
     return {
-      'uuid': this.uuid,
-      'code': this.code,
-      'name': this.name,
+      'uuid': uuid,
+      'code': code,
+      'name': name,
       'groupx': "group",
-      'opening_bal': this.opening_bal,
-      'description': this.description,
-      'storeid': this.storeid,
-      'createdby': this.createdby,
-      'datex': this.date.toIso8601String(),
-      'status': this.status,
+      'opening_bal': opening_bal,
+      'description': description,
+      'storeid': storeid,
+      'createdby': createdby,
+      'datex': date.toIso8601String(),
+      'status': status,
     };
   }
 

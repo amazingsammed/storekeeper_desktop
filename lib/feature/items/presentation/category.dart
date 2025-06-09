@@ -6,7 +6,6 @@ import 'package:storekepper_desktop/feature/items/presentation/forms/addcategory
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
 
-import '../../../shared/widgets/datalisting.dart';
 import '../controller/itemcontroller.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -35,7 +34,25 @@ class CategoryPage extends StatelessWidget {
         title: "Category of Item",
         heads: [
           TableHead(title: 'Name', id: 'name'),
-          TableHead(title: 'Status', id: 'status'),
+          TableHead(title: 'Status', id: 'status'),TableHead(title: 'Action', id: 'id',isbutton: true,button: (data){
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TableButton(
+                  ontap: (){
+
+                  },
+                  icon: Icons.edit, bgColor: Colors.blue,
+                ),TableButton(
+                  ontap: (){
+
+                  },
+                  bgColor: Colors.red,
+                  icon: Icons.delete,
+                ),
+              ],
+            );
+          })
         ],
         items: controller.allCategory.value.map((e)=>{
           "name":e.name,

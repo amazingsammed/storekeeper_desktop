@@ -7,13 +7,11 @@ import 'package:storekepper_desktop/feature/authentication/controller/authcontro
 import 'package:storekepper_desktop/feature/sales/controller/vouchercontroller.dart';
 import 'package:storekepper_desktop/feature/sales/models/accounting.dart';
 import 'package:storekepper_desktop/feature/sales/models/inventory.dart';
-import 'package:storekepper_desktop/feature/sales/models/salesitem.dart';
 import 'package:storekepper_desktop/feature/sales/models/voucher.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../shared/widgets/datalisting.dart';
 import '../../../items/domain/models/item.dart';
 
 import '../../../items/presentation/itemsearchlist.dart';

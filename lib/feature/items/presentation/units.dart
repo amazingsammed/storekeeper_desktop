@@ -37,6 +37,25 @@ class UnitsPage extends StatelessWidget {
         heads: [
           TableHead(title: 'Name', id: 'name'),
           TableHead(title: 'Status', id: 'status'),
+          TableHead(title: 'Action', id: 'id',isbutton: true,button: (data){
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TableButton(
+                  ontap: (){
+
+                  },
+                  icon: Icons.edit, bgColor: Colors.blue,
+                ),TableButton(
+                  ontap: (){
+
+                  },
+                  bgColor: Colors.red,
+                  icon: Icons.delete,
+                ),
+              ],
+            );
+          })
 
         ],
         items: controller.allUnit.value.map((e) =>

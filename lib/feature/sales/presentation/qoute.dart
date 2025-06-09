@@ -30,6 +30,25 @@ class QuotePage extends StatelessWidget {
         TableHead(title: "Sales Person", id: 'createdby'),
         TableHead(title: 'Status', id: 'amount'),
         TableHead(title: 'Amount', id: 'amount'),
+        TableHead(title: 'Action', id: 'id',isbutton: true,button: (data){
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TableButton(
+                ontap: (){
+
+                },
+                icon: Icons.edit, bgColor: Colors.blue,
+              ),TableButton(
+                ontap: (){
+
+                },
+                bgColor: Colors.red,
+                icon: Icons.delete,
+              ),
+            ],
+          );
+        })
       ],
       items: [],
     );

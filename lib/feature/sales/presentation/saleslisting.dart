@@ -52,7 +52,26 @@ class Saleslisting extends GetView<SalesController> {
             TableHead(title: 'Narration', id: 'narration'),
             TableHead(title: 'Account Name', id: 'account_name'),
             TableHead(title: 'Amount', id: 'amount'),
-            TableHead(title: "Sales Person", id: 'createdby')
+            TableHead(title: "Sales Person", id: 'createdby'),
+            TableHead(title: 'Action', id: 'id',isbutton: true,button: (data){
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TableButton(
+                    ontap: (){
+
+                    },
+                    icon: Icons.edit, bgColor: Colors.blue,
+                  ),TableButton(
+                    ontap: (){
+
+                    },
+                    bgColor: Colors.red,
+                    icon: Icons.delete,
+                  ),
+                ],
+              );
+            })
           ],
           items: controller.salesList.value.isEmpty ? [] : controller.salesList
               .value.map((element) {

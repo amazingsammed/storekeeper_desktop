@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:sqlbase/sqlbase.dart';
 import 'package:storekepper_desktop/feature/authentication/businessinfo.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/business.dart';

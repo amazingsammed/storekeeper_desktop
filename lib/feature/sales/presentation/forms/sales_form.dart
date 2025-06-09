@@ -13,7 +13,6 @@ import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../shared/widgets/datalisting.dart';
 import '../../../items/domain/models/item.dart';
 
 import '../../../items/presentation/itemsearchlist.dart';

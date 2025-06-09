@@ -69,11 +69,11 @@ class Units{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'status': this.status,
-      'storeid': this.storeid,
-      'busid': this.busid,
-      'createdby': this.createdby,
+      'name': name,
+      'status': status,
+      'storeid': storeid,
+      'busid': busid,
+      'createdby': createdby,
     };
   }
 

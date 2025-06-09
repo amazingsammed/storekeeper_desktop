@@ -79,13 +79,13 @@ class CustomerModel{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'phone': this.phone,
-      'address': this.address,
-      'coa_uuid': this.coa_uuid,
-      'createdby': this.createdby,
-      'storeid': this.storeid,
-      'status': this.status,
+      'name': name,
+      'phone': phone,
+      'address': address,
+      'coa_uuid': coa_uuid,
+      'createdby': createdby,
+      'storeid': storeid,
+      'status': status,
     };
   }
 

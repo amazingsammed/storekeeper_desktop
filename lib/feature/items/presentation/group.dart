@@ -6,7 +6,6 @@ import 'package:storekepper_desktop/feature/items/presentation/forms/addgroup.da
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
 
-import '../../../shared/widgets/datalisting.dart';
 import '../controller/itemcontroller.dart';
 
 class GroupPage extends StatelessWidget {
@@ -38,7 +37,25 @@ class GroupPage extends StatelessWidget {
           // TableHead(title: 'Date', id: 'date'),
           TableHead(title: 'Name', id: 'name'),
           TableHead(title: 'Category', id: 'category'),
-          TableHead(title: 'status', id: 'status'),
+          TableHead(title: 'status', id: 'status'),TableHead(title: 'Action', id: 'id',isbutton: true,button: (data){
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TableButton(
+                  ontap: (){
+
+                  },
+                  icon: Icons.edit, bgColor: Colors.blue,
+                ),TableButton(
+                  ontap: (){
+
+                  },
+                  bgColor: Colors.red,
+                  icon: Icons.delete,
+                ),
+              ],
+            );
+          })
         ],
         items: controller.allGroup.value.map((e)=>{
           "name":e.name,

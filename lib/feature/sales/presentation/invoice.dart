@@ -1,9 +1,7 @@
  
 import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
-import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
 
-import '../../../shared/widgets/datalisting.dart';
 
 class InvoicePage extends StatelessWidget {
   const InvoicePage({super.key});
@@ -32,6 +30,25 @@ class InvoicePage extends StatelessWidget {
         TableHead(title: "Sales Person", id: 'createdby'),
         TableHead(title: 'Amount', id: 'amount'),
         TableHead(title: 'Status', id: 'amount'),
+        TableHead(title: 'Action', id: 'id',isbutton: true,button: (data){
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TableButton(
+                ontap: (){
+
+                },
+                icon: Icons.edit, bgColor: Colors.blue,
+              ),TableButton(
+                ontap: (){
+
+                },
+                bgColor: Colors.red,
+                icon: Icons.delete,
+              ),
+            ],
+          );
+        })
       ],
       items: [],
     );
