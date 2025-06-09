@@ -1,10 +1,11 @@
  
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../shared/widgets/button_c.dart';
-import '../../../shared/widgets/datalisting.dart';
+
 import 'forms/purchases_form.dart';
 
 class PurchaseListing extends StatelessWidget {
@@ -12,7 +13,7 @@ class PurchaseListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DataTableV2(
+    return  DataTableX(
       titleWidget: Row(
         children: [
           PrimaryButton (
@@ -24,9 +25,8 @@ class PurchaseListing extends StatelessWidget {
 
         ],
       ),
-      selecteditems: (e) {
-      },
-      ontap: (element) {
+
+      onTap: (element) {
       },
       title: "Purchase Listing",
       heads: [

@@ -1,15 +1,14 @@
  
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
-import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
 
-import '../../../shared/widgets/datalisting.dart';
 
 class PurchaseOrder extends StatelessWidget {
   const PurchaseOrder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  DataTableV2(
+    return  DataTableX(
       titleWidget: Row(
         children: [
           ElevatedButton (
@@ -18,10 +17,8 @@ class PurchaseOrder extends StatelessWidget {
           ),
         ],
       ),
-      selecteditems: (e) {
-        print(e);
-      },
-      ontap: (element) {
+
+      onTap: (element) {
         print(element['id'].runtimeType);
       },
       title: "Purchase Order",

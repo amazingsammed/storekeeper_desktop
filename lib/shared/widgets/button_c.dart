@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../constant/colors.dart';
 
-enum Variant { Solid, Outline }
+enum Variants { Solid, Outline }
 
 class PrimaryButton extends StatefulWidget {
   final Function()? onTap;
@@ -212,7 +212,7 @@ class ContainerWithIconCentered extends StatelessWidget {
   final Function()? ontap;
   final Function()? onLongPress;
   final Function()? onDoubleTap;
-  final Variant variant;
+  final Variants variant;
 
   const ContainerWithIconCentered(
       {Key? key,
@@ -221,7 +221,7 @@ class ContainerWithIconCentered extends StatelessWidget {
       this.ontap,
       this.onLongPress,
       this.onDoubleTap,
-      this.variant = Variant.Solid})
+      this.variant = Variants.Solid})
       : super(key: key);
 
   @override
@@ -238,14 +238,14 @@ class ContainerWithIconCentered extends StatelessWidget {
         // width: 40,
         padding: width<600?null:EdgeInsets.all(10),
         decoration: width<600?null:BoxDecoration(
-            color: variant==Variant.Solid?bgColor:Colors.transparent,
+            color: variant==Variants.Solid?bgColor:Colors.transparent,
             borderRadius: BorderRadius.circular(6),
-          border: variant==Variant.Outline?Border.all(color:
+          border: variant==Variants.Outline?Border.all(color:
           bgColor):null
         ),
         child: Icon(
           icon,
-          color:width<600?bgColor:variant==Variant.Outline?bgColor: Colors.white60,
+          color:width<600?bgColor:variant==Variants.Outline?bgColor: Colors.white60,
           // size: width<600?20: width/70,
           size: width<600?null: 20,
         ),

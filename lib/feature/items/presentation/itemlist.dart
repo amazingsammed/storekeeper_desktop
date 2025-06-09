@@ -1,4 +1,5 @@
 
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
@@ -19,7 +20,7 @@ class ItemListing extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        return DataTableV2(
+        return DataTableX(
           refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async {
 
             await controller.getAllItems();}).withLoading(controller.loading),
@@ -34,10 +35,8 @@ class ItemListing extends StatelessWidget {
               ),
             ],
           ),
-          selecteditems: (e) {
-            print(e);
-          },
-          ontap: (element) {
+
+          onTap: (element) {
           },
           title: "Items List",
           heads: [

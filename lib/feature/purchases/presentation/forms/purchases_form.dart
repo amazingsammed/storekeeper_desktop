@@ -1,3 +1,4 @@
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -45,7 +46,7 @@ class PurchasesForm extends StatelessWidget {
               Expanded(
                   flex: 4,
                   child: Obx(() {
-                    return DataTableV2(
+                    return DataTableX(
                       titleWidget: Row(
                         children: [
                           SecondaryButtons(
@@ -68,7 +69,7 @@ class PurchasesForm extends StatelessWidget {
                       selecteditems: (e) {
                         print(e);
                       },
-                      ontap: (element) {
+                      onTap: (element) {
                         print(element['id'].runtimeType);
                       },
                       title: "Purchases List",
@@ -94,10 +95,10 @@ class PurchasesForm extends StatelessWidget {
                               return Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  ContainerWithIconCentered(
+                                  TableButton(
                                     icon: Icons.delete,
                                     bgColor: Colors.red,
-                                    variant: Variant.Outline,
+                                    variant: Variant.outline,
                                     ontap: () {
                                       controller.removeSalesItem(
                                           PurchaseItem.fromMap(data));

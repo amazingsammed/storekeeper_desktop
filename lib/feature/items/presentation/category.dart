@@ -1,4 +1,5 @@
 
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storekepper_desktop/feature/items/presentation/forms/addcategory.dart';
@@ -16,7 +17,7 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return DataTableV2(
+      return DataTableX(
         refreshButton: IconButton(icon: Icon(Icons.refresh), onPressed: () async { await controller.getAllCategory();}).withLoading(controller.loading),
         titleWidget: Row(
           children: [
@@ -28,9 +29,8 @@ class CategoryPage extends StatelessWidget {
             ),
           ],
         ),
-        selecteditems: (e) {
-        },
-        ontap: (element) {
+
+        onTap: (element) {
         },
         title: "Category of Item",
         heads: [

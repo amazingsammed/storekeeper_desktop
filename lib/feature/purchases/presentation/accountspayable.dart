@@ -1,14 +1,14 @@
  
-import 'package:flutter/material.dart';
 
-import '../../../shared/widgets/datalisting.dart';
+import 'package:datatablex/datatablex.dart';
+import 'package:flutter/material.dart';
 
 class AccountsPayable extends StatelessWidget {
   const AccountsPayable({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  DataTableV2(
+    return  DataTableX(
       titleWidget: Row(
         children: [
           ElevatedButton (
@@ -17,10 +17,8 @@ class AccountsPayable extends StatelessWidget {
           ),
         ],
       ),
-      selecteditems: (e) {
-        print(e);
-      },
-      ontap: (element) {
+
+      onTap: (element) {
         print(element['id'].runtimeType);
       },
       title: "Accounts Payable",

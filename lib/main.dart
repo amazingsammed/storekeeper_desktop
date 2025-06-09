@@ -9,6 +9,12 @@ import 'feature/authentication/presentation/signin.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Sqlbase.initialize(url: "http://localhost/sqlbase.php", key: '123456');
+
+
+
+
+
+
   Get.put(AuthController());
   runApp(const MyApp());
 }

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sqlbase/sqlbase.dart';
 import 'package:storekepper_desktop/feature/authentication/controller/authcontroller.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
 import 'package:storekepper_desktop/feature/authentication/presentation/signup.dart';
@@ -121,6 +122,22 @@ class SignInScreen extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                           )).withLoading(loading: authController.loading),
                     ),
+
+
+                    kSizedbox40,
+
+                    // ElevatedButton(onPressed: () async {
+                    //   Sqlbase mydatabase = Sqlbase();
+                    //
+                    //
+                    //   var data = await mydatabase.table('user').record("123456789",column: "userid").update({
+                    //     "name":"Sammed only",
+                    //     //"userid":"1234567f89",
+                    //     "email":"dhhdhdd"
+                    //   });
+                    //
+                    //   print(data);
+                    // }, child: Text("Fetch data")),
                   ],
                 ),
               ),

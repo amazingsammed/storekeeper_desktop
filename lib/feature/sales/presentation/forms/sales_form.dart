@@ -1,3 +1,4 @@
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -43,7 +44,7 @@ class SalesForm extends StatelessWidget {
               Expanded(
                   flex: 4,
                   child: Obx(() {
-                    return DataTableV2(
+                    return DataTableX(
                       titleWidget: Row(
                         children: [
                           SecondaryButtons(
@@ -66,7 +67,7 @@ class SalesForm extends StatelessWidget {
                       selecteditems: (e) {
                         print(e);
                       },
-                      ontap: (element) {
+                      onTap: (element) {
                         print(element['id'].runtimeType);
                       },
                       title: "Sales List",
@@ -92,10 +93,10 @@ class SalesForm extends StatelessWidget {
                               return Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  ContainerWithIconCentered(
+                                  TableButton(
                                     icon: Icons.delete,
                                     bgColor: Colors.red,
-                                    variant: Variant.Outline,
+                                    variant: Variant.outline,
                                     ontap: () {
                                       controller.removeSalesItem(
                                           SalesItem.fromMap(data));

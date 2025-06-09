@@ -5,9 +5,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class KTextField extends StatelessWidget {
   final String title;
-  final String id;
+  final String? id;
+  final TextEditingController? controller;
 
-  const KTextField({super.key, required this.title, required this.id});
+  const KTextField({super.key, required this.title,  this.id, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class KTextField extends StatelessWidget {
       children: [
         Text(title),
         SizedBox(height: 5,),
-        FormBuilderTextField(
-          name: id,
+        TextFormField(
+         controller: controller,
           decoration: InputDecoration(
             hintText: title,
             border: OutlineInputBorder(),

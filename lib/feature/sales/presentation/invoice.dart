@@ -1,4 +1,5 @@
  
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:storekepper_desktop/feature/dashboard/presentation/_component/toolbarItem.dart';
 
@@ -9,7 +10,7 @@ class InvoicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DataTableV2(
+    return  DataTableX(
       titleWidget: Row(
         children: [
           ElevatedButton (
@@ -18,10 +19,8 @@ class InvoicePage extends StatelessWidget {
           ),
         ],
       ),
-      selecteditems: (e) {
-        print(e);
-      },
-      ontap: (element) {
+
+      onTap: (element) {
         print(element['id'].runtimeType);
       },
       title: "Invoice",

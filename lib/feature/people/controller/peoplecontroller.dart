@@ -35,8 +35,8 @@ class PeopleController extends GetxController {
   addCustomer({required CustomerRecord transaction}) async {
     SqlBaseResponse data = await mySqldb.transaction((batch) {
       batch.start();
-      batch.add('chart_of_account', transaction.accounts.toMap());
       batch.add('customer', transaction.customer.toMap());
+      batch.add('chart_of_account', transaction.accounts.toMap());
       return batch;
     });
 

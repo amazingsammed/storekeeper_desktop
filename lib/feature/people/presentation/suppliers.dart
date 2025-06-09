@@ -1,4 +1,5 @@
  
+import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -15,7 +16,7 @@ class SuppliersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DataTableV2(
+    return  DataTableX(
       titleWidget: Row(
         children: [
           PrimaryButton (
@@ -29,7 +30,7 @@ class SuppliersPage extends StatelessWidget {
       selecteditems: (e) {
         print(e);
       },
-      ontap: (element) {
+      onTap: (element) {
         print(element['id'].runtimeType);
       },
       title: "Customers",
