@@ -11,9 +11,9 @@ import '../domain/models/units.dart';
 abstract class ItemDatabaseRepository{
   Future<List<Item>> getAllItems({required Store store}) ;
 
-  Future<List<Groups>> getAllGroups({required Store store});
+  Future<List<GroupModel>> getAllGroups({required Store store});
 
-  Future<List<Units>> getAllUnits({required Store store});
+  Future<List<UnitModel>> getAllUnits({required Store store});
 
   Future<List<CategoryModel>> getAllCategory({ required Store store});
   Future<List<Voucher>> getAllVoucher({required Store store});

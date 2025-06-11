@@ -27,8 +27,8 @@ class ItemLocalDatabase  implements ItemDatabaseRepository{
   }
 
   @override
-  Future<List<Groups>> getAllGroups({required Store store}) async {
-    List<Groups> items = [];
+  Future<List<GroupModel>> getAllGroups({required Store store}) async {
+    List<GroupModel> items = [];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists = await dbClient!.rawQuery('''
     SELECT
@@ -48,14 +48,14 @@ WHERE
             element.map((key, value) => MapEntry(key, value)))
         .toList();
     for (var e in data) {
-      items.add(Groups.fromMap(e));
+      items.add(GroupModel.fromMap(e));
     }
     return items;
   }
 
   @override
-  Future<List<Units>> getAllUnits({required Store store}) async {
-    List<Units> items=[];
+  Future<List<UnitModel>> getAllUnits({required Store store}) async {
+    List<UnitModel> items=[];
     var dbClient = await database.db;
     List<Map<String, dynamic>> lists = await dbClient!.query('stock_item_unit');
     var data = lists
@@ -63,7 +63,7 @@ WHERE
             element.map((key, value) => MapEntry(key, value)))
         .toList();
     for (var e in data) {
-      items.add(Units.fromMap(e));
+      items.add(UnitModel.fromMap(e));
     }
     return items;
   }

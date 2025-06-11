@@ -35,8 +35,8 @@ class ItemController extends GetxController {
 
 
   var allItems = <Item>[].obs;
-  var allGroup = <Groups>[].obs;
-  var allUnit = <Units>[].obs;
+  var allGroup = <GroupModel>[].obs;
+  var allUnit = <UnitModel>[].obs;
   var allCategory = <CategoryModel>[].obs;
 
   Future<void> getAllItems() async {
@@ -113,7 +113,7 @@ class ItemController extends GetxController {
     });
   }
 
-  Future<void> addGroup({required Groups data}) async {
+  Future<void> addGroup({required GroupModel data}) async {
     loading.value = true;
     final results = await itemRepository.createSingleGroup(data: data.copyWith(
         createdby: authController.currentProfile.value.userid,
@@ -129,7 +129,7 @@ class ItemController extends GetxController {
     });
   }
 
-  addUnit({required Units data}) async {
+  addUnit({required UnitModel data}) async {
     loading.value = true;
     final results = await itemRepository.createSingleUnit(data: data.copyWith(
         createdby: authController.currentProfile.value.userid,
@@ -148,7 +148,7 @@ class ItemController extends GetxController {
   addItem({required Item data}) async {
     loading.value = true;
     final results = await itemRepository.createSingleItem(data: data.copyWith(
-      unit_id: const Uuid().v4(),
+      uuid: const Uuid().v4(),
         createdby: authController.currentProfile.value.userid,
         storeid: authController.myStore.storeid,
         busid: authController.myStore.busid),);
@@ -161,4 +161,10 @@ class ItemController extends GetxController {
       loading.value = false;
     });
   }
+
+  updateItem({required Item data}) {}
+
+  updateGroup({required GroupModel data}) {}
+
+  updateCategory({required CategoryModel data}) {}
 }

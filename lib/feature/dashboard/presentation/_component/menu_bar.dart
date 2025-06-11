@@ -16,6 +16,7 @@ import '../../../sales/presentation/qoute.dart';
 import '../../../sales/presentation/salesorder.dart';
 import '../../../settings/presentation/settings.dart';
 import '../../../settings/presentation/users.dart';
+import '../dashboardpage.dart';
 
 class MyTabBar {
   final String title;
@@ -43,7 +44,7 @@ class MainNavigation {
 
 List<MainNavigation> navItems = [
   MainNavigation(title: 'Home', icon: Icons.dashboard, tabs: [
-    MyTabBar(title: 'Dashboard', icon: Icons.dashboard, body: Container())
+    MyTabBar(title: 'Dashboard', icon: Icons.dashboard, body: DashboardPage())
   ]),
   MainNavigation(title: 'Sales', icon: Icons.shopping_bag, tabs: [
     MyTabBar(title: 'Sale Listing', icon: Icons.list, body: Saleslisting()),

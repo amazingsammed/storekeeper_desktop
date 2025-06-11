@@ -2,6 +2,7 @@
 import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/feature/items/presentation/forms/addcategory.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
@@ -40,7 +41,7 @@ class CategoryPage extends StatelessWidget {
               children: [
                 TableButton(
                   ontap: (){
-
+                    Get.dialog(AddCategory(isEdit: true,categoryModel: CategoryModel.fromMap(data['data']),));
                   },
                   icon: Icons.edit, bgColor: Colors.blue,
                 ),TableButton(
@@ -56,7 +57,8 @@ class CategoryPage extends StatelessWidget {
         ],
         items: controller.allCategory.value.map((e)=>{
           "name":e.name,
-          "status":"Active"
+          "status":"Active",
+          "data":e.toMap()
         }).toList(),
       );
     });

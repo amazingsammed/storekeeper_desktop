@@ -2,6 +2,7 @@
 import 'package:datatablex/datatablex.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 import 'package:storekepper_desktop/feature/items/presentation/forms/addgroup.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
@@ -43,6 +44,7 @@ class GroupPage extends StatelessWidget {
               children: [
                 TableButton(
                   ontap: (){
+                    Get.dialog(AddGroup(isEdit: true,group: GroupModel.fromMap(data['data']),));
 
                   },
                   icon: Icons.edit, bgColor: Colors.blue,
@@ -60,7 +62,7 @@ class GroupPage extends StatelessWidget {
         items: controller.allGroup.value.map((e)=>{
           "name":e.name,
           "category":e.category,
-          "status":"Active"
+          "status":"Active","data":e.toMap()
         }).toList(),
       );
     });

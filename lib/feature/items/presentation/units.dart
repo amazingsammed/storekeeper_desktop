@@ -8,6 +8,7 @@ import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
 import '../../../shared/widgets/button_c.dart';
 import '../../../shared/widgets/datalisting.dart';
 import '../controller/itemcontroller.dart';
+import '../domain/models/units.dart';
 
 class UnitsPage extends StatelessWidget {
   final ItemController controller = Get.put(ItemController());
@@ -43,7 +44,7 @@ class UnitsPage extends StatelessWidget {
               children: [
                 TableButton(
                   ontap: (){
-
+                    Get.dialog(AddUnit(isEdit: true,unit: UnitModel.fromMap(data['data']),));
                   },
                   icon: Icons.edit, bgColor: Colors.blue,
                 ),TableButton(
@@ -61,7 +62,8 @@ class UnitsPage extends StatelessWidget {
         items: controller.allUnit.value.map((e) =>
         {
           "name": e.name,
-          "status": "Active"
+          "status": "Active",
+          "data":e.toMap()
         }).toList(),
       );
     });

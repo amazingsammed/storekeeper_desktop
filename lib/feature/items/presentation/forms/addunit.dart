@@ -13,16 +13,21 @@ import '../../controller/itemcontroller.dart';
 class AddUnit extends StatelessWidget {
   final ItemController controller = Get.put(ItemController());
   final _formKey = GlobalKey<FormBuilderState>();
-   AddUnit({super.key});
+  final bool isEdit;
+  final UnitModel? unit;
+   AddUnit({super.key, this.isEdit = false, this.unit});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: ListTile(
-        title: Text("Create New Unit"),
-        subtitle: Text("Use this form to create a new unit"),
+        title: isEdit?Text("Update Unit"):Text("Create New Unit"),
+        subtitle: Text("Fill the form below"),
       ),
       content: FormBuilder(
+        initialValue: isEdit?{
+          "name":unit?.name
+        }:{},
         key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -48,7 +53,7 @@ class AddUnit extends StatelessWidget {
                           .invalidate('Category is empty');
                     }
 
-                    await controller.addUnit(data: Units(id: 0, name: _formKey.currentState?.fields['name']!.value, status: 1, storeid: '', busid: '', createdby: ''));
+                    await controller.addUnit(data: UnitModel(id: 0, name: _formKey.currentState?.fields['name']!.value, status: 1, storeid: '', busid: '', createdby: ''));
 
                     Navigator.of(context).pop();
                   },title: "Save",)

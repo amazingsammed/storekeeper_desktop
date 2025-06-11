@@ -146,7 +146,7 @@ class Item {
 
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      id: map['id'] as int,
+      id: 0,
       name: map['name'] as String,
       uuid: map['uuid'] as String,
       busid: map['busid'] as String,
@@ -164,7 +164,7 @@ class Item {
   }
 
 //</editor-fold>
-  String getGroup(List<Groups> value) {
+  String getGroup(List<GroupModel> value) {
     if(value.isEmpty) return 'loading..';
    return value.firstWhere((element)=>element.id==int.parse(group_id)).name;
   }

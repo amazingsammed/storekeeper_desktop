@@ -11,21 +11,26 @@ import '../../../../shared/widgets/ktextfields.dart';
 class AddCategory extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
   final ItemController controller = Get.put(ItemController());
+  final bool isEdit;
+  final CategoryModel? categoryModel;
 
-  AddCategory({super.key});
+  AddCategory({super.key, this.isEdit=false, this.categoryModel});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: ListTile(
-        title: Text("Create New Category"),
-        subtitle: Text("Use this form to create a new Category"),
+        title:isEdit?Text("Update Category"): Text("Create New Category"),
+        subtitle: const Text("Fill the form below"),
       ),
       content: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
         height: 450,
         width: 600,
         child: FormBuilder(
+          initialValue: isEdit?{
+            "name":categoryModel?.name
+          }:{},
           key: _formKey,
           child: Column(
             children: [
@@ -42,7 +47,7 @@ class AddCategory extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  PrimaryButton(
+                 if(!isEdit) PrimaryButton(
                     onTap: () async {
                       //_formKey.currentState?.fields['name']!.invalidate('Email already taken');
                       if (_formKey.currentState!.fields['name'] == null) {
@@ -54,7 +59,21 @@ class AddCategory extends StatelessWidget {
                     Navigator.of(context).pop();
                       },
                     title: "Save",
-                  )
+                  ),
+                 if(isEdit) PrimaryButton(
+                    onTap: () async {
+                      //_formKey.currentState?.fields['name']!.invalidate('Email already taken');
+                      if (_formKey.currentState!.fields['name'] == null) {
+                        return _formKey.currentState?.fields['name']!
+                            .invalidate('Category is empty');
+                      }
+                     await controller.updateCategory(data: CategoryModel(name: _formKey.currentState?.fields['name']!.value, status: 1, createdby: 'createdby', id: 0, is_active: 1, storeid: '', busid: ''));
+                   controller.update();
+                    Navigator.of(context).pop();
+                      },
+                    title: "Update",
+                   icon: Icons.update,
+                  ),
                 ],
               )
             ],

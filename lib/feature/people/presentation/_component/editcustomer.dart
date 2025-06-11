@@ -21,18 +21,25 @@ class EditCustomer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return AlertDialog(
       title: ListTile(
         title: Text("Edit Customer"),
         subtitle: Text("Use this form to edit Customer Information"),
-        trailing: IconButton(onPressed: (){
-          _formKey.currentState?.fields['namex']?.didChange(customer.name);
-          _formKey.currentState?.fields['phone']?.didChange(customer.phone);
-          _formKey.currentState?.fields['address']?.didChange(customer.address);
-        }, icon: Icon(Icons.file_download_done)),
+        trailing: IconButton(
+            onPressed: () {
+              _formKey.currentState?.fields['namex']?.didChange(customer.name);
+              _formKey.currentState?.fields['phone']?.didChange(customer.phone);
+              _formKey.currentState?.fields['address']
+                  ?.didChange(customer.address);
+            },
+            icon: Icon(Icons.file_download_done)),
       ),
       content: FormBuilder(
+        initialValue: {
+          'namex': customer.name,
+          'phone': customer.phone,
+          'address': customer.address
+        },
         key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -87,20 +94,17 @@ class EditCustomer extends StatelessWidget {
                 children: [
                   PrimaryButton(
                     onTap: () async {
-
-
-                      CustomerModel    customerx= CustomerModel(
-                            name: _formKey.currentState!.fields['namex']?.value,
-                            coa_uuid: customer.coa_uuid,
-                            address: _formKey
-                                .currentState!.fields['address']!.value
-                                .toString(),
-                            phone: _formKey.currentState!.fields['phone']!.value
-                                .toString(),
-                            storeid: authController.storeid,
-                            createdby: authController.createdby,
-                            status: 1,
-                          );
+                      CustomerModel customerx = CustomerModel(
+                        name: _formKey.currentState!.fields['namex']?.value,
+                        coa_uuid: customer.coa_uuid,
+                        address: _formKey.currentState!.fields['address']!.value
+                            .toString(),
+                        phone: _formKey.currentState!.fields['phone']!.value
+                            .toString(),
+                        storeid: authController.storeid,
+                        createdby: authController.createdby,
+                        status: 1,
+                      );
 
                       await controller.editCustomer(customer: customerx);
                       Navigator.of(context).pop();

@@ -11,55 +11,31 @@ import 'package:uuid/uuid.dart';
 import '../../../../shared/constant/colors.dart';
 import '../../../../shared/widgets/ktextfields.dart';
 
-class AddCustomer extends StatefulWidget {
+class AddCustomer extends StatelessWidget {
   final bool isEdit;
-  final CustomerModel? existingUser;
-  const AddCustomer({super.key,  this.isEdit =false, this.existingUser});
+  final CustomerModel? customer;
 
-  @override
-  State<AddCustomer> createState() => _AddCustomerState();
-}
+  AddCustomer({super.key, this.isEdit = false, this.customer});
 
-class _AddCustomerState extends State<AddCustomer> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _openbalanceController = TextEditingController();
-
+  final _formKey = GlobalKey<FormBuilderState>();
 
   final PeopleController controller = Get.put(PeopleController());
 
   final AuthController authController = Get.find();
 
   @override
-  void initState() {
-    super.initState();
-    if (widget.isEdit && widget.existingUser != null) {
-      _nameController.text = widget.existingUser!.name;
-      _phoneController.text = widget.existingUser!.phone;
-      _addressController.text = widget.existingUser!.address;
-    }
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _phoneController.dispose();
-    _addressController.dispose();
-    _openbalanceController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const ListTile(
-        title: Text("Add New Customer"),
+      title:  ListTile(
+        title: isEdit?Text("Update Customer"):Text("Add New Customer"),
         subtitle: Text("Use this form to create a new Customer"),
       ),
-      content: Form(
+      content: FormBuilder(
+        initialValue: isEdit?{
+          'namex': customer?.name,
+          'phone': customer?.phone,
+          'address': customer?.address
+        }:{},
         key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -73,7 +49,7 @@ class _AddCustomerState extends State<AddCustomer> {
                     KTextField(
                       title: "Customer Name",
                       id: 'namex',
-                      controller: _nameController,
+
                     ),
                     Row(
                       children: [
@@ -81,7 +57,7 @@ class _AddCustomerState extends State<AddCustomer> {
                           child: KTextField(
                             title: "Phone number",
                             id: 'phone',
-                            controller: _phoneController,
+
                           ),
                         ),
                         kSizedbox10,
@@ -89,16 +65,17 @@ class _AddCustomerState extends State<AddCustomer> {
                           child: KTextField(
                             title: "Customer address",
                             id: 'address',
-                            controller: _addressController,
+
                           ),
                         ),
                       ],
                     ),
-                    KTextField(
+                   if(!isEdit) KTextField(
                       title: "Opening balance",
                       id: 'openbal',
-                      controller: _openbalanceController,
+
                     ),
+
                   ],
                 ),
               ),
@@ -113,23 +90,20 @@ class _AddCustomerState extends State<AddCustomer> {
                           accounts: ChatofAccounts(
                               uuid: uuid,
                               code: 4566,
-                              name:
-                                  _nameController.text,
+                              name: _formKey.currentState!.fields['name']?.value,
                               group: "692AC7B4-98AE-4ED5-9D2D-BE8C70D4FBBE",
-                              opening_bal: double.parse(_openbalanceController.text??
-                                  '0'),
+                              opening_bal: double.parse(
+                                  _formKey.currentState!.fields['openbal']?.value ?? '0'),
                               description: 'customer',
                               storeid: authController.storeid,
                               createdby: authController.createdby,
                               date: DateTime.now(),
                               status: 1),
                           customer: CustomerModel(
-                            name: _nameController.text,
+                            name: _formKey.currentState!.fields['name']?.value,
                             coa_uuid: uuid,
-                            address: _addressController.text
-                                .toString(),
-                            phone: _phoneController.text
-                                .toString(),
+                            address: _formKey.currentState!.fields['address']?.value,
+                            phone: _formKey.currentState!.fields['phone']?.value,
                             storeid: authController.storeid,
                             createdby: authController.createdby,
                             status: 1,

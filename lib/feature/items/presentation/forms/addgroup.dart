@@ -12,17 +12,22 @@ import '../../../../shared/widgets/ktextfields.dart';
 class AddGroup extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
   final ItemController controller = Get.put(ItemController());
-
-  AddGroup({super.key});
+  final bool isEdit;
+  final GroupModel? group;
+  AddGroup({super.key,  this.isEdit =false, this.group});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: ListTile(
-        title: Text("Create New Group"),
-        subtitle: Text("Use this form to create a new Group"),
+        title:isEdit?Text("Update Group"): Text("Create New Group"),
+        subtitle: Text("Fill the Form below"),
       ),
       content: FormBuilder(
+        initialValue: isEdit?{
+          "name":group?.name,
+          "category":group?.category
+        }:{},
         key: _formKey,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -54,7 +59,7 @@ class AddGroup extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  PrimaryButton(
+                if(!isEdit)  PrimaryButton(
                     onTap: () async {
                       if (_formKey.currentState!.fields['name'] == null) {
                         return _formKey.currentState?.fields['name']!
@@ -65,12 +70,29 @@ class AddGroup extends StatelessWidget {
                             .invalidate('Category is empty');
                       }
 
-                      await controller.addGroup(data: Groups(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
+                      await controller.addGroup(data: GroupModel(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
                       print(_formKey.currentState?.fields.keys);
                       Navigator.of(context).pop();
                     },
                     title: "Save",
-                  )
+                  ),
+                if(isEdit)  PrimaryButton(
+                    onTap: () async {
+                      if (_formKey.currentState!.fields['name'] == null) {
+                        return _formKey.currentState?.fields['name']!
+                            .invalidate('Name cannot be empty');
+                      }
+                      if (_formKey.currentState!.fields['category'] == null) {
+                        return _formKey.currentState?.fields['category']!
+                            .invalidate('Category is empty');
+                      }
+
+                      await controller.updateGroup(data: GroupModel(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
+                      Navigator.of(context).pop();
+                    },
+                    title: "Update",
+                  icon: Icons.update,
+                  ),
                 ],
               )
             ],

@@ -1,0 +1,31 @@
+{
+  "roles": {
+    "admin": {
+      "includes": [
+        "worker","supervisor"
+      ],
+      "permissions": [
+        "create:product",
+        "update:product",
+        "view:product",
+        "delete:product"
+      ]
+    },
+    "supervisor": {
+      "includes": [],
+      "permissions": [
+        "create:report",
+        "print:report"
+      ]
+    },
+    "worker": {
+      "includes": [],
+      "permissions": [
+        "create:product",
+        "update:product",
+        "view:product",
+        "delete:product"
+      ]
+    }
+  }
+}

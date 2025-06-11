@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
 import 'package:storekepper_desktop/shared/widgets/button_extension.dart';
 import '../controller/itemcontroller.dart';
+import '../domain/models/item.dart';
 import 'forms/additem.dart';
 
 class ItemListing extends StatelessWidget {
@@ -51,7 +52,10 @@ class ItemListing extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TableButton(
-                        ontap: () {},
+                        ontap: () {
+                          print(data['data']);
+                          Get.dialog(AddProduct(isEdit: true,item: Item.fromMap(data['data']),));
+                        },
                         icon: Icons.edit,
                         bgColor: Colors.blue,
                       ),
@@ -71,7 +75,8 @@ class ItemListing extends StatelessWidget {
                     'name': element.name,
                     'group_id': element.getGroup(controller.allGroup.value),
                     'salesprice': element.salesprice,
-                    'status': element.getStatus()
+                    'status': element.getStatus(),
+                    'data':element.toMap()
                   };
                 }).toList(),
         );

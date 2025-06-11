@@ -1,4 +1,4 @@
-class Units{
+class UnitModel{
   int id	;
   String name	;
   int status;
@@ -7,7 +7,7 @@ class Units{
   String createdby;
 
 //<editor-fold desc="Data Methods">
-  Units({
+  UnitModel({
     required this.id,
     required this.name,
     required this.status,
@@ -19,7 +19,7 @@ class Units{
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Units &&
+      (other is UnitModel &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           name == other.name &&
@@ -49,7 +49,7 @@ class Units{
         '}';
   }
 
-  Units copyWith({
+  UnitModel copyWith({
     int? id,
     String? name,
     int? status,
@@ -57,7 +57,7 @@ class Units{
     String? busid,
     String? createdby,
   }) {
-    return Units(
+    return UnitModel(
       id: id ?? this.id,
       name: name ?? this.name,
       status: status ?? this.status,
@@ -77,9 +77,9 @@ class Units{
     };
   }
 
-  factory Units.fromMap(Map<String, dynamic> map) {
-    return Units(
-      id: map['id'] as int,
+  factory UnitModel.fromMap(Map<String, dynamic> map) {
+    return UnitModel(
+      id: 0,
       name: map['name'] as String,
       status: map['status'] as int,
       storeid: map['storeid'] as String,

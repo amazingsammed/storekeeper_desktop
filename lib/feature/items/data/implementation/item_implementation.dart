@@ -54,7 +54,7 @@ class ItemImplementation implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> createSingleUnit({required Units data}) async {
+  Future<Either<Failure, bool>> createSingleUnit({required UnitModel data}) async {
     try {
         await remoteDatabase.addUnit(data: data.toMap());
       // if (await networkInfo.hasInternet()) {
@@ -90,8 +90,8 @@ class ItemImplementation implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, List<Groups>>> getAllGroups() async {
-    var data = <Groups>[];
+  Future<Either<Failure, List<GroupModel>>> getAllGroups() async {
+    var data = <GroupModel>[];
     try {
         data = await remoteDatabase.getAllGroups(store: authController.myStore);
       // if (await networkInfo.hasInternet()) {
@@ -126,8 +126,8 @@ class ItemImplementation implements ItemRepository {
   }
 
   @override
-  Future<Either<Failure, List<Units>>> getAllUnits() async {
-    var data = <Units>[];
+  Future<Either<Failure, List<UnitModel>>> getAllUnits() async {
+    var data = <UnitModel>[];
     try {
         data = await remoteDatabase.getAllUnits(store: authController.myStore);
       // if (await networkInfo.hasInternet()) {
@@ -144,7 +144,7 @@ class ItemImplementation implements ItemRepository {
 
   @override
   Future<Either<Failure, bool>> createSingleGroup(
-      {required Groups data}) async {
+      {required GroupModel data}) async {
     try {
         await remoteDatabase.addGroup(data: data.toMap());
       // if (await networkInfo.hasInternet()) {

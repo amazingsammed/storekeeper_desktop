@@ -56,12 +56,12 @@ class ItemRemoteDatabase implements ItemDatabaseRepository {
   }
 
   @override
-  Future<List<Groups>> getAllGroups({required Store store}) async {
-    List<Groups> items = [];
+  Future<List<GroupModel>> getAllGroups({required Store store}) async {
+    List<GroupModel> items = [];
     var data =
         await groupDB.where('storeid',isEqualTo: store.storeid).where('busid', isEqualTo:store.busid).get();
     for (var element in data.data['data']) {
-      items.add(Groups.fromMap(element));
+      items.add(GroupModel.fromMap(element));
     }
     return items;
   }
@@ -78,12 +78,12 @@ class ItemRemoteDatabase implements ItemDatabaseRepository {
   }
 
   @override
-  Future<List<Units>> getAllUnits({required Store store}) async {
-    List<Units> items = [];
+  Future<List<UnitModel>> getAllUnits({required Store store}) async {
+    List<UnitModel> items = [];
     var data =
         await unitDB.where('storeid',isEqualTo: store.storeid).where('busid',isEqualTo: store.busid).get();
     for (var element in data.data['data']) {
-      items.add(Units.fromMap(element));
+      items.add(UnitModel.fromMap(element));
     }
     return items;
   }

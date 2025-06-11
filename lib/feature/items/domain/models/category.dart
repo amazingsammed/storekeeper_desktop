@@ -89,7 +89,7 @@ class CategoryModel {
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
-      id: map['id'] as int,
+      id: 0,
       name: map['name'] as String,
       status: map['status'] as int,
       createdby: map['createdby'] as String,

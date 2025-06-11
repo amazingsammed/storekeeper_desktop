@@ -1,5 +1,5 @@
 
-class Groups{
+class GroupModel{
   int id;
   String name;
   String category;
@@ -9,7 +9,7 @@ class Groups{
   String busid;
 
 //<editor-fold desc="Data Methods">
-  Groups({
+  GroupModel({
     required this.id,
     required this.name,
     required this.category,
@@ -22,7 +22,7 @@ class Groups{
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Groups &&
+      (other is GroupModel &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           name == other.name &&
@@ -55,7 +55,7 @@ class Groups{
         '}';
   }
 
-  Groups copyWith({
+  GroupModel copyWith({
     int? id,
     String? name,
     String? category,
@@ -64,7 +64,7 @@ class Groups{
     int? is_active,
     String? busid,
   }) {
-    return Groups(
+    return GroupModel(
       id: id ?? this.id,
       name: name ?? this.name,
       category: category ?? this.category,
@@ -86,9 +86,9 @@ class Groups{
     };
   }
 
-  factory Groups.fromMap(Map<String, dynamic> map) {
-    return Groups(
-      id: map['id'] as int,
+  factory GroupModel.fromMap(Map<String, dynamic> map) {
+    return GroupModel(
+      id: 0,
       name: map['name'] as String,
       category: map['category'] as String,
       createdby: map['createdby'] as String,

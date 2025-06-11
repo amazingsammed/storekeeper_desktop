@@ -9,6 +9,8 @@ import '_component/menu_bar.dart';
 class MainDashboard extends StatelessWidget {
   DashboardController controller = Get.put(DashboardController(),permanent: true);
 
+  MainDashboard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

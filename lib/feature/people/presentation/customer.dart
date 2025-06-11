@@ -49,7 +49,7 @@ class CustomerPage extends StatelessWidget {
               children: [
                 TableButton(
                   ontap: (){
-Get.dialog(EditCustomer(customer: CustomerModel.fromMap(data)));
+Get.dialog(AddCustomer(isEdit:true,customer: CustomerModel.fromMap(data)));
                   },
                   icon: Icons.edit, bgColor: Colors.blue,
                 ),TableButton(

@@ -13,8 +13,10 @@ import '../../data/local/item_localdb.dart';
 class AddProduct extends StatelessWidget {
   final _formKey = GlobalKey<FormBuilderState>();
   final ItemController controller = Get.put(ItemController());
+  final bool isEdit;
+  final Item? item;
 
-  AddProduct({super.key});
+  AddProduct({super.key,this.isEdit=false,this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,13 @@ class AddProduct extends StatelessWidget {
         subtitle: Text("Use this form to create a new item"),
       ),
       content: FormBuilder(
+initialValue: isEdit? {
+  "name":item?.name,
+  "salesprice":item?.salesprice.toString(),
+  "purchaseprice":item?.purchaseprice.toString(),
+  "groupid":item?.group_id,
+  "unitid":item?.unit_id,
+}: {},
         key: _formKey,
         child: Obx(() {
           return Container(
@@ -81,7 +90,7 @@ class AddProduct extends StatelessWidget {
                           )),
                         ],
                       ),
-                      CheckboxListTile(
+                     if(!isEdit) CheckboxListTile(
                         value: controller.hasOpeningBal.value,
                         onChanged: (v) {
                           controller.hasOpeningBal.value = v!;
@@ -89,7 +98,7 @@ class AddProduct extends StatelessWidget {
                         },
                         title: Text("Has Opening Balanced"),
                       ),
-                      if (controller.hasOpeningBal.value)
+                      if(!isEdit)    if (controller.hasOpeningBal.value)
                         KTextField(
                           title: "Initial Quantity",
                           id: 'qty',
@@ -100,7 +109,7 @@ class AddProduct extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    PrimaryButton(
+                  if(!isEdit)  PrimaryButton(
                       onTap: () async {
                         Item item = Item(
                             id: 0,
@@ -125,7 +134,34 @@ class AddProduct extends StatelessWidget {
 
                       },
                       title: "Save",
-                    )
+                    ),
+                  if(isEdit)  PrimaryButton(
+                      onTap: () async {
+                        Item item = Item(
+                            id: 0,
+                            name: _formKey.currentState!.fields['name']?.value,
+                            uuid: 'idsdf',
+                            unit_id:
+                                _formKey.currentState!.fields['unit']!.value.toString(),
+                            group_id:
+                                _formKey.currentState!.fields['group']!.value.toString(),
+                            status: 1,
+                            createdby: 'createdby',
+                            storeid: 'storeid',
+                            is_active: 1,
+                            salesprice: double.parse( _formKey
+                                .currentState!.fields['salesprice']!.value),
+                            purchaseprice: double.parse(_formKey
+                                .currentState!.fields['purchaseprice']?.value),
+                            warninglimit: 2,
+                            is_service: 0, busid: 'busid');
+                         await controller.updateItem(data: item);
+                        Navigator.of(context).pop();
+
+                      },
+                      title: "Update",
+                    icon: Icons.update,
+                    ),
                   ],
                 )
               ],
