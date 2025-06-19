@@ -59,4 +59,8 @@ class PeopleController extends GetxController {
     showSuccessSnackbar(message: "Data Updated Successfully");
     await getAllCutomers();
   }
+
+  updateCustomer(CustomerModel customerM) {
+    print(customerM.toMap());
+  }
 }

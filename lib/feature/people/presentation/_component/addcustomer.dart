@@ -82,7 +82,7 @@ class AddCustomer extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  PrimaryButton(
+                  if(!isEdit)  PrimaryButton(
                     onTap: () async {
                       if (!_formKey.currentState!.validate()) return;
                       String uuid = const Uuid().v4();
@@ -90,7 +90,7 @@ class AddCustomer extends StatelessWidget {
                           accounts: ChatofAccounts(
                               uuid: uuid,
                               code: 4566,
-                              name: _formKey.currentState!.fields['name']?.value,
+                              name: _formKey.currentState!.fields['namex']?.value,
                               group: "692AC7B4-98AE-4ED5-9D2D-BE8C70D4FBBE",
                               opening_bal: double.parse(
                                   _formKey.currentState!.fields['openbal']?.value ?? '0'),
@@ -100,7 +100,7 @@ class AddCustomer extends StatelessWidget {
                               date: DateTime.now(),
                               status: 1),
                           customer: CustomerModel(
-                            name: _formKey.currentState!.fields['name']?.value,
+                            name: _formKey.currentState!.fields['namex']?.value,
                             coa_uuid: uuid,
                             address: _formKey.currentState!.fields['address']?.value,
                             phone: _formKey.currentState!.fields['phone']?.value,
@@ -113,6 +113,24 @@ class AddCustomer extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     title: "Save",
+                  ),
+                  if(isEdit)  PrimaryButton(
+                    onTap: () async {
+                      if (!_formKey.currentState!.validate()) return;
+                     CustomerModel customerM= CustomerModel(
+                        name: _formKey.currentState!.fields['namex']?.value,
+                        coa_uuid: customer!.coa_uuid,
+                        address: _formKey.currentState!.fields['address']?.value,
+                        phone: _formKey.currentState!.fields['phone']?.value,
+                        storeid: authController.storeid,
+                        createdby: authController.createdby,
+                        status: customer!.status,
+                      );
+
+                      await controller.editCustomer(customer: customerM);
+                      Navigator.of(context).pop();
+                    },
+                    title: "Update",
                   )
                 ],
               )

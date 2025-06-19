@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/category.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
 
@@ -54,7 +55,7 @@ class AddCategory extends StatelessWidget {
                         return _formKey.currentState?.fields['name']!
                             .invalidate('Category is empty');
                       }
-                     await controller.addCategory(data: CategoryModel(name: _formKey.currentState?.fields['name']!.value, status: 1, createdby: 'createdby', id: 0, is_active: 1, storeid: '', busid: ''));
+                     await controller.addCategory(data: CategoryModel(name: _formKey.currentState?.fields['name']!.value, status: 1, createdby: 'createdby', uuid: Uuid().v1(), is_active: 1, storeid: '', busid: ''));
                    controller.update();
                     Navigator.of(context).pop();
                       },
@@ -67,7 +68,7 @@ class AddCategory extends StatelessWidget {
                         return _formKey.currentState?.fields['name']!
                             .invalidate('Category is empty');
                       }
-                     await controller.updateCategory(data: CategoryModel(name: _formKey.currentState?.fields['name']!.value, status: 1, createdby: 'createdby', id: 0, is_active: 1, storeid: '', busid: ''));
+                     await controller.updateCategory(data: CategoryModel(name: _formKey.currentState?.fields['name']!.value, status: 1, createdby: 'createdby', uuid: categoryModel!.uuid, is_active: 1, storeid: '', busid: ''));
                    controller.update();
                     Navigator.of(context).pop();
                       },

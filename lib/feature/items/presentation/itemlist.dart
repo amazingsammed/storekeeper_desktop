@@ -53,7 +53,6 @@ class ItemListing extends StatelessWidget {
                     children: [
                       TableButton(
                         ontap: () {
-                          print(data['data']);
                           Get.dialog(AddProduct(isEdit: true,item: Item.fromMap(data['data']),));
                         },
                         icon: Icons.edit,

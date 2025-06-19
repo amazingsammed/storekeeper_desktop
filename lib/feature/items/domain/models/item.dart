@@ -165,8 +165,14 @@ class Item {
 
 //</editor-fold>
   String getGroup(List<GroupModel> value) {
+    print(value);
     if(value.isEmpty) return 'loading..';
-   return value.firstWhere((element)=>element.id==int.parse(group_id)).name;
+    try{
+
+   return value.firstWhere((element)=>element.uuid==int.parse(group_id)).name;
+    }catch(e){
+      return "loading";
+    }
   }
   String getStatus() {
     if(status==0)return 'inactive';

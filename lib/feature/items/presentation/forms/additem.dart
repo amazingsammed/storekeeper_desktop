@@ -75,7 +75,7 @@ initialValue: isEdit? {
                             id: 'group',
                             children: controller.allGroup.value
                                 .map((element) =>
-                                    {'name': element.name, 'id': element.id})
+                                    {'name': element.name, 'id': element.uuid})
                                 .toList(),
                           )),
                           kSizedbox10,
@@ -85,7 +85,7 @@ initialValue: isEdit? {
                             id: 'unit',
                             children: controller.allUnit.value
                                 .map((element) =>
-                                    {'name': element.name, 'id': element.id})
+                                    {'name': element.name, 'id': element.uuid})
                                 .toList(),
                           )),
                         ],

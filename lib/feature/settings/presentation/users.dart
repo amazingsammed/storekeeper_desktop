@@ -20,8 +20,8 @@ class UsersTable extends StatelessWidget {
     return Scaffold(
         body: Obx(() {
           return DataTableX(
-              refreshButton: IconButton(onPressed: () {
-                authController.getUsersInStore();
+              refreshButton: IconButton(onPressed: () async{
+               await authController.getUsersInStore();
               }, icon: Icon(Icons.refresh)),
               title: "User Management",
               titleWidget: PrimaryButton(
@@ -31,10 +31,10 @@ class UsersTable extends StatelessWidget {
                 },
               ),
               heads: [
-                TableHead(title: 'Name', id: 'username'),
-                TableHead(title: "Phone", id: "contact"),
+                TableHead(title: 'Name', id: 'name'),
+                TableHead(title: "Role", id: "role"),
                 TableHead(title: "Email", id: 'email'),
-                TableHead(title: "Type", id: 'type')
+                TableHead(title: "Status", id: 'status',type: TableHeadType.int)
               ],
               items: authController.storemembers.value);
         }));

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:storekepper_desktop/feature/items/domain/models/units.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
 import '../../controller/itemcontroller.dart';
@@ -53,7 +54,7 @@ class AddUnit extends StatelessWidget {
                           .invalidate('Category is empty');
                     }
 
-                    await controller.addUnit(data: UnitModel(id: 0, name: _formKey.currentState?.fields['name']!.value, status: 1, storeid: '', busid: '', createdby: ''));
+                    await controller.addUnit(data: UnitModel(uuid: Uuid().v1(), name: _formKey.currentState?.fields['name']!.value, status: 1, storeid: '', busid: '', createdby: ''));
 
                     Navigator.of(context).pop();
                   },title: "Save",)

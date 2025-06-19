@@ -1,6 +1,6 @@
 
 class GroupModel{
-  int id;
+  String uuid;
   String name;
   String category;
   String createdby;
@@ -10,7 +10,7 @@ class GroupModel{
 
 //<editor-fold desc="Data Methods">
   GroupModel({
-    required this.id,
+    required this.uuid,
     required this.name,
     required this.category,
     required this.createdby,
@@ -24,7 +24,7 @@ class GroupModel{
       identical(this, other) ||
       (other is GroupModel &&
           runtimeType == other.runtimeType &&
-          id == other.id &&
+          uuid == other.uuid &&
           name == other.name &&
           category == other.category &&
           createdby == other.createdby &&
@@ -34,7 +34,7 @@ class GroupModel{
 
   @override
   int get hashCode =>
-      id.hashCode ^
+      uuid.hashCode ^
       name.hashCode ^
       category.hashCode ^
       createdby.hashCode ^
@@ -44,8 +44,8 @@ class GroupModel{
 
   @override
   String toString() {
-    return 'Groups{' +
-        ' id: $id,' +
+    return 'GroupModel{' +
+        ' uuid: $uuid,' +
         ' name: $name,' +
         ' category: $category,' +
         ' createdby: $createdby,' +
@@ -56,7 +56,7 @@ class GroupModel{
   }
 
   GroupModel copyWith({
-    int? id,
+    String? uuid,
     String? name,
     String? category,
     String? createdby,
@@ -65,7 +65,7 @@ class GroupModel{
     String? busid,
   }) {
     return GroupModel(
-      id: id ?? this.id,
+      uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       category: category ?? this.category,
       createdby: createdby ?? this.createdby,
@@ -77,18 +77,19 @@ class GroupModel{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'category': category,
-      'createdby': createdby,
-      'storeid': storeid,
-      'is_active': is_active,
-      'busid': busid,
+      'uuid': this.uuid,
+      'name': this.name,
+      'category': this.category,
+      'createdby': this.createdby,
+      'storeid': this.storeid,
+      'is_active': this.is_active,
+      'busid': this.busid,
     };
   }
 
   factory GroupModel.fromMap(Map<String, dynamic> map) {
     return GroupModel(
-      id: 0,
+      uuid: map['uuid'] as String,
       name: map['name'] as String,
       category: map['category'] as String,
       createdby: map['createdby'] as String,

@@ -3,6 +3,7 @@ import 'package:storekepper_desktop/feature/items/presentation/itemlist.dart';
 import 'package:storekepper_desktop/feature/people/presentation/suppliers.dart';
 import 'package:storekepper_desktop/feature/purchases/presentation/purchaselisting.dart';
 import 'package:storekepper_desktop/feature/sales/presentation/saleslisting.dart';
+import 'package:storekepper_desktop/feature/settings/presentation/chartofaccounts.dart';
 
 import '../../../items/presentation/category.dart';
 import '../../../items/presentation/group.dart';
@@ -122,7 +123,7 @@ List<MainNavigation> navItems = [
   MainNavigation(title: 'Settings', icon: Icons.settings, tabs: [
     MyTabBar(title: 'General', icon: Icons.dashboard, body: GeneralPage()),
     MyTabBar(title: 'Users', icon: Icons.person, body: UsersTable()),
-    MyTabBar(title: 'Chart of Accounts', icon: Icons.person, body: Container()),
+    MyTabBar(title: 'Chart of Accounts', icon: Icons.person, body: Chartofaccounts()),
     MyTabBar(
         title: 'About',
         icon: Icons.dashboard,

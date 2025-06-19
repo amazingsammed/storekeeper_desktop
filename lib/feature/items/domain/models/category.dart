@@ -1,7 +1,7 @@
 
 
 class CategoryModel {
-  int id;
+  String uuid;
   String name;
   int status;
   String createdby;
@@ -11,7 +11,7 @@ class CategoryModel {
 
 //<editor-fold desc="Data Methods">
   CategoryModel({
-    required this.id,
+    required this.uuid,
     required this.name,
     required this.status,
     required this.createdby,
@@ -25,7 +25,7 @@ class CategoryModel {
       identical(this, other) ||
       (other is CategoryModel &&
           runtimeType == other.runtimeType &&
-          id == other.id &&
+          uuid == other.uuid &&
           name == other.name &&
           status == other.status &&
           createdby == other.createdby &&
@@ -35,7 +35,7 @@ class CategoryModel {
 
   @override
   int get hashCode =>
-      id.hashCode ^
+      uuid.hashCode ^
       name.hashCode ^
       status.hashCode ^
       createdby.hashCode ^
@@ -46,7 +46,7 @@ class CategoryModel {
   @override
   String toString() {
     return 'CategoryModel{' +
-        ' id: $id,' +
+        ' uuid: $uuid,' +
         ' name: $name,' +
         ' status: $status,' +
         ' createdby: $createdby,' +
@@ -57,7 +57,7 @@ class CategoryModel {
   }
 
   CategoryModel copyWith({
-    int? id,
+    String? uuid,
     String? name,
     int? status,
     String? createdby,
@@ -66,7 +66,7 @@ class CategoryModel {
     String? busid,
   }) {
     return CategoryModel(
-      id: id ?? this.id,
+      uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       status: status ?? this.status,
       createdby: createdby ?? this.createdby,
@@ -78,18 +78,19 @@ class CategoryModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'status': status,
-      'createdby': createdby,
-      'is_active': is_active,
-      'storeid': storeid,
-      'busid': busid,
+      'uuid': this.uuid,
+      'name': this.name,
+      'status': this.status,
+      'createdby': this.createdby,
+      'is_active': this.is_active,
+      'storeid': this.storeid,
+      'busid': this.busid,
     };
   }
 
   factory CategoryModel.fromMap(Map<String, dynamic> map) {
     return CategoryModel(
-      id: 0,
+      uuid: map['uuid'] as String,
       name: map['name'] as String,
       status: map['status'] as int,
       createdby: map['createdby'] as String,

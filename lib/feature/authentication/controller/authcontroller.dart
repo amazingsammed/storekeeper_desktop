@@ -5,7 +5,6 @@ import 'package:storekepper_desktop/feature/authentication/domain/model/business
 import 'package:storekepper_desktop/feature/authentication/domain/model/profile.dart';
 import 'package:storekepper_desktop/feature/authentication/domain/repositories/profile_repository.dart';
 
-
 import '../data/repositories/profile_repository_impl.dart';
 import '../domain/model/store.dart';
 import '../domain/model/user_business.dart';
@@ -18,9 +17,7 @@ class AuthController extends GetxController {
   final supabase = null;
   ProfileRepository profileRepository = ProfileRepositoryImpl();
 
-  var currentProfile = Profile
-      .empty()
-      .obs;
+  var currentProfile = Profile.empty().obs;
   var selectedBusiness = <Business>[].obs;
   var selectedStoreList = <Store>[].obs;
   var userStores = <UserStore>[].obs;
@@ -29,16 +26,17 @@ class AuthController extends GetxController {
   var storemembers = [].obs;
   Sqlbase mydb = Sqlbase();
 
-  Store get selectedStore=>selectedStoreList.value[0];
+  Store get selectedStore => selectedStoreList.value[0];
 
+  String get createdby => authController.currentProfile.value.userid;
 
-  String get createdby=>authController.currentProfile.value.userid;
-  String get storeid=>authController.selectedStore.storeid;
+  String get storeid => authController.selectedStore.storeid;
 
-  Future <Profile?> signIn(Profile user) async {
+  Future<Profile?> signIn(Profile user) async {
     //print()
-    SqlBaseResponse response = await mydb.auth('user').signIn(
-        email: user.email, password: user.password);
+    SqlBaseResponse response = await mydb
+        .auth('user')
+        .signIn(email: user.email, password: user.password);
 
     if (response.statusCode == 0) return null;
     currentProfile.value = Profile.fromMap(response.data['data']);
@@ -48,10 +46,8 @@ class AuthController extends GetxController {
   Future<Profile?> signUp(Profile user) async {
     SqlBaseResponse response = await mydb.auth('user').signUp(
         email: user.email,
-        password: user.password, data: {
-      "name": user.username
-    }
-    );
+        password: user.password,
+        data: {"name": user.username});
     print(response);
     if (response.statusCode == 0) return null;
     currentProfile.value = Profile.fromMap(response.data['data']);
@@ -63,7 +59,6 @@ class AuthController extends GetxController {
   Store get myStore => selectedStoreList.value[0];
 
   var loading = false.obs;
-
 
   Future<List<UserBusiness>> getAllBusiness() async {
     userBusiness.clear();
@@ -89,8 +84,8 @@ class AuthController extends GetxController {
   Future<Store> getStoreByID(String id) async {
     List<Store> items = [];
     try {
-
-      var response = await mydb.table('store').where('storeid',isEqualTo: id).get();
+      var response =
+          await mydb.table('store').where('storeid', isEqualTo: id).get();
       for (var element in response.data['data']) {
         items.add(Store.fromMap(element));
       }
@@ -101,12 +96,14 @@ class AuthController extends GetxController {
     }
   }
 
- Future<void> getAllStoresbyUserid() async {
+  Future<void> getAllStoresbyUserid() async {
     userStores.clear();
     try {
-      SqlBaseResponse data = await mydb.table('user_store')
+      SqlBaseResponse data = await mydb
+          .table('user_store')
           .where('userid', isEqualTo: currentProfile.value.userid)
           .get();
+      print(data.toString());
       for (var element in data.data['data']) {
         userStores.add(UserStore.fromMap(element));
       }
@@ -117,53 +114,63 @@ class AuthController extends GetxController {
 
   Future getUsersInStore() async {
     storemembers.clear();
-    try {
-      var data = await supabase
-          .from('user_store')
-          .select()
-          .eq('storeid', selectedStoreList.value[0].storeid)
-          .eq("busid", appbusiness.busid);
+
+      SqlBaseResponse data = await Sqlbase.rawQuery("""
+      SELECT DISTINCT
+	`user`.`name`, 
+	user_store.role, 
+	`user`.`name` AS createdby, 
+	`user`.email, 
+	user_store.`status`, 
+	user_store.userid
+FROM
+	user_store
+	LEFT JOIN
+	`user`
+	ON 
+		user_store.userid = `user`.userid
+	LEFT JOIN
+	`user` AS asd
+	ON 
+		user_store.createdby = `user`.userid
+WHERE
+	user_store.busid = "${appbusiness.busid}" AND
+	user_store.storeid = "${authController.storeid}"
+      """).execute();
       print(data);
-      for (var element in data) {
-        var data = await supabase.from('users').select().eq(
-            'userid', element['userid']);
-        storemembers.add(data[0]);
+      for (var element in data.data['data']) {
+        storemembers.add(element);
       }
-      return storemembers;
-    } catch (e) {
-      return storemembers;
-    }
+
+      print(data);
+      return [];
+
   }
 
   saveStore(Store store) async {
-    try{
-
-   SqlBaseResponse response = await mydb.table('store').add(store.toMap());
-   if(response.statusCode==0) print(response);
-    response = await mydb.table('user_store').add(UserStore(
-        userid: currentProfile.value.userid,
-        storeid: store.storeid,
-        status: 1,
-        role: 'admin',
-        busid: store.busid)
-        .toMap());
-   if(response.statusCode==0) print(response);
-    }catch(e){
+    try {
+      SqlBaseResponse response = await mydb.table('store').add(store.toMap());
+      if (response.statusCode == 0) print(response);
+      response = await mydb.table('user_store').add(UserStore(
+              userid: currentProfile.value.userid,
+              storeid: store.storeid,
+              status: 1,
+              role: 'admin',
+              busid: store.busid)
+          .toMap());
+      if (response.statusCode == 0) print(response);
+    } catch (e) {
       print(e);
     }
-
-
   }
 
   Future saveBusiness(Business business) async {
     await supabase.from('business').insert(business.toMap());
     await supabase.from('user_business').insert(UserBusiness(
-        userid: currentProfile.value.userid,
-        busid: business.busid,
-        status: 1)
+            userid: currentProfile.value.userid,
+            busid: business.busid,
+            status: 1)
         .toMap());
     await getAllBusiness();
   }
-
-
 }

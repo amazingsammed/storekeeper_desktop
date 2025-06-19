@@ -6,6 +6,8 @@ import 'package:storekepper_desktop/feature/items/controller/itemcontroller.dart
 import 'package:storekepper_desktop/feature/items/domain/models/group.dart';
 import 'package:storekepper_desktop/shared/constant/colors.dart';
 import 'package:storekepper_desktop/shared/widgets/button_c.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/v4.dart';
 
 import '../../../../shared/widgets/ktextfields.dart';
 
@@ -49,7 +51,7 @@ class AddGroup extends StatelessWidget {
                       children: controller.allCategory.value
                           .map((element) => {
                                 'name': element.name,
-                                'id': element.id
+                                'id': element.uuid
                               })
                           .toList(),
                     ),
@@ -70,7 +72,7 @@ class AddGroup extends StatelessWidget {
                             .invalidate('Category is empty');
                       }
 
-                      await controller.addGroup(data: GroupModel(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
+                      await controller.addGroup(data: GroupModel(uuid: Uuid().v1(), name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
                       print(_formKey.currentState?.fields.keys);
                       Navigator.of(context).pop();
                     },
@@ -87,7 +89,7 @@ class AddGroup extends StatelessWidget {
                             .invalidate('Category is empty');
                       }
 
-                      await controller.updateGroup(data: GroupModel(id: 0, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
+                      await controller.updateGroup(data: GroupModel(uuid: group!.uuid, name: _formKey.currentState!.fields['name']?.value, category: _formKey.currentState!.fields['category']!.value.toString(), createdby: '', storeid: '', is_active: 1, busid: ''));
                       Navigator.of(context).pop();
                     },
                     title: "Update",

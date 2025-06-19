@@ -26,7 +26,7 @@ class SuppliersPage extends StatelessWidget {
       onTap: (element) {
         print(element['id'].runtimeType);
       },
-      title: "Customers",
+      title: "Suppliers",
       heads: [
         TableHead(title: 'Date', id: 'date'),
         TableHead(title: 'Narration', id: 'narration'),

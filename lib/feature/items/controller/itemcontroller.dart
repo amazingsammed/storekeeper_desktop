@@ -17,14 +17,6 @@ class ItemController extends GetxController {
   var loading = false.obs;
 
 
-  // @override
-  // Future<void> onInit() async {
-  //   await getAllCategory();
-  //   await getAllGroups();
-  //   await getAllUnits();
-  //   await getAllItems();
-  //   super.onInit();
-  // }
 
   Future<void> startup()async{
     await getAllCategory();
@@ -84,9 +76,6 @@ class ItemController extends GetxController {
       loading.value = false;
       showErrorSnackbar(message: failure.message);
     }, (exists) {
-      print('exists data \n\n');
-      print(exists);
-      print('exists data \n\n');
       allCategory.value = exists;
       loading.value = false;
     });

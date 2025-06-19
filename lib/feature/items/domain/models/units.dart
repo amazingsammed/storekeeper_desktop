@@ -1,5 +1,5 @@
 class UnitModel{
-  int id	;
+  String uuid	;
   String name	;
   int status;
   String storeid;
@@ -8,7 +8,7 @@ class UnitModel{
 
 //<editor-fold desc="Data Methods">
   UnitModel({
-    required this.id,
+    required this.uuid,
     required this.name,
     required this.status,
     required this.storeid,
@@ -21,7 +21,7 @@ class UnitModel{
       identical(this, other) ||
       (other is UnitModel &&
           runtimeType == other.runtimeType &&
-          id == other.id &&
+          uuid == other.uuid &&
           name == other.name &&
           status == other.status &&
           storeid == other.storeid &&
@@ -30,7 +30,7 @@ class UnitModel{
 
   @override
   int get hashCode =>
-      id.hashCode ^
+      uuid.hashCode ^
       name.hashCode ^
       status.hashCode ^
       storeid.hashCode ^
@@ -39,8 +39,8 @@ class UnitModel{
 
   @override
   String toString() {
-    return 'Units{' +
-        ' id: $id,' +
+    return 'UnitModel{' +
+        ' uuid: $uuid,' +
         ' name: $name,' +
         ' status: $status,' +
         ' storeid: $storeid,' +
@@ -50,7 +50,7 @@ class UnitModel{
   }
 
   UnitModel copyWith({
-    int? id,
+    String? uuid,
     String? name,
     int? status,
     String? storeid,
@@ -58,7 +58,7 @@ class UnitModel{
     String? createdby,
   }) {
     return UnitModel(
-      id: id ?? this.id,
+      uuid: uuid ?? this.uuid,
       name: name ?? this.name,
       status: status ?? this.status,
       storeid: storeid ?? this.storeid,
@@ -69,17 +69,18 @@ class UnitModel{
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'status': status,
-      'storeid': storeid,
-      'busid': busid,
-      'createdby': createdby,
+      'uuid': this.uuid,
+      'name': this.name,
+      'status': this.status,
+      'storeid': this.storeid,
+      'busid': this.busid,
+      'createdby': this.createdby,
     };
   }
 
   factory UnitModel.fromMap(Map<String, dynamic> map) {
     return UnitModel(
-      id: 0,
+      uuid: map['uuid'] as String,
       name: map['name'] as String,
       status: map['status'] as int,
       storeid: map['storeid'] as String,
